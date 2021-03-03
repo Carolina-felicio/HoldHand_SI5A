@@ -11,4 +11,5 @@ Gustavo Almeida Oliveira - 1700602
 
 # O que consiste essa comunidade?
 Comunidade artesanal que conta com diversos empreendedores/as para fazer troca de materiais de artesanato,  
-como: bordado, crochê, produtos artesanais naturais, patchwork, tricotin, tricô, pinturas e entre outros.
+como: bordado, crochê, produtos artesanais naturais, patchwork, tricotin, tricô, pinturas e entre outros  
+por meio de delivery.
