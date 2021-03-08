@@ -1,0 +1,109 @@
+{% load static %}
+<!-- ##### Header Area Start ##### -->
+<header class="header-area">
+  <!-- Top Header Area -->
+  <div class="top-header-area">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center justify-content-between">
+        <!-- Breaking News -->
+        <div class="col-12 col-sm-6">
+          <div class="breaking-news">
+            <div id="breakingNewsTicker" class="ticker">
+              <ul>
+                <li>
+                  <a href="" style="color: black;">
+                    <strong>Welcome to the HoldHand website</strong>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- Top Social Info -->
+        <div class="col-12 col-sm-6">
+          <div class="top-social-info text-right">
+           
+            {% if user.is_authenticated %}
+            <strong
+              >Dear, {{ user.last_name }},{{ user.first_name }}, 
+              Welcome to the HoldHand website 
+              <i class='fa fa-id-badge' aria-hidden="true" style='font-size:18px'></i>
+            </strong>
+            {% elif user.is_superuser %}
+            <strong
+              >Dear, {{ user.last_name }},{{ user.first_name }},
+              Welcome to the HoldHand website 
+              <i class='fa fa-id-badge' aria-hidden="true" style='font-size:18px'></i>
+            </strong>
+            {% else %}
+            <strong
+              >Dear, Welcome to the HoldHand website
+            </strong>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar Area -->
+  <div class="delicious-main-menu">
+    <div class="classy-nav-container breakpoint-off">
+      <div class="container">
+        <!-- Menu -->
+        <nav class="classy-navbar justify-content-between" id="deliciousNav">
+          <!-- Logo -->
+          <a class="nav-brand" href="#">
+            <h6>
+              <img src="{% static 'img/system/holdhandltda.jpeg' %}" alt="" width="220" height="150"/>
+            </h6>
+          </a>
+          <!-- Menu -->
+          <div class="classy-menu">
+            <div class="classynav col-12">
+                {% if user.is_authenticated %}
+                <button type="button" class="btn btn-primary btn-sm" onclick="exibirHome()">
+                  Home <i class="fa fa-home" aria-hidden="true"></i>
+                </button>&nbsp;
+                <button type="button" class="btn btn-primary btn-sm" onclick="exibirInsertProduct()">
+                  Insert Products <i class="fa fa-list" aria-hidden="true"></i>
+                </button>&nbsp;
+                <button type="button" class="btn btn-primary btn-sm" onclick="exibirLogout()">
+                  Logout <i class="fa fa-sign-out" aria-hidden="true"></i>
+                </button>
+                {% else %}
+                  <button type="button" class="btn btn-primary btn-sm" onclick="exibirRegister()">
+                    Register
+                  </button>&nbsp;
+                  <button type="button" class="btn btn-primary" onclick="exibirLogin()">
+                    Log in
+                  </button>
+                {% endif %}
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+<script>
+  function exibirLogout() {
+    location.href = "{% url 'logout' %}";
+  }
+
+  function exibirRegister() {
+    location.href = "{% url 'register' %}";
+  }
+
+  function exibirLogin() {
+    location.href = "{% url 'login' %}";
+  }
+
+  function exibirInsertProduct() {
+    location.href = "{% url 'insert_product' %}";
+  }
+
+  function exibirHome() {
+    location.href = "{% url 'home' %}";
+  }
+</script>

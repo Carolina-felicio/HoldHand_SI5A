@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'partials/_menu.html' %}
+<div class="contact-area section-padding-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="contact-form-area text-dark">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="row text-dark">
+
+                            <div class="col-12 col-lg-12 text-dark">
+                                <b> {{ user_form.as_table }}</b>
+                                <b>{{ profile_form.as_table }}</b>
+                            </div>
+
+                            <div class="classynav col-12 text-center text-dark">
+
+                                <button type="submit" class="btn btn-primary border border-dark btn-block">
+                                    Insert Data 
+                                </button>
+
+                            </div>
+
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+{% endblock %}

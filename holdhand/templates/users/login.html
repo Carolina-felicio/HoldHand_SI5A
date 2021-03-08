@@ -1,0 +1,97 @@
+{% extends 'base.html' %} {% load static %} {% block content %} 
+
+<br /><br />
+<!-- ##### Contact Form Area Start ##### -->
+<div class="contact-area section-padding-0-80">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="contact-form-area">
+          <!--alert-->
+          <div class="alert alert-primary text-center border border-dark text-uppercase" role="alert">
+            <h4 class="alert-heading">
+              Access your account on the HoldHand website
+            </h4>
+            <p class="alert-heading">
+              Your digital and personalized HOLDHAND store. 
+              Here you will find several embroidery options. Feel free to contact us!
+            </p>
+            <hr/>
+            <p class="alert-heading">
+              All the following data will be mandatory to register
+              on the HOLDHAND website
+            </p>
+          </div>
+          {% include 'partials/_alertas.html' %}
+          <form class="ls-form ls-form-horizontal" action="{% url 'login' %}"
+            method="POST" data-toggle="validator"role="form"
+          >
+            {% csrf_token %}
+            <div class="row form-group">
+              <div class="col-12 col-lg-12 ls-prefix-group">
+                <label for="email"
+                  ><strong>E-mail
+                    <i
+                      class="fa fa-envelope"
+                      style="color: black;"
+                      aria-hidden="true"
+                    ></i></strong>
+                </label>
+                <input
+                  type="text"
+                  id="email"
+                  class="form-control border border-dark rounded"
+                  name="email"
+                  placeholder="Digite seu e-mail para realizar o login..."
+                  title="Digite o seu e-mail cadastrado no sistema para realizar o login no site da Golden Bear Company."
+                  required="True"
+                />
+              </div>
+
+              <div class="col-12 col-lg-12 ls-prefix-group">
+                <label for="password"
+                  ><b>
+                    Password <i class="fa fa-key fa-fw" aria-hidden="true"></i></b
+                ></label>
+                <input
+                  id="password"
+                  type="password"
+                  class="form-control border border-dark rounded"
+                  name="password"
+                  placeholder="Digite sua senha para realizar o login..."
+                  title="Digite sua senha cadastrada no sistema para realizar o login no site da Golden Bear Company."
+                  required="True"
+                />
+                <p></p>
+              </div>
+
+              <div class="col-12 text-center">
+                <button
+                  class="btn btn-primary border border-dark btn-block"
+                  type="submit"
+                >
+                access your account
+                </button>
+
+              </div>
+            </div>
+          </form>
+          <button
+            class="btn btn-primary border border-dark btn-block"
+            type="button"
+            onclick="exibirRegister()"
+          >
+          Don't have an account yet? Click here
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br /><br />
+<script>
+    function exibirRegister() {
+    location.href = "{% url 'register' %}";
+  }
+</script>
+{% endblock %}

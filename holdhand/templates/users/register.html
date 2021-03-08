@@ -1,0 +1,283 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block content %}
+
+<!-- ##### Contact Form Area Start ##### -->
+<br>
+<div class="contact-area section-padding-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <!--alert-->
+        <div class="alert alert-primary text-center border border-dark text-uppercase" role="alert">
+          <h4 class="alert-heading">
+            Create your account on the HoldHand website
+            <i class="fa fa-registered" aria-hidden="true"></i>
+          </h4>
+          <p class="alert-heading">
+            Your digital and personalized HOLDHAND store. 
+            Here you will find several embroidery options. Feel free to contact us!
+          </p>
+          <hr/>
+          <p class="alert-heading">
+            All the following data will be mandatory to register
+            on the HOLDHAND website
+          </p>
+        </div>
+
+        {% include 'partials/_alertas.html' %}
+        <!--Form insert user-->
+        <div class="contact-form-area">
+          <form
+            action="#"
+            method="POST"
+            data-toggle="validator"
+            role="form"
+          >
+            {% csrf_token %}
+
+            <div class="row form-group">
+              <div class="col-12 col-lg-12 ls-prefix-group">
+                <label for="username">
+                  <strong>User <i class="fa fa-user-plus" aria-hidden="true"></i></strong>
+                </label>
+                <input
+                  type="text"
+                  class="form-control border border-dark rounded contador caracteres"
+                  name="username"
+                  id="username"
+                  placeholder="Please enter a username..."
+                  title="Your user is required to fill out the form, and it must contain between five (5) and thirty (30) characters."
+                  maxlength="30"
+                  minlength="5"
+                  onkeydown="contaCaracteresUsuario(this)"
+                  onkeyup="contaCaracteresUsuario(this)"
+                  onclick="contaCaracteresUsuario(this)"
+                  style="color: rgba(0, 0, 0, 0.849);"
+                  required
+                />
+                <div>
+                  <strong
+                    ><p style="color: black;" id="divmag">
+                      30 characters remaining
+                    </p></strong
+                  >
+                </div>
+              </div>
+
+              
+
+              <div class="col-12 col-lg-6">
+                <label for="name">
+                  <strong>Name <i class="fa fa-user-plus" aria-hidden="true"></i></strong>
+                </label>
+                <input
+                  type="text"
+                  class="form-control is-valid border border-dark rounded"
+                  name="name"
+                  id="name"
+                  data-ls-module="charCounter"
+                  maxlength="30"
+                  placeholder="Please enter a name..."
+                  title="Your name is required to fill in the form."
+                  required
+                />
+              </div>
+
+              <div class="col-12 col-lg-6">
+                <label for="surname">
+                  <strong>Surname
+                    <i class="fa fa-user-plus" aria-hidden="true"></i></strong>
+                </label>
+                <input
+                  type="text"
+                  class="form-control is-valid border border-dark rounded"
+                  name="surname"
+                  id="surname"
+                  placeholder="Enter your last name..."
+                  title="Your last name is mandatory to fill out the form."
+                  required
+                />
+              </div>
+
+              <div class="col-12 col-lg-6">
+                <label for="email">
+                  <strong>E-mail
+                    <i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i>
+                  </strong>
+                </label>
+                <input
+                  type="email"
+                  class="form-control is-valid border border-dark rounded"
+                  name="email"
+                  id="email"
+                  maxlength="80"
+                  placeholder="Type your e-mail..."
+                  title="Your email must contain a name before the '@', and after the '@' it must contain a domain."
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                  required
+                />
+              </div>
+
+              <div class="col-12 col-lg-6">
+                <label for="email2">
+                  <strong>E-mail confirmation
+                    <i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i>
+                  </strong>
+                </label>
+                <input
+                  type="email"
+                  class="form-control border border-dark rounded"
+                  name="email2"
+                  id="email2"
+                  maxlength="80"
+                  placeholder="Confirm your email..."
+                  title="Your confirmation email must contain a name before the '@', and after the '@' it must contain a domain.."
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                  required
+                />
+              </div>
+
+              <div class="col-12 col-lg-6 form-group">
+                <label for="password" class="control-label">
+                  <strong>
+                    Password <i class="fa fa-key fa-fw" aria-hidden="true"></i>
+                  </strong>
+                </label>
+                <input
+                  type="password"
+                  class="form-control is-valid border border-dark rounded"
+                  name="password"
+                  id="password"
+                  placeholder="Type your password..."
+                  data-minlength="8"
+                  maxlength="30"
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!|@|#|$|%|^|&|*|(|)|-|_]).{8,}"
+                  title="The password must contain eight (8) to thirty (30) characters, at least one number, an uppercase letter, 
+                  lowercase letters and must not contain spaces or emoji."
+                  onkeydown="contaCaracteresSenha(this)"
+                  onkeyup="contaCaracteresSenha(this)"
+                  onclick="contaCaracteresSenha(this)"
+                  required
+                />
+                <div>
+                  <strong
+                    ><p style="color: black;" id="divmagsenha">
+                      30 characters remaining
+                    </p></strong
+                  >
+                </div>
+                <p style="color: black;">
+                  <strong style="color: black;">Attention!!!</strong> Password must contain eight (8) to thirty (30) characters
+                  at least one number, an uppercase letter, a lowercase letter and must not contain spaces or emoji.
+                </p>
+              </div>
+
+              <div
+                class="col-12 col-lg-6 input-group col-md-4 f-left form-group"
+              >
+                <label for="password2" class="control-label">
+                  <strong>Password confirmation
+                    <i class="fa fa-key fa-fw" aria-hidden="true"></i>
+                    </strong
+                ></label>
+                <input
+                  type="password"
+                  class="form-control border border-dark rounded"
+                  name="password2"
+                  id="password2"
+                  placeholder="Confirm your password..."
+                  data-component="password-strength"
+                  data-monitor-id="password-strength-monitor"
+                  data-minlength="8"
+                  maxlength="30"
+                  data-match="#password"
+                  data-match-error="Atenção! As senhas não estão iguais."
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!|@|#|$|%|^|&|*|(|)|-|_]).{8,}"
+                  title="The password must contain eight (8) to thirty (30) characters, at least one number, an uppercase letter, 
+                  lowercase letters and must not contain spaces or emoji."
+                  onkeydown="contaCaracteresConfSenha(this)"
+                  onkeyup="contaCaracteresConfSenha(this)"
+                  onclick="contaCaracteresConfSenha(this)"
+                  required
+                />
+                <div>
+                  <strong
+                    ><p style="color: black;" id="divmagconfsenha">
+                      30 characters remaining
+                    </p></strong
+                  >
+                </div>
+                <p style="color: black;">
+                  <strong style="color: black;">Attention!!!</strong> Password must contain eight (8) to thirty (30) characters
+                  at least one number, an uppercase letter, a lowercase letter and must not contain spaces or emoji.
+                </p>
+              </div>
+
+              <div class="col-12 text-center form-group">
+                <button
+                  class="btn btn-primary border border-dark rounded btn-block"
+                  type="submit"
+                >
+                  Create your account<i class="fa fa-upload" aria-hidden="true"></i>
+                </button>
+
+                <button
+                  class="btn btn-primary border border-dark rounded btn-block"
+                  type="button"
+                  onclick="exibirLogin()"
+                >
+                  Already have an account? Click here
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+
+  function exibirLogin() {
+    location.href = "{% url 'login' %}";
+  }
+
+  function exibirRegister() {
+    location.href = "{% url 'home' %}";
+  }
+
+  function contaCaracteresUsuario(campo_passado) {
+    var limite = 30;
+    var campo = campo_passado.value.length;
+    var maxlength = document
+      .getElementById("username")
+      .setAttribute("maxlength", limite);
+    var conta = limite - campo;
+    var divmag = document.getElementById("divmag");
+    divmag.innerHTML = conta + " characters remaining";
+  }
+
+  function contaCaracteresSenha(campo_passado) {
+    var limite = 30;
+    var campo = campo_passado.value.length;
+    var maxlength = document
+      .getElementById("password")
+      .setAttribute("maxlength", limite);
+    var conta = limite - campo;
+    var divmagsenha = document.getElementById("divmagsenha");
+    divmagsenha.innerHTML = conta + " characters remaining";
+  }
+
+  function contaCaracteresConfSenha(campo_passado) {
+    var limite = 30;
+    var campo = campo_passado.value.length;
+    var maxlength = document
+      .getElementById("password2")
+      .setAttribute("maxlength", limite);
+    var conta = limite - campo;
+    var divmagconfsenha = document.getElementById("divmagconfsenha");
+    divmagconfsenha.innerHTML = conta + " characters remaining";
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,216 @@
+from django.shortcuts import render, redirect
+from django.contrib import auth, messages
+from django.contrib.auth.models import User
+from .forms import UserForm, UserProfile, UserProfileForm
+
+# Create your views here.
+
+
+def register(request):
+    """
+    Function at register user
+    """
+    if request.method == 'POST':
+        userSystem = request.POST.get('username', None)
+        if userSystem is None:
+            return redirect('register')
+        name = request.POST['name']
+        surname = request.POST['surname']
+        email = request.POST['email']
+        email2 = request.POST['email2']
+        password = request.POST['password']
+        password2 = request.POST['password2']
+
+        if (campo_vazio(userSystem) or userSystem is None):
+            messages.erro(
+                request, 'WARNING!!! The user field cannot be empty'
+            )
+            return redirect('register')
+
+        if (campo_vazio(name) or name is None):
+            messages.error(
+                request, 'WARNING!!! The name field cannot be empty'
+            )
+            return redirect('register')
+
+        if (campo_vazio(surname) or surname is None):
+            messages.error(
+                request, 'WARNING !!! The surname field cannot be empty'
+            )
+            return redirect('register')
+
+        if (campo_vazio(email) or email is None):
+            messages.error(
+                request, 'WARNING!!! The email field cannot be empty'
+            )
+            return redirect('register')
+
+        if (campo_vazio(email2) or email2 is None):
+            messages.error(
+                request, 'WARNING!!! The confirmation email field cannot be empty'
+            )
+            return redirect('register')
+
+        if (campo_vazio(password) or password is None):
+            messages.error(
+                request, 'WARNING!!! The password field cannot be empty'
+            )
+            return redirect('register')
+
+        if (campo_vazio(password2) or password2 is None):
+            messages.error(
+                request, 'WARNING!!! The confirmation password field cannot be empty'
+            )
+            return redirect('register')
+
+        if (senhas_nao_sao_iguais(password, password2)):
+            messages.error(
+                request, 'WARNING!!! The password and password confirmation fields do not match'
+            )
+            return redirect('register')
+
+        if (email_nao_sao_iguais(email, email2)):
+            messages.error(
+                request, 'WARNING!!! The e-mail and e-mail confirmation fields do not match'
+            )
+            return redirect('register')
+
+        if User.objects.filter(email=email).exists():
+            messages.error(
+                request, 'WARNING!!! This email is already registered'
+            )
+            return redirect('register')
+
+        if User.objects.filter(username=userSystem).exists():
+            messages.error(
+                request, 'WARNING!!! This username already exists. Please insert another'
+            )
+            return redirect('register')
+        user = User.objects.create_user(
+            username=userSystem, email=email, password=password, first_name=name, last_name=surname
+        )
+        user.save()
+        messages.success(request, 'Successful registration')
+        return redirect('login')
+    else:
+        return render(request, 'users/register.html')
+
+
+def login(request):
+    """
+    function login
+    """
+    dados_cookie = {
+        'email': request.COOKIES.get('email'),
+        'password': request.COOKIES.get('password')
+    }
+
+    if request.method == 'POST':
+        email = request.POST['email']
+        senha = request.POST['password']
+
+        if (campo_vazio(email) or campo_vazio(senha)):
+            messages.error(
+                request, 'WARNING!!! E-mail and / or password fields cannot be empty'
+            )
+            return redirect('login')
+
+        if User.objects.filter(email=email).exists():
+            name = User.objects.filter(email=email).values_list(
+                'username', flat=True
+            ).get()
+            user = auth.authenticate(request, username=name, password=senha)
+
+            if user is not None:
+                auth.login(request, user)
+                response = redirect('home')
+                response.set_cookie(key='email', value=email)
+                return response
+
+        if User.objects.filter(email=email).exists():
+            messages.error(
+                request, 'WARNING!!! Invalid email and / or password'
+            )
+        else:
+            messages.error(
+                request, 'WARNING!!! This email is not registered'
+            )
+
+        response = render(request, 'users/login.html')
+        response.set_cookie(key='email', value=email)
+        return response
+    return render(request, 'users/login.html', dados_cookie)
+
+
+def home(request):
+    """
+    function home page
+    """
+    return render(request, 'home.html')
+
+
+def logout(request):
+    """
+    Function logout
+    """
+    auth.logout(request)
+    return redirect('login')
+
+
+def campo_vazio(campo):
+    """
+    Função que verifica se um determinado campo, de cadastro ou login está vazio
+    """
+    return not campo.strip()
+
+
+def senhas_nao_sao_iguais(senha, senha2):
+    """
+    Função que verifica se as senha são diferentes para realizar o cadastro
+    """
+    return senha != senha2
+
+
+def email_nao_sao_iguais(email, email2):
+    """
+    Função que verifica se os emails não são iguais para realizar o cadastro
+    """
+    return email != email2
+
+
+def insert_product(request):
+    if request.user.is_authenticated:
+        user = User.objects.get(pk=request.user.pk)
+        user_form = UserForm(instance=user)
+
+        try:
+            user_profile = UserProfile.objects.get(user=user)
+        except:
+            user_profile = UserProfile()
+            user_profile.user = user
+            user_profile.save()
+
+        profile_form = UserProfileForm(instance=user_profile)
+
+        if request.method == 'POST':
+            user_form = UserForm(request.POST)
+            profile_form = UserProfileForm(request.POST)
+            if user_form.is_valid() and profile_form.is_valid():
+                user.first_name = user_form.cleaned_data['first_name']
+                user.last_name = user_form.cleaned_data['last_name']
+                user.email = user_form.cleaned_data['email']
+                user.save()
+
+                user_profile.segment = profile_form.cleaned_data['segment']
+                user_profile.store_name = profile_form.cleaned_data['store_name']
+                user_profile.address = profile_form.cleaned_data['address']
+                user_profile.payment_method = profile_form.cleaned_data['payment_method']
+                user_profile.save()
+
+        context = {
+            'user_form': user_form,
+            'profile_form': profile_form,
+            'user': user
+        }
+        return render(request, 'products/insert_product.html', context)
+    return redirect('login')
