@@ -33,20 +33,22 @@
             method="POST"
             data-toggle="validator"
             role="form"
+            class="was-validated"
           >
             {% csrf_token %}
 
             <div class="row form-group">
-              <div class="col-12 col-lg-12 ls-prefix-group">
+              <div class="col-12 col-lg-12 shadow-lg p-3 mb-5 bg-white ls-prefix-group">
                 <label for="username">
-                  <strong>User <i class="fa fa-user-plus" aria-hidden="true"></i></strong>
+                  <strong>User <i class="fa fa-user-plus" aria-hidden="true"></i></strong><br>
+                  <small>Your user is required to fill out the form, and it must contain between five (5) and thirty (30) characters.</small>
                 </label>
                 <input
                   type="text"
                   class="form-control border border-dark rounded contador caracteres"
                   name="username"
                   id="username"
-                  placeholder="Please enter a username..."
+                  placeholder="username"
                   title="Your user is required to fill out the form, and it must contain between five (5) and thirty (30) characters."
                   maxlength="30"
                   minlength="5"
@@ -67,40 +69,40 @@
 
               
 
-              <div class="col-12 col-lg-6">
+              <div class="col-12 shadow-lg p-3 mb-5 bg-white col-lg-6">
                 <label for="name">
                   <strong>Name <i class="fa fa-user-plus" aria-hidden="true"></i></strong>
                 </label>
                 <input
                   type="text"
-                  class="form-control is-valid border border-dark rounded"
+                  class="form-control border border-dark rounded"
                   name="name"
                   id="name"
                   data-ls-module="charCounter"
                   maxlength="30"
-                  placeholder="Please enter a name..."
+                  placeholder="name"
                   title="Your name is required to fill in the form."
                   required
                 />
               </div>
 
-              <div class="col-12 col-lg-6">
+              <div class="col-12 shadow-lg p-3 mb-5 bg-white col-lg-6">
                 <label for="surname">
                   <strong>Surname
                     <i class="fa fa-user-plus" aria-hidden="true"></i></strong>
                 </label>
                 <input
                   type="text"
-                  class="form-control is-valid border border-dark rounded"
+                  class="form-control border border-dark rounded"
                   name="surname"
                   id="surname"
-                  placeholder="Enter your last name..."
+                  placeholder="surname"
                   title="Your last name is mandatory to fill out the form."
                   required
                 />
               </div>
 
-              <div class="col-12 col-lg-6">
+              <div class="col-12 shadow-lg p-3 mb-5 bg-white col-lg-6">
                 <label for="email">
                   <strong>E-mail
                     <i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i>
@@ -108,18 +110,18 @@
                 </label>
                 <input
                   type="email"
-                  class="form-control is-valid border border-dark rounded"
+                  class="form-control border border-dark rounded"
                   name="email"
                   id="email"
                   maxlength="80"
-                  placeholder="Type your e-mail..."
+                  placeholder="e-mail"
                   title="Your email must contain a name before the '@', and after the '@' it must contain a domain."
                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                   required
                 />
               </div>
 
-              <div class="col-12 col-lg-6">
+              <div class="col-12 shadow-lg p-3 mb-5 bg-white col-lg-6">
                 <label for="email2">
                   <strong>E-mail confirmation
                     <i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i>
@@ -131,25 +133,27 @@
                   name="email2"
                   id="email2"
                   maxlength="80"
-                  placeholder="Confirm your email..."
+                  placeholder="e-mail confirmation"
                   title="Your confirmation email must contain a name before the '@', and after the '@' it must contain a domain.."
                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                   required
                 />
               </div>
 
-              <div class="col-12 col-lg-6 form-group">
+              <div class="col-12 shadow-lg p-3 mb-5 bg-white col-lg-6 form-group">
                 <label for="password" class="control-label">
                   <strong>
                     Password <i class="fa fa-key fa-fw" aria-hidden="true"></i>
-                  </strong>
+                  </strong><br>
+                  <small>The password must contain eight (8) to thirty (30) characters, at least one number, an uppercase letter, 
+                    lowercase letters and must not contain spaces or emoji.</small>
                 </label>
                 <input
                   type="password"
-                  class="form-control is-valid border border-dark rounded"
+                  class="form-control border border-dark rounded"
                   name="password"
                   id="password"
-                  placeholder="Type your password..."
+                  placeholder="password"
                   data-minlength="8"
                   maxlength="30"
                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!|@|#|$|%|^|&|*|(|)|-|_]).{8,}"
@@ -167,26 +171,24 @@
                     </p></strong
                   >
                 </div>
-                <p style="color: black;">
-                  <strong style="color: black;">Attention!!!</strong> Password must contain eight (8) to thirty (30) characters
-                  at least one number, an uppercase letter, a lowercase letter and must not contain spaces or emoji.
-                </p>
               </div>
 
               <div
-                class="col-12 col-lg-6 input-group col-md-4 f-left form-group"
+                class="col-12 shadow-lg p-3 mb-5 bg-white col-lg-6 input-group col-md-4 f-left form-group"
               >
                 <label for="password2" class="control-label">
                   <strong>Password confirmation
                     <i class="fa fa-key fa-fw" aria-hidden="true"></i>
-                    </strong
-                ></label>
+                    </strong><br>
+                  <small>The password must contain eight (8) to thirty (30) characters, at least one number, an uppercase letter, 
+                    lowercase letters and must not contain spaces or emoji.</small>
+                  </label>
                 <input
                   type="password"
                   class="form-control border border-dark rounded"
                   name="password2"
                   id="password2"
-                  placeholder="Confirm your password..."
+                  placeholder="password confirmation"
                   data-component="password-strength"
                   data-monitor-id="password-strength-monitor"
                   data-minlength="8"
@@ -208,11 +210,71 @@
                     </p></strong
                   >
                 </div>
-                <p style="color: black;">
-                  <strong style="color: black;">Attention!!!</strong> Password must contain eight (8) to thirty (30) characters
-                  at least one number, an uppercase letter, a lowercase letter and must not contain spaces or emoji.
-                </p>
               </div>
+
+              <div class="col-6 shadow-lg p-3 mb-5 bg-white border rounded">
+                <label for="zip_code">
+                    <strong>Zip code</strong>
+                </label>
+                <i class="fa fa-exclamation-circle trailing"></i>
+                <input class="form-control border border-dark rounded" 
+                name="zip_code" id="zip_code" cols="30" rows="10" placeholder="zip code" required>
+              </div>
+
+              <div class="col-3 shadow-lg p-3 mb-5 bg-white border rounded">
+                <label for="city">
+                    <strong>City</strong>
+                </label>
+                <i class="fa fa-exclamation-circle trailing"></i>
+                <input class="form-control border border-dark rounded" 
+                name="city" id="city" cols="30" rows="10" placeholder="city" required>
+              </div>
+
+              <div class="col-3 shadow-lg p-3 mb-5 bg-white border rounded">
+                <label for="uf">
+                    <strong>Uf</strong>
+                </label>
+                <i class="fa fa-exclamation-circle trailing"></i>
+                <input class="form-control border border-dark rounded" 
+                name="uf" id="uf" cols="30" rows="10" placeholder="Uf" required>
+              </div>
+
+
+              <div class="col-12 shadow-lg p-3 mb-5 bg-white border rounded">
+                <label for="address">
+                    <strong>Address</strong>
+                </label>
+                <i class="fa fa-exclamation-circle trailing"></i>
+                <input class="form-control border border-dark rounded" 
+                name="address" id="address" cols="30" rows="10" placeholder="address" required>
+            </div>
+
+            <div class="col-6 shadow-lg p-3 mb-5 bg-white border rounded">
+                <label for="district">
+                    <strong>District</strong>
+                </label>
+                <i class="fa fa-exclamation-circle trailing"></i>
+                <input class="form-control border border-dark rounded" 
+                name="district" id="district" cols="30" rows="10" placeholder="district" required>
+            </div>
+
+            <div class="col-3 shadow-lg p-3 mb-5 bg-white border rounded">
+                <label for="number">
+                    <strong>Number</strong>
+                </label>
+                <i class="fa fa-exclamation-circle trailing"></i>
+                <input class="form-control border border-dark rounded" 
+                name="number" id="number" cols="30" rows="10" placeholder="number" required>
+            </div>
+
+            <div class="col-3 shadow-lg p-3 mb-5 bg-white border rounded">
+                <label for="complement">
+                    <strong>Complement</strong>
+                </label>
+                <i class="fa fa-exclamation-circle trailing"></i>
+                <input class="form-control border border-dark rounded" 
+                name="complement" id="complement" cols="30" rows="10" placeholder="complement">
+            </div>
 
               <div class="col-12 text-center form-group">
                 <button
@@ -279,5 +341,35 @@
     var divmagconfsenha = document.getElementById("divmagconfsenha");
     divmagconfsenha.innerHTML = conta + " characters remaining";
   }
+</script>
+
+<script type="text/javascript">
+	$("#zip_code").focusout(function(){
+		//Início do Comando AJAX
+		$.ajax({
+			//O campo URL diz o caminho de onde virá os dados
+			//É importante concatenar o valor digitado no CEP
+			url: 'https://viacep.com.br/ws/'+$(this).val()+'/json/unicode/',
+			//Aqui você deve preencher o tipo de dados que será lido,
+			//no caso, estamos lendo JSON.
+			dataType: 'json',
+			//SUCESS é referente a função que será executada caso
+			//ele consiga ler a fonte de dados com sucesso.
+			//O parâmetro dentro da função se refere ao nome da variável
+			//que você vai dar para ler esse objeto.
+			success: function(resposta){
+				//Agora basta definir os valores que você deseja preencher
+				//automaticamente nos campos acima.
+				$("#address").val(resposta.logradouro);
+				$("#complement").val(resposta.complemento);
+				$("#district").val(resposta.bairro);
+				$("#city").val(resposta.localidade);
+				$("#uf").val(resposta.uf);
+				//Vamos incluir para que o Número seja focado automaticamente
+				//melhorando a experiência do usuário
+				$("#number").focus();
+			}
+		});
+	});
 </script>
 {% endblock %}

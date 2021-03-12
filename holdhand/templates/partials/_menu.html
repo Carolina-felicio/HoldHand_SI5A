@@ -46,6 +46,7 @@
     </div>
   </div>
 
+
   <!-- Navbar Area -->
   <div class="delicious-main-menu">
     <div class="classy-nav-container breakpoint-off">
@@ -60,25 +61,40 @@
           </a>
           <!-- Menu -->
           <div class="classy-menu">
-            <div class="classynav col-12">
+            <div class="classynav col-13">
+              <nav class="navbar navbar-expand-lg navbar-light bg-light border border-dark rounded">
                 {% if user.is_authenticated %}
-                <button type="button" class="btn btn-primary btn-sm" onclick="exibirHome()">
+                <button type="button" class="btn btn-link text-dark btn-sm" onclick="exibirHome()">
                   Home <i class="fa fa-home" aria-hidden="true"></i>
                 </button>&nbsp;
-                <button type="button" class="btn btn-primary btn-sm" onclick="exibirInsertProduct()">
+                <button type="button" class="btn btn-link text-dark btn-sm" onclick="displayDashboard()">
+                  Dashboard <i class="fa fa-dashboard" aria-hidden="true"></i>
+                </button>&nbsp;
+                <button type="button" class="btn btn-link text-dark btn-sm" onclick="exibirInsertProduct()">
                   Insert Products <i class="fa fa-list" aria-hidden="true"></i>
                 </button>&nbsp;
-                <button type="button" class="btn btn-primary btn-sm" onclick="exibirLogout()">
+                <button type="button" class="btn btn-link text-dark btn-sm" onclick="exibirLogout()">
                   Logout <i class="fa fa-sign-out" aria-hidden="true"></i>
-                </button>
+                </button>&nbsp;
                 {% else %}
-                  <button type="button" class="btn btn-primary btn-sm" onclick="exibirRegister()">
+                <button type="button" class="btn btn-link text-dark btn-sm" onclick="exibirHome()">
+                  Home <i class="fa fa-home" aria-hidden="true"></i>
+                </button>&nbsp;
+                  <button type="button" class="btn btn-link text-dark btn-sm" onclick="exibirRegister()">
                     Register
                   </button>&nbsp;
-                  <button type="button" class="btn btn-primary" onclick="exibirLogin()">
+                  <button type="button" class="btn btn-link text-dark btn-sm" onclick="exibirLogin()">
                     Log in
-                  </button>
+                  </button>&nbsp;
                 {% endif %}
+
+                <form action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
+                  <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search">
+                  <button class="btn btn-outline-light my-2 text-dark my-sm-0" type="submit">
+                    <i class="material-icons">search</i>
+                  </button>
+                </form>
+              </nav>
             </div>
           </div>
         </nav>
@@ -105,5 +121,9 @@
 
   function exibirHome() {
     location.href = "{% url 'home' %}";
+  }
+
+  function displayDashboard() {
+    location.href = "{% url 'dashboard' %}";
   }
 </script>

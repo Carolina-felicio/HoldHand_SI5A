@@ -1,18 +1,18 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth, messages
 from django.contrib.auth.models import User
-from .forms import UserForm, UserProfile, UserProfileForm
+from products.models import ProductProfile
+from .models import UserProfile
+
 
 # Create your views here.
-
-
 def register(request):
     """
     Function at register user
     """
     if request.method == 'POST':
-        userSystem = request.POST.get('username', None)
-        if userSystem is None:
+        username = request.POST.get('username', None)
+        if username is None:
             return redirect('register')
         name = request.POST['name']
         surname = request.POST['surname']
@@ -20,8 +20,15 @@ def register(request):
         email2 = request.POST['email2']
         password = request.POST['password']
         password2 = request.POST['password2']
+        address = request.POST['address']
+        zip_code = request.POST['zip_code']
+        city = request.POST['city']
+        uf = request.POST['uf']
+        number = request.POST['number']
+        district = request.POST['district']
+        complement = request.POST['complement']
 
-        if (campo_vazio(userSystem) or userSystem is None):
+        if (campo_vazio(username) or username is None):
             messages.erro(
                 request, 'WARNING!!! The user field cannot be empty'
             )
@@ -62,6 +69,49 @@ def register(request):
                 request, 'WARNING!!! The confirmation password field cannot be empty'
             )
             return redirect('register')
+        # Address
+        if (campo_vazio(address) or address is None):
+            messages.error(
+                request, 'WARNING!!! The address field cannot be empty'
+            )
+            return redirect('register')
+
+        if (campo_vazio(zip_code) or zip_code is None):
+            messages.error(
+                request, 'WARNING!!! The zip_code field cannot be empty'
+            )
+            return redirect('register')
+
+        if (campo_vazio(city) or city is None):
+            messages.error(
+                request, 'WARNING!!! The city field cannot be empty'
+            )
+            return redirect('register')
+        
+        if (campo_vazio(uf) or uf is None):
+            messages.error(
+                request, 'WARNING!!! The zip_code field cannot be empty'
+            )
+            return redirect('register')
+    
+        if (campo_vazio(complement) or complement is None):
+            messages.error(
+                request, 'WARNING!!! The complement field cannot be empty'
+            )
+            return redirect('register')
+        
+        if (campo_vazio(district) or district is None):
+            messages.error(
+                request, 'WARNING!!! The district field cannot be empty'
+            )
+            return redirect('register')
+        
+        if (campo_vazio(number) or number is None):
+            messages.error(
+                request, 'WARNING!!! The number field cannot be empty'
+            )
+            return redirect('register')
+        # Address
 
         if (senhas_nao_sao_iguais(password, password2)):
             messages.error(
@@ -81,16 +131,26 @@ def register(request):
             )
             return redirect('register')
 
-        if User.objects.filter(username=userSystem).exists():
+        if User.objects.filter(username=username).exists():
             messages.error(
                 request, 'WARNING!!! This username already exists. Please insert another'
             )
             return redirect('register')
         user = User.objects.create_user(
-            username=userSystem, email=email, password=password, first_name=name, last_name=surname
+            username=username, email=email, password=password, first_name=name, last_name=surname
+        )
+        user_address = UserProfile.objects.create(
+            username=user, address=address, number=number, district=district, 
+            city=city, uf=uf, complement=complement, zip_code=zip_code
         )
         user.save()
-        messages.success(request, 'Successful registration')
+        user_address.save()
+        datas = {
+            'user': user,
+            'user_address': user_address
+        }
+        
+        messages.success(request, 'Successful registration', datas)
         return redirect('login')
     else:
         return render(request, 'users/register.html')
@@ -142,11 +202,17 @@ def login(request):
     return render(request, 'users/login.html', dados_cookie)
 
 
-def home(request):
-    """
-    function home page
-    """
-    return render(request, 'home.html')
+def dashboard(request):
+    if request.user.is_authenticated:
+        identification = request.user.id
+        products = ProductProfile.objects.order_by('product_name').filter(username=identification)
+
+        datas = {
+            'products': products
+        }
+        return render(request, 'users/dashboard.html', datas)
+    else:
+        return redirect('login')
 
 
 def logout(request):
@@ -176,41 +242,3 @@ def email_nao_sao_iguais(email, email2):
     Função que verifica se os emails não são iguais para realizar o cadastro
     """
     return email != email2
-
-
-def insert_product(request):
-    if request.user.is_authenticated:
-        user = User.objects.get(pk=request.user.pk)
-        user_form = UserForm(instance=user)
-
-        try:
-            user_profile = UserProfile.objects.get(user=user)
-        except:
-            user_profile = UserProfile()
-            user_profile.user = user
-            user_profile.save()
-
-        profile_form = UserProfileForm(instance=user_profile)
-
-        if request.method == 'POST':
-            user_form = UserForm(request.POST)
-            profile_form = UserProfileForm(request.POST)
-            if user_form.is_valid() and profile_form.is_valid():
-                user.first_name = user_form.cleaned_data['first_name']
-                user.last_name = user_form.cleaned_data['last_name']
-                user.email = user_form.cleaned_data['email']
-                user.save()
-
-                user_profile.segment = profile_form.cleaned_data['segment']
-                user_profile.store_name = profile_form.cleaned_data['store_name']
-                user_profile.address = profile_form.cleaned_data['address']
-                user_profile.payment_method = profile_form.cleaned_data['payment_method']
-                user_profile.save()
-
-        context = {
-            'user_form': user_form,
-            'profile_form': profile_form,
-            'user': user
-        }
-        return render(request, 'products/insert_product.html', context)
-    return redirect('login')

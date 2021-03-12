@@ -23,12 +23,12 @@
             </p>
           </div>
           {% include 'partials/_alertas.html' %}
-          <form class="ls-form ls-form-horizontal" action="{% url 'login' %}"
+          <form class="ls-form ls-form-horizontal was-validated" action="{% url 'login' %}"
             method="POST" data-toggle="validator"role="form"
           >
             {% csrf_token %}
             <div class="row form-group">
-              <div class="col-12 col-lg-12 ls-prefix-group">
+              <div class="col-12 col-lg-12 shadow-lg p-3 mb-5 bg-white ls-prefix-group">
                 <label for="email"
                   ><strong>E-mail
                     <i
@@ -42,13 +42,14 @@
                   id="email"
                   class="form-control border border-dark rounded"
                   name="email"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                   placeholder="Digite seu e-mail para realizar o login..."
                   title="Digite o seu e-mail cadastrado no sistema para realizar o login no site da Golden Bear Company."
                   required="True"
                 />
               </div>
 
-              <div class="col-12 col-lg-12 ls-prefix-group">
+              <div class="col-12 col-lg-12 shadow-lg p-3 mb-5 bg-white ls-prefix-group">
                 <label for="password"
                   ><b>
                     Password <i class="fa fa-key fa-fw" aria-hidden="true"></i></b

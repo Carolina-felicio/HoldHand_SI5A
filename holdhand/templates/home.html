@@ -1,54 +1,27 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
 {% include 'partials/_menu.html' %} 
 
 <!-- ##### Best Receipe Area Start ##### -->
 <section class="best-receipe-area">
   <div class="container">
     <div class="row">
-      <br>
-      <table class="table table-bordered table-primary ">
-        <thead class="thead-dark text-uppercase">
-          <tr class="rounded text-center">
-            <th scope="col">Name</th>
-            <th scope="col">Segment</th>
-            <th scope="col"> Store name</th>
-            <th scope="col"> Address</th>
-            <th scope="col">Payment method</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="align-middle text-center">
-            <th scope="row" class="align-middle">
-              Guilherme Moreira
-            </th>
-            <th scope="row" class="align-middle">
-              Tecnologia
-            </th>
-            <th class="align-middle" scope="row">
-              VilelaTech
-            </th>
-            <th class="align-middle" scope="row">
-              Avenida Paulista, 1000
-            </th>
-            <th class="align-middle" scope="row">Cartão</th>
-          </tr>
-          <tr class="align-middle text-center">
-            <th scope="row" class="align-middle">
-              Ana Felicio
-            </th>
-            <th scope="row" class="align-middle">
-              Artesanato/Bordado
-            </th>
-            <th class="align-middle" scope="row">
-              Pense Bordado
-            </th>
-            <th class="align-middle" scope="row">
-              Avenida Paulista, 2000
-            </th>
-            <th class="align-middle" scope="row">Dinheiro/Cartão</th>
-          </tr>
-        </tbody>
-      </table>
+      {% if products %}
+      {% for product in products %}
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="single-best-receipe-area mb-30">
+            <img src="{% static 'img/product/product-icon.png' %}" width="400" height="150" alt="">
+            <div class="receipe-content">
+              <a href="{% url 'product' product.id %}">
+                  <h5>{{ product.product_name }}</h5>
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      {% else %}
+      {% endif %}
     </div>
   </div>
 </section>

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'partials/_menu.html' %}
+
+<div class="">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading">
+                    <h3>Dear,<br> {{ user.last_name }}, {{ user.first_name }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="">
+    <div class="container">
+        <div class="row">
+          {% if products %}
+          {% for product in products %}
+          <div class="col-12 col-sm-12 col-lg-12">
+            <div class="single-best-receipe-area mb-30">
+              <a href="#">
+                <ul class="list-unstyled">
+                  <li class="media">
+                    <img class="mr-3" src="{{ product.image.url }}"  width="130" height="250" alt="">
+                    <div class="media-body">
+                      <h5 class="mt-0 mb-1">{{ product.product_name }}</h5>
+                      <small>
+                        {{ product.description }}
+                      </small><br>
+                      <div class="col-12 col-sm-12 col-lg-12 d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a type="button" href="{% url 'edit_product' product.id %}" class="btn btn-primary text-white">
+                          Editing Product <i class="fa fa-trash fa-1x" aria-hidden="true"></i>
+                        </a>&nbsp;
+                        <a type="button" href="{% url 'delete_product' product.id %}" class="btn btn-danger text-white">
+                          Delete Product <i class="fa fa-trash fa-1x" aria-hidden="true"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                <br>
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+          {% else %}
+          {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}
