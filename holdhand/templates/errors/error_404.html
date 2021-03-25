@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'partials/_menu.html' %}
+
+<div class="">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <br>
+                <div class="jumbotron bg-secondary">
+                    <h1 class="display-4 text-center">404<br> Page Not Found</h1> 
+                    <p class="lead text-center text-dark">Sorry, this page is missing or does not exists</p>
+                    <hr class="my-4">
+                    <p class="lead text-center">
+                      <a class="btn btn-primary btn-lg" href="{% url 'home' %}" role="button">Go to  our Home Page</a>
+                    </p>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+{% include 'partials/_footer.html' %}
+{% endblock %}

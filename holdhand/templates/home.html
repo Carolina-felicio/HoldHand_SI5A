@@ -7,22 +7,109 @@
 <section class="best-receipe-area">
   <div class="container">
     <div class="row">
+      <h2 class="text-center">Available products</h2>
+      
       {% if products %}
       {% for product in products %}
-        <div class="col-12 col-sm-6 col-lg-4">
-          <div class="single-best-receipe-area mb-30">
-            <img src="{% static 'img/product/product-icon.png' %}" width="400" height="150" alt="">
-            <div class="receipe-content">
-              <a href="{% url 'product' product.id %}">
-                  <h5>{{ product.product_name }}</h5>
-              </a>
-            </div>
-          </div>
+      <br><br>
+      <div class="col-12 col-sm-12 col-lg-12">
+        <div class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border rounded">
+          <a href="#">
+            <ul class="list-unstyled">
+              <li class="media">
+                <img class="img-rounded img-thumbnail border border-white" src="{% static 'img/product/new-product.png' %}" width="205"  alt="">&nbsp;
+                <div class="media-body">
+                  <h5 class="mt-0 mb-1 text-center">Product name - "<strong>{{ product.product_name }}</strong>"</h5>
+                  <div class="card text text-body">
+                    <div class="card-body text text-body border border-white rounded">
+                      <small class="text text-justify text-body font-italic">
+                        DESCRIPTION -->> {{ product.description }}
+                      </small><br><br>
+                      <footer class="blockquote-footer text text-body text-uppercase">Created by <cite title="Título da fonte">{{ product.username.first_name }} {{ product.username.last_name }}</cite></footer>
+                    </div>
+                  </div><br>
+                  <div class="col-12 col-sm-12 col-lg-12 d-grid gap-2 d-md-flex justify-content-md-end"> 
+                    <p> 
+                      <small class="text-dark text-end text-uppercase fst-italic">
+                        Click the button to see more product information -> 
+                      </small>
+                      <a type="button" href="{% url 'product' product.id %}" class="btn btn-outline-info border border-transparent">
+                        {{ product.product_name }} 
+                      </a>&nbsp;
+                    </p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <br>
+          </a>
         </div>
+      </div>
       {% endfor %}
       {% else %}
+      <div class="row">
+        <div class="col-13">
+          <br>
+          <div class="jumbotron bg-danger text-white">
+            <h1 class="display-4 text-white">Not a a product into your account, which you want to exchange or sell.</h1>
+            <p class="lead text-white">Your digital and personalized HOLDHAND store. 
+              Here you will find several embroidery options. Feel free to contact us!.
+            </p>
+        </div>
+      </div>
       {% endif %}
     </div>
   </div>
 </section>
+
+<!-- ##### Pagination ##### -->
+<section class="top-catagory-area section-padding-20-0" style="color: black;">
+  <div class="container">
+    {% if products.has_other_pages %}
+    <ul class="pagination justify-content-center" style="color: black;">
+      {% if products.has_previous %}
+      <li class="page-item" style="color: black;">
+        <a href="?page={{ products.previous_page_number }}" class="page-link"
+          >&laquo;</a
+        >
+      </li>
+      {% else %}
+      <li class="page-item disabled" style="color: black;">
+        <a class="page-link" style="color: black;">&laquo;</a>
+      </li>
+      {% endif %} {% for pagina in products.paginator.page_range %} 
+      {% if products.number == pagina %}
+      <li class="page-item active" style="color: black;">
+        <a class="page-link" style="color: black;">{{ pagina }}</a>
+      </li>
+      {% else %}
+      <li class="page-item" style="color: black;">
+        <a
+          href="?page={{ pagina }}"
+          class="page-link btn btn-outline-dark"
+          style="color: black;"
+          >{{ pagina }}</a
+        >
+      </li>
+      {% endif %} {% endfor %} {% if products.has_next %}
+      <li class="page-item" style="color: black;">
+        <a
+          href="?page={{ products.next_page_number }}"
+          style="color: black;"
+          class="page-link btn btn-outline-dark"
+          >&raquo;</a
+        >
+      </li>
+      {% else %}
+      <li class="page-item disabled" style="color: black;">
+        <a class="page-link" style="color: black;">&raquo;</a>
+      </li>
+      {% endif %}
+    </ul>
+    {% endif %}
+  </div>
+</section>
+<br>
+<!-- ##### Pagination End ##### -->
+{% include 'partials/_footer.html' %}
 {% endblock %}

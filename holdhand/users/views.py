@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth, messages
 from django.contrib.auth.models import User
-from products.models import ProductProfile
 from .models import UserProfile
+from .forms import UserForm, UserProfileForm
 
 
 # Create your views here.
@@ -27,6 +27,8 @@ def register(request):
         number = request.POST['number']
         district = request.POST['district']
         complement = request.POST['complement']
+        phone = request.POST['phone']
+        cell_phone = request.POST['cell_phone']
 
         if (campo_vazio(username) or username is None):
             messages.erro(
@@ -87,25 +89,19 @@ def register(request):
                 request, 'WARNING!!! The city field cannot be empty'
             )
             return redirect('register')
-        
+
         if (campo_vazio(uf) or uf is None):
             messages.error(
                 request, 'WARNING!!! The zip_code field cannot be empty'
             )
             return redirect('register')
-    
-        if (campo_vazio(complement) or complement is None):
-            messages.error(
-                request, 'WARNING!!! The complement field cannot be empty'
-            )
-            return redirect('register')
-        
+
         if (campo_vazio(district) or district is None):
             messages.error(
                 request, 'WARNING!!! The district field cannot be empty'
             )
             return redirect('register')
-        
+
         if (campo_vazio(number) or number is None):
             messages.error(
                 request, 'WARNING!!! The number field cannot be empty'
@@ -140,8 +136,9 @@ def register(request):
             username=username, email=email, password=password, first_name=name, last_name=surname
         )
         user_address = UserProfile.objects.create(
-            username=user, address=address, number=number, district=district, 
-            city=city, uf=uf, complement=complement, zip_code=zip_code
+            username=user, address=address, number=number, district=district,
+            city=city, uf=uf, complement=complement, zip_code=zip_code,
+            cell_phone=cell_phone, phone=phone
         )
         user.save()
         user_address.save()
@@ -149,9 +146,7 @@ def register(request):
             'user': user,
             'user_address': user_address
         }
-        
-        messages.success(request, 'Successful registration', datas)
-        return redirect('login')
+        return render(request, 'users/login.html', datas)
     else:
         return render(request, 'users/register.html')
 
@@ -202,17 +197,51 @@ def login(request):
     return render(request, 'users/login.html', dados_cookie)
 
 
-def dashboard(request):
+def my_data(request):
     if request.user.is_authenticated:
-        identification = request.user.id
-        products = ProductProfile.objects.order_by('product_name').filter(username=identification)
+        user = User.objects.get(pk=request.user.pk)
+        user_form = UserForm(instance=user)
 
-        datas = {
-            'products': products
+        try:
+            user_profile = UserProfile.objects.get(username=user)
+        except:
+            user_profile = UserProfile()
+            user_profile.username = user
+            user_profile.save()
+
+        profile_form = UserProfileForm(instance=user_profile)
+
+        if request.method == 'POST':
+            user_form = UserForm(request.POST)
+            profile_form = UserProfileForm(request.POST)
+            if user_form.is_valid() and profile_form.is_valid():
+                user.first_name = user_form.cleaned_data['first_name']
+                user.last_name = user_form.cleaned_data['last_name']
+                user.email = user_form.cleaned_data['email']
+                user.save()
+
+                user_profile.phone = profile_form.cleaned_data['phone']
+                user_profile.cell_phone = profile_form.cleaned_data['cell_phone']
+                user_profile.zip_code = profile_form.cleaned_data['zip_code']
+                user_profile.address = profile_form.cleaned_data['address']
+                user_profile.district = profile_form.cleaned_data['district']
+                user_profile.number = profile_form.cleaned_data['number']
+                user_profile.complement = profile_form.cleaned_data['complement']
+                user_profile.city = profile_form.cleaned_data['city']
+                user_profile.uf = profile_form.cleaned_data['uf']
+                user_profile.save()
+
+        data = {
+            'user_form': user_form,
+            'profile_form': profile_form,
+            'user': user
         }
-        return render(request, 'users/dashboard.html', datas)
-    else:
-        return redirect('login')
+        return render(request, 'users/my_data.html', data)
+    return redirect('login')
+
+
+def dashboard(request):
+    return render(request, 'users/dashboard.html')
 
 
 def logout(request):

@@ -7,7 +7,7 @@ class ProductProfileList(admin.ModelAdmin):
     prepopulated_fields = {"slug": ('product_name', )}
     list_display = (
         'username', 'product_name', 'segment', 'store_name', 'payment_method',
-        'date_product', 'image',
+        'date_product', 'image_one',
     )
     list_display_links = ('username',)
     list_filter = ('segment',)

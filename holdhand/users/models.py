@@ -5,7 +5,9 @@ from django.contrib.auth.models import User
 # Create your models here.
 class UserProfile(models.Model):
     username = models.OneToOneField(User, unique=True, on_delete=models.CASCADE)
-    zip_code = models.IntegerField(blank=False)
+    phone = models.CharField(max_length=50)
+    cell_phone = models.CharField(max_length=50)
+    zip_code = models.CharField(max_length=20)
     address = models.CharField(max_length=150)
     district = models.CharField(max_length=50)
     number = models.CharField(max_length=20)

@@ -1,13 +1,14 @@
 {% extends 'base.html' %} 
-{% load static %}
+{% load static %} 
 {% block content %}
+{% include 'partials/_menu.html' %} 
 
 <!-- ##### Contact Form Area Start ##### -->
 <br>
 <div class="contact-area section-padding-0">
   <div class="container">
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 shadow-lg p-3 mb-5 bg-white">
         <!--alert-->
         <div class="alert alert-primary text-center border border-dark text-uppercase" role="alert">
           <h4 class="alert-heading">
@@ -37,8 +38,12 @@
           >
             {% csrf_token %}
 
-            <div class="row form-group">
-              <div class="col-12 col-lg-12 shadow-lg p-3 mb-5 bg-white ls-prefix-group">
+            <div class="col-12 shadow-lg p-3 mb-5 bg-white border rounded">
+              <h4 class="text-center">Personal data</h4>
+            </div>
+
+            <div class="form-group form-row">
+              <div class="md-form col-12 col-lg-12 shadow-lg p-3 mb-5 bg-white ls-prefix-group">
                 <label for="username">
                   <strong>User <i class="fa fa-user-plus" aria-hidden="true"></i></strong><br>
                   <small>Your user is required to fill out the form, and it must contain between five (5) and thirty (30) characters.</small>
@@ -212,21 +217,47 @@
                 </div>
               </div>
 
+              <div class="col-12 shadow-lg p-3 mb-5 bg-white border rounded">
+                <h4 class="text-center">Phone and/or Cell Phone</h4>
+              </div>
+
+              <div class="col-6 shadow-lg p-3 mb-5 bg-white border rounded">
+                <label for="phone">
+                    <strong>Phone</strong>
+                </label>
+                <i class="fa fa-phone"></i> <small>(optional)</small>
+                <input type="text" class="form-control phone-ddd-mask border border-dark rounded" 
+                name="phone" id="phone" cols="30" rows="10" placeholder="(00) 0000-0000" value="(00) 0000-0000">
+              </div>
+
+              <div class="col-6 shadow-lg p-3 mb-5 bg-white border rounded">
+                <label for="cell_phone">
+                    <strong>Cell Phone</strong>
+                </label>
+                <i class="fa fa-mobile" aria-hidden="true"></i>
+                <input type="text" class="form-control cel-sp-mask border border-dark rounded" 
+                name="cell_phone" id="cell_phone" cols="30" rows="10" placeholder="(00) 00000-0000" required>
+              </div><br><br>
+
+              <div class="col-12 shadow-lg p-3 mb-5 bg-white border rounded">
+                <h4 class="text-center">Address</h4>
+              </div>
+
               <div class="col-6 shadow-lg p-3 mb-5 bg-white border rounded">
                 <label for="zip_code">
                     <strong>Zip code</strong>
                 </label>
-                <i class="fa fa-exclamation-circle trailing"></i>
-                <input class="form-control border border-dark rounded" 
-                name="zip_code" id="zip_code" cols="30" rows="10" placeholder="zip code" required>
+                <i class="fa fa-address-card"></i>
+                <input type="text" class="form-control border border-dark rounded" 
+                name="zip_code" id="zip_code" cols="30" rows="10" placeholder="00000-000" required>
               </div>
 
               <div class="col-3 shadow-lg p-3 mb-5 bg-white border rounded">
                 <label for="city">
                     <strong>City</strong>
                 </label>
-                <i class="fa fa-exclamation-circle trailing"></i>
-                <input class="form-control border border-dark rounded" 
+                <i class="fa fa-address-card"></i>
+                <input type="text" class="form-control border border-dark rounded" 
                 name="city" id="city" cols="30" rows="10" placeholder="city" required>
               </div>
 
@@ -234,8 +265,8 @@
                 <label for="uf">
                     <strong>Uf</strong>
                 </label>
-                <i class="fa fa-exclamation-circle trailing"></i>
-                <input class="form-control border border-dark rounded" 
+                <i class="fa fa-address-card"></i>
+                <input type="text" class="form-control border border-dark rounded" 
                 name="uf" id="uf" cols="30" rows="10" placeholder="Uf" required>
               </div>
 
@@ -244,48 +275,49 @@
                 <label for="address">
                     <strong>Address</strong>
                 </label>
-                <i class="fa fa-exclamation-circle trailing"></i>
-                <input class="form-control border border-dark rounded" 
+                <i class="fa fa-address-card"></i>
+                <input type="text" class="form-control border border-dark rounded" 
                 name="address" id="address" cols="30" rows="10" placeholder="address" required>
-            </div>
+              </div>
 
-            <div class="col-6 shadow-lg p-3 mb-5 bg-white border rounded">
-                <label for="district">
-                    <strong>District</strong>
-                </label>
-                <i class="fa fa-exclamation-circle trailing"></i>
-                <input class="form-control border border-dark rounded" 
-                name="district" id="district" cols="30" rows="10" placeholder="district" required>
-            </div>
+              <div class="col-6 shadow-lg p-3 mb-5 bg-white border rounded">
+                  <label for="district">
+                      <strong>District</strong>
+                  </label>
+                  <i class="fa fa-address-card"></i>
+                  <input type="text" class="form-control border border-dark rounded" 
+                  name="district" id="district" cols="30" rows="10" placeholder="district" required>
+              </div>
 
-            <div class="col-3 shadow-lg p-3 mb-5 bg-white border rounded">
-                <label for="number">
-                    <strong>Number</strong>
-                </label>
-                <i class="fa fa-exclamation-circle trailing"></i>
-                <input class="form-control border border-dark rounded" 
-                name="number" id="number" cols="30" rows="10" placeholder="number" required>
-            </div>
+              <div class="col-3 shadow-lg p-3 mb-5 bg-white border rounded">
+                  <label for="number">
+                      <strong>Number</strong>
+                  </label>
+                  <i class="fa fa-address-card"></i>
+                  <input type="text" class="form-control border border-dark rounded" 
+                  name="number" id="number" cols="30" rows="10" placeholder="number" required>
+              </div>
 
-            <div class="col-3 shadow-lg p-3 mb-5 bg-white border rounded">
-                <label for="complement">
-                    <strong>Complement</strong>
-                </label>
-                <i class="fa fa-exclamation-circle trailing"></i>
-                <input class="form-control border border-dark rounded" 
-                name="complement" id="complement" cols="30" rows="10" placeholder="complement">
-            </div>
+              <div class="col-3 shadow-lg p-3 mb-5 bg-white border rounded">
+                  <label for="complement">
+                      <strong>Complement</strong>
+                  </label>
+                  <i class="fa fa-address-card"></i> <small>(optional)</small>
+                  <input type="text" class="form-control border border-dark rounded" 
+                  name="complement" id="complement" cols="30" rows="10" placeholder="complement" value="not complement">
+              </div>
 
-              <div class="col-12 text-center form-group">
+              <div class="col-12 text-center form-group shadow-lg p-3 mb-5 bg-white">
                 <button
-                  class="btn btn-primary border border-dark rounded btn-block"
+                  class="btn btn-outline-primary border border-transparent rounded btn-block"
                   type="submit"
                 >
                   Create your account<i class="fa fa-upload" aria-hidden="true"></i>
                 </button>
+                <br><br>
 
                 <button
-                  class="btn btn-primary border border-dark rounded btn-block"
+                  class="btn btn-outline-danger border border-transparentrounded btn-block"
                   type="button"
                   onclick="exibirLogin()"
                 >
@@ -361,7 +393,6 @@
 				//Agora basta definir os valores que você deseja preencher
 				//automaticamente nos campos acima.
 				$("#address").val(resposta.logradouro);
-				$("#complement").val(resposta.complemento);
 				$("#district").val(resposta.bairro);
 				$("#city").val(resposta.localidade);
 				$("#uf").val(resposta.uf);
@@ -372,4 +403,5 @@
 		});
 	});
 </script>
+{% include 'partials/_footer.html' %}
 {% endblock %}

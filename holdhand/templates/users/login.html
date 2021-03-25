@@ -1,12 +1,15 @@
-{% extends 'base.html' %} {% load static %} {% block content %} 
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+{% include 'partials/_menu.html' %} 
 
-<br /><br />
+<br>
 <!-- ##### Contact Form Area Start ##### -->
-<div class="contact-area section-padding-0-80">
+<div class="col-13 col-lg-13">
   <div class="container">
     <div class="row">
-      <div class="col-12">
-        <div class="contact-form-area">
+      <div class="col-13 col-lg-13">
+        <div class="contact-form-area col-13 col-lg-13 shadow-lg p-3 mb-5 bg-white">
           <!--alert-->
           <div class="alert alert-primary text-center border border-dark text-uppercase" role="alert">
             <h4 class="alert-heading">
@@ -27,7 +30,7 @@
             method="POST" data-toggle="validator"role="form"
           >
             {% csrf_token %}
-            <div class="row form-group">
+            <div class="row form-group col-13 col-lg-13">
               <div class="col-12 col-lg-12 shadow-lg p-3 mb-5 bg-white ls-prefix-group">
                 <label for="email"
                   ><strong>E-mail
@@ -63,36 +66,38 @@
                   title="Digite sua senha cadastrada no sistema para realizar o login no site da Golden Bear Company."
                   required="True"
                 />
-                <p></p>
               </div>
 
-              <div class="col-12 text-center">
+              <div class="col-12 text-center shadow-lg p-3 mb-5 bg-white">
                 <button
-                  class="btn btn-primary border border-dark btn-block"
+                  class="btn btn-outline-primary border border-transparent btn-block"
                   type="submit"
                 >
                 access your account
-                </button>
-
+                </button><br><br>
+                <button
+                  class="btn btn-outline-danger border border-transparent btn-block"
+                  type="button"
+                  onclick="exibirRegister()"
+                >
+                Don't have an account yet? Click here
+                </button><br><br>
               </div>
             </div>
           </form>
-          <button
-            class="btn btn-primary border border-dark btn-block"
-            type="button"
-            onclick="exibirRegister()"
-          >
-          Don't have an account yet? Click here
-          </button>
+          
         </div>
       </div>
     </div>
   </div>
 </div>
-<br /><br />
 <script>
-    function exibirRegister() {
+  function exibirRegister() {
     location.href = "{% url 'register' %}";
   }
+  function displayResetPassword() {
+    location.href = "{% url 'password_reset' %}";
+  }
 </script>
+{% include 'partials/_footer.html' %}
 {% endblock %}

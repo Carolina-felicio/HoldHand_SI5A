@@ -3,71 +3,204 @@
 {% block content %}
 {% include 'partials/_menu.html' %}
 
+<h1 class="text-center">Product: {{product.product_name}}</h1>
+<br>
 <!-- Receipe Slider -->
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner text-center">
-              <div class="carousel-item active">
-                <img src="{% static 'img/product/product-icon.png' %}" class="img-fluid" alt="Responsive image">
-              </div>
-              <div class="carousel-item">
-                <img src="{% static 'img/product/product-icon.png' %}" class="img-fluid" alt="Responsive image">
-                <div class="carousel-caption d-none d-md-block">
-                  <h5>Product's name - {{ product.product_name }}</h5>
-                  <h5>Date insert product - {{ product.date_product }}</h5>
-                </div>
-              </div><br><br>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-              <strong class="carousel-control-prev-icon text-dark" aria-hidden="true">
-                <i class='fa fa-chevron-left' style='font-size:48px'></i>
-              </strong>
-              <span class="sr-only text-dark">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-              <strong class="carousel-control-next-icon" aria-hidden="true">
-                <i class='fa fa-chevron-right' style='font-size:48px;color:black'></i>
-              </strong>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>
-      </div>
-  </div>
-</div>
-    
-<!-- Receipe Content Area -->
-<div class="receipe-content-area">
+<div class="">
   <div class="container">
-      <div class="row">
-        <div class="col-12 col-md-8">
-            <div class="receipe-headline my-5">
-                <strong>{{ product.date_product }}</strong>
-                <h1>Title product: {{product.product_name}}</h1>
-                <div class="receipe-duration">
-                    <h6>Segment: {{product.segment}}</h6>
-                    <h6>Store name: {{product.store_name}}</h6>
-                    <h6>Address: {{product.address}}</h6>
-                    <h6>Payment method: {{ product.payment_method }}</h6>
-                </div>
+    <div class="col-12 col-sm-12 col-lg-12">
+      <div class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border rounded">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner text-center">
+            <div class="carousel-item active">
+              <img src="{{ product.image_one.url }}" class="img-fluid" alt="Responsive image">
             </div>
-        </div><br>
-  <!-- Ingredientes -->
-  <br><br>
-  <div class="col-12 col-lg-12">
-      <div class="ingredients">
-          <h4><strong>Description</strong></h4>
-          <div class="ingredients">
-              <small>{{product.description}}</small>
-          </p>
+            <div class="carousel-item">
+              <img src="{{ product.image_two.url }}" class="img-fluid" alt="Responsive image">
+            </div>
+            <div class="carousel-item">
+              <img src="{{ product.image_three.url }}" class="img-fluid" alt="Responsive image">
+            </div><br><br>
           </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <strong class="carousel-control-prev-icon text-dark" aria-hidden="true">
+              <i class='fa fa-chevron-left' style='font-size:48px'></i>
+            </strong>
+            <span class="sr-only text-dark">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <strong class="carousel-control-next-icon" aria-hidden="true">
+              <i class='fa fa-chevron-right' style='font-size:48px;color:black'></i>
+            </strong>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
       </div>
+    </div>
   </div>
 </div>
+<br>
+<!-- Receipe Content Area -->
+<div class="">
+  <div class="container">
+    <div class="col-12 col-sm-12 col-lg-12">
+      <div class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border rounded">
+        <div class="receipe-headline my-5">
+          <strong>{{ product.date_product }}</strong>
+          <h1>Title product: {{product.product_name}}</h1>
+          <div class="receipe-duration">
+              <h6>Segment: {{product.segment}}</h6>
+              <h6>Store name: {{product.store_name}}</h6>
+              <h6>Payment method: {{ product.payment_method }}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="">
+  <div class="container">
+    <div class="col-12 col-sm-12 col-lg-12">
+      <div class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border rounded">
+        <a href="#">
+          <ul class="list-unstyled">
+            <li class="media">
+              <img class="img-rounded img-thumbnail border border-white" src="{{ product.image_one.url }}" width="205"  alt="">&nbsp;
+              <div class="media-body">
+                <h5 class="mt-0 mb-1 text-center">Product name - "<strong>{{ product.product_name }}</strong>"</h5>
+                <div class="card text text-body">
+                  <div class="card-body text text-body border border-dark rounded">
+                    <small class="text text-justify text-body font-italic">
+                      DESCRIPTION -->> {{ product.description }}
+                    </small><br><br>
+                    <footer class="blockquote-footer text text-body text-uppercase">Created by <cite title="Título da fonte">{{ user.last_name }}, {{ user.first_name }}</cite></footer>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <br>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section-questions-market-place-content">
+  <div class="container">
+      <header>
+        <div class="single-best-receipe-area mb-30 col-12">
+          <div>
+            <h2 class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border rounded">Questions to the seller
+            </h2>
+          </div>
+        </div>
+      </header>
+
+      <section class="section-questions-market-place-content">
+        <div class="">
+          <div class="col-12 col-sm-12 col-lg-12">
+            <div class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border rounded">
+        {% if request.user.is_authenticated%}
+            <form class="questions-form" action="{% url 'product_new_question' product.id %}" method="post">
+                {% csrf_token %}
+                <div>
+                  <h4 class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border rounded">Questions
+                  </h4>
+                </div>
+                <div class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border rounded">
+                  {{ form.question }}
+                </div>
+                <br>
+                <div class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border rounded">
+                  <button type="submit" class="btn btn-outline-info border border-transparent rounded btn-block">Perguntar</button>
+                </div>
+            </form>
+        {% endif %}
+        
+        <section class="section-questions-market-place-content">
+          <ul class="ml-questions-list single-best-receipe-area mb-30 col-12">
+              {% for q in questions %}
+                <li>
+                  <div class="single-best-receipe-area mb-30 col-13 shadow-lg p-3 mb-5 bg-white border rounded">
+                    <article class="ml-questions-list-question">
+                        <p><i class="fa fa-user" style="color: black;"> </i> <span class="text-dark">Client - </span> <strong class="text-body">{{ q.user.first_name }} {{ q.user.last_name }}</strong><br>
+                          <i class="fa fa-comment" style="color: black;"></i> <strong class="text-body">Question - </strong> <strong class="text-secondary">{{ q.question }}</strong></small>
+                        </p>
+                    </article>
+                    <article class="ml-questions-list-answer">
+                      {% for a in q.get_answers %}
+                          <p class="text-justify">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-user" style="color: Dodgerblue;"></i><span class="text-dark"> Seller - </span> <strong class="text-primary">{{ product.username.first_name }} {{ product.username.last_name }}</strong><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-comment" style="color: Dodgerblue;"></i> <strong style="color: Dodgerblue;"> Answer - </strong> <strong class="text-secondary text-center ">{{ a.answer }}</strong>
+                          </p>
+                      {% endfor %}
+                    </article>
+                </div>
+                </li>
+              {% endfor %}
+          </ul>
+        </section>
+
+          <!-- ##### Pagination ##### -->
+          <section class="top-catagory-area section-padding-20-0" style="color: black;">
+            <div class="container">
+                {% if questions.has_other_pages %}
+                <ul class="pagination justify-content-center" style="color: black;">
+                {% if questions.has_previous %}
+                <li class="page-item" style="color: black;">
+                    <a href="?page={{ questions.previous_page_number }}" class="page-link"
+                    >&laquo;</a
+                    >
+                </li>
+                {% else %}
+                <li class="page-item disabled" style="color: black;">
+                    <a class="page-link" style="color: black;">&laquo;</a>
+                </li>
+                {% endif %} {% for pagina in questions.paginator.page_range %} 
+                {% if questions.number == pagina %}
+                <li class="page-item active" style="color: black;">
+                    <a class="page-link" style="color: black;">{{ pagina }}</a>
+                </li>
+                {% else %}
+                <li class="page-item" style="color: black;">
+                    <a
+                    href="?page={{ pagina }}"
+                    class="page-link btn btn-outline-dark"
+                    style="color: black;"
+                    >{{ pagina }}</a
+                    >
+                </li>
+                {% endif %} {% endfor %} {% if questions.has_next %}
+                <li class="page-item" style="color: black;">
+                    <a
+                    href="?page={{ questions.next_page_number }}"
+                    style="color: black;"
+                    class="page-link btn btn-outline-dark"
+                    >&raquo;</a
+                    >
+                </li>
+                {% else %}
+                <li class="page-item disabled" style="color: black;">
+                    <a class="page-link" style="color: black;">&raquo;</a>
+                </li>
+                {% endif %}
+                </ul>
+                {% endif %}
+            </div>
+            </section>
+            <!-- ##### Pagination End ##### -->
+            </div>
+            </div>
+        </div>
+      </section>
+  </div>
+</section>
+{% include 'partials/_footer.html' %}
 {% endblock %}

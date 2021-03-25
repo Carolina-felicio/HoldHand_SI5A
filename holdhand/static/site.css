@@ -277,28 +277,6 @@ textarea:focus {
     margin-top: 0;
     width: 100%; }
 
-/* ScrollUp */
-#scrollUp {
-  background-color: #000;
-  border-radius: 0;
-  bottom: 60px;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
-  color: #ffffff;
-  font-size: 24px;
-  height: 40px;
-  line-height: 38px;
-  right: 60px;
-  text-align: center;
-  width: 40px;
-  -webkit-transition-duration: 500ms;
-  transition-duration: 500ms; }
-  #scrollUp:hover {
-    background-color: #141414; }
-  @media only screen and (max-width: 767px) {
-    #scrollUp {
-      bottom: 30px;
-      right: 30px; } }
-
 /* Button */
 .delicious-btn {
   display: inline-block;

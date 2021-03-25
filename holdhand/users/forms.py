@@ -10,7 +10,7 @@ class UserForm(forms.ModelForm):
         fields = ('first_name', 'last_name', 'email')
 
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control border border-dark rounded text-dark'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control border border-dark rounded text-dark required'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control border border-dark rounded text-dark'}),
             'email': forms.EmailInput(attrs={'class': 'form-control border border-dark rounded text-dark'}),
         }
@@ -26,18 +26,28 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        exclude = ('user', '')
+        exclude = ('username', '')
 
         widgets = {
-            'segment': forms.TextInput(attrs={'class': 'form-control border border-dark rounded text-dark'}),
-            'store_name': forms.TextInput(attrs={'class': 'form-control border border-dark rounded text-dark'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control phone-ddd-mask border border-dark rounded text-dark'}),
+            'cell_phone': forms.TextInput(attrs={'class': 'form-control cel-sp-mask border border-dark rounded text-dark'}),
+            'zip_code': forms.TextInput(attrs={'class': 'form-control border border-dark rounded text-dark'}),
             'address': forms.TextInput(attrs={'class': 'form-control border border-dark rounded text-dark'}),
-            'payment_method': forms.TextInput(attrs={'class': 'form-control border border-dark rounded text-dark'}),
+            'district': forms.TextInput(attrs={'class': 'form-control border border-dark rounded text-dark'}),
+            'number': forms.TextInput(attrs={'class': 'form-control border border-dark rounded text-dark'}),
+            'complement': forms.TextInput(attrs={'class': 'form-control border border-dark rounded text-dark'}),
+            'city': forms.TextInput(attrs={'class': 'form-control border border-dark rounded text-dark'}),
+            'uf': forms.TextInput(attrs={'class': 'form-control border border-dark rounded text-dark'})
         }
 
         labels = {
-            'segment': 'Segment',
-            'store_name': 'Store Name',
+            'phone': 'Phone',
+            'cell_phone': 'Cell phone',
+            'zip_code': 'Zip Code',
             'address': 'Address',
-            'payment_method': 'Payment Method'
+            'district': 'District',
+            'number': 'Number',
+            'complement': 'Complement',
+            'city': 'City',
+            'uf': 'Uf'
         }

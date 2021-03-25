@@ -29,8 +29,9 @@ SECRET_KEY = 'ej(^0a@%vgt7e2k4^$h%a)m+kt29u9aw3wf1$u8^gzl*(y05di'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', '127.0.0.1']
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
 
 # Application definition
 
@@ -44,6 +45,8 @@ INSTALLED_APPS = [
     'users',
     'products',
     'search',
+    'home',
+    'questionsandanswers',
 ]
 
 MIDDLEWARE = [
@@ -58,10 +61,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'holdhand.urls'
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [TEMPLATE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -90,7 +96,7 @@ WSGI_APPLICATION = 'holdhand.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'holdhand',
+        'NAME': 'database-holdhand',
         'USER': 'vilela',
         'PASSWORD': '123456',
         'HOST': 'localhost',

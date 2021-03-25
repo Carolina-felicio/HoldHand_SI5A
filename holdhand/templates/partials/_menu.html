@@ -2,25 +2,23 @@
 <!-- ##### Header Area Start ##### -->
 <header class="header-area">
   <!-- Top Header Area -->
-  <div class="top-header-area">
+  <div class="top-header-area bg-dark text-white">
     <div class="container h-100">
       <div class="row h-100 align-items-center justify-content-between">
         <!-- Breaking News -->
-        <div class="col-12 col-sm-6">
-          <div class="breaking-news">
-            <div id="breakingNewsTicker" class="ticker">
+        <div class="col-12 col-sm-6 text-left">
+          <div class="">
+            <div id="" class="">
               <ul>
                 <li>
-                  <a href="" style="color: black;">
-                    <strong>Welcome to the HoldHand website</strong>
-                  </a>
+                  <strong>Welcome to the HoldHand website</strong>
                 </li>
               </ul>
             </div>
           </div>
         </div>
         <!-- Top Social Info -->
-        <div class="col-12 col-sm-6">
+        <div class="col-13 col-sm-6">
           <div class="top-social-info text-right">
            
             {% if user.is_authenticated %}
@@ -62,35 +60,35 @@
           <!-- Menu -->
           <div class="classy-menu">
             <div class="classynav col-13">
-              <nav class="navbar navbar-expand-lg navbar-light bg-light border border-dark rounded">
+              <nav class="navbar navbar-expand-lg navbar-light bg-light border border-transparent shadow-lg p-3 mb-5 bg-body rounded">
                 {% if user.is_authenticated %}
-                <button type="button" class="btn btn-link text-dark btn-sm" onclick="exibirHome()">
+                <button type="button" class="btn btn-outline-info btn-sm border border-transparent" onclick="exibirHome()">
                   Home <i class="fa fa-home" aria-hidden="true"></i>
                 </button>&nbsp;
-                <button type="button" class="btn btn-link text-dark btn-sm" onclick="displayDashboard()">
+                <button type="button" class="btn btn-outline-info btn-sm border border-transparent" onclick="displayDashboard()">
                   Dashboard <i class="fa fa-dashboard" aria-hidden="true"></i>
                 </button>&nbsp;
-                <button type="button" class="btn btn-link text-dark btn-sm" onclick="exibirInsertProduct()">
+                <button type="button" class="btn btn-outline-info btn-sm border border-transparent" onclick="exibirInsertProduct()">
                   Insert Products <i class="fa fa-list" aria-hidden="true"></i>
                 </button>&nbsp;
-                <button type="button" class="btn btn-link text-dark btn-sm" onclick="exibirLogout()">
+                <button type="button" class="btn btn-outline-info btn-sm border border-transparent" onclick="exibirLogout()">
                   Logout <i class="fa fa-sign-out" aria-hidden="true"></i>
                 </button>&nbsp;
                 {% else %}
-                <button type="button" class="btn btn-link text-dark btn-sm" onclick="exibirHome()">
+                <button type="button" class="btn btn-outline-info btn-sm border border-transparent" onclick="exibirHome()">
                   Home <i class="fa fa-home" aria-hidden="true"></i>
                 </button>&nbsp;
-                  <button type="button" class="btn btn-link text-dark btn-sm" onclick="exibirRegister()">
+                  <button type="button" class="btn btn-outline-info btn-sm border border-transparent" onclick="exibirRegister()">
                     Register
                   </button>&nbsp;
-                  <button type="button" class="btn btn-link text-dark btn-sm" onclick="exibirLogin()">
+                  <button type="button" class="btn btn-outline-info btn-sm border border-transparent" onclick="exibirLogin()">
                     Log in
                   </button>&nbsp;
                 {% endif %}
 
                 <form action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
-                  <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search">
-                  <button class="btn btn-outline-light my-2 text-dark my-sm-0" type="submit">
+                  <input class="form-control mr-sm-1 border border-info" type="search" name="search" placeholder="Search">
+                  <button class="btn btn-outline-light my-3 text-dark my-sm-0" type="submit">
                     <i class="material-icons">search</i>
                   </button>
                 </form>

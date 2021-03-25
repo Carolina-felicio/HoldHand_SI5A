@@ -4,10 +4,10 @@
 {% include 'partials/_menu.html' %} 
  
 <!-- ##### Contact Form Area Start ##### -->
-<div class="section-padding-0-80">
-   <div class="container">
+<div class="">
+   <div class="container shadow-lg p-3 mb-5 bg-white">
        <div class="row">
-           <div class="col-13">
+           <div class="col-12">
                <br>
                <div class="jumbotron bg-primary text-white">
                 <h1 class="display-4 text-white">Insert a product into your account, which you want to exchange or sell.</h1>
@@ -16,103 +16,132 @@
             </div>
         </div>
         
-        <div class="row">
-            <div class="col-12">
-                <div class="contact-form-area">
-                    <form action="{% url 'create_product' %}" class="was-validated needs-validation" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                       <div class="row">
+        <div class="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="contact-form-area">
+                            <form action="{% url 'create_product' %}" class="was-validated needs-validation" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                            <div class="row">
 
-                            <div class="col-12 col-lg-12 shadow-lg p-3 mb-5 bg-white border rounded">
-                               <label for="product_name">
-                                   <strong>Product name</strong>
-                                </label>
-                                <i class="fa fa-exclamation-circle trailing"></i>
-                               <input type="text" id="product_name" 
-                                class="form-control border border-dark rounded" 
-                                name="product_name" placeholder="products name" required
-                               >
-                            </div>
-
-                            <div class="col-12 col-lg-12">
-                                <input type="hidden" id="slug" 
-                                 class="form-control border border-dark rounded" 
-                                 name="slug" placeholder="products name" required
+                                <div class="col-12 col-lg-12 shadow-lg p-3 mb-5 bg-white border rounded">
+                                <label for="product_name">
+                                    <strong>Product name</strong>
+                                    </label>
+                                    <i class="fa fa-exclamation-circle trailing"></i>
+                                <input type="text" id="product_name" 
+                                    class="form-control border border-dark rounded" 
+                                    name="product_name" placeholder="products name" required
                                 >
-                             </div>
+                                </div>
 
-                            <div class="col-6 shadow-lg p-3 mb-5 bg-white rounded">
-                               <label for="segment">
-                                   <strong>Segment</strong>
-                                </label>
+                                <div class="col-12 col-lg-12">
+
+                                    <input type="hidden" id="slug" 
+                                    class="form-control border border-dark rounded" 
+                                    name="slug" placeholder="slug" required
+                                    >
+                                </div>
+
+                                <div class="col-12 col-lg-12">
+
+                                    <input type="hidden" id="price" 
+                                    class="form-control border border-dark rounded" 
+                                    name="price" placeholder="price" required
+                                    >
+                                </div>
+
+                                <div class="col-6 shadow-lg p-3 mb-5 bg-white rounded">
+                                <label for="segment">
+                                    <strong>Segment</strong>
+                                    </label>
+                                    <i class="fa fa-exclamation-circle trailing"></i>
+                                <input class="form-control border border-dark border rounded" 
+                                name="segment" id="segment" cols="30" rows="10" placeholder="segment" required>
+                                </div>
+
+                                <div class="col-6 shadow-lg p-3 mb-5 bg-white rounded">
+                                <label for="store_name">
+                                    <strong>Store name</strong>
+                                    </label>
+                                    <i class="fa fa-exclamation-circle trailing"></i>
+                                <input class="form-control border border-dark border rounded" 
+                                name="store_name" id="store_name" cols="30" rows="10" placeholder="store name" required>
+                                </div>
+
+                                <div class="col-12 shadow-lg p-3 mb-5 bg-white border was-validated rounded">
+                                    <label for="payment_method">
+                                        <strong>Payment method's</strong>
+                                    </label>&nbsp;
+                                    <a href="#" data-toggle="tooltip" title="Select the payment method you want or if the product will be exchanged">
+                                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                    </a>
+                                    <input class="form-control mb-3 is-valid border border-dark rounded" name="payment_method" id="payment_method" list="datalistOptions" id="exampleDataList" 
+                                    placeholder="Select the payment method or if you will exchange the product" required>
+                                        <datalist id="datalistOptions">
+                                        <option value="PIX">PIX</option>
+                                        <option value="Ticket">Ticket</option>
+                                        <option value="Credit card | debit">Credit card | debit</option>
+                                        <option value="Exchange involving product">Exchange involving product</option>
+                                        </datalist>
+                                </div>
+
+                                <div class="col-12 col-lg-12 shadow-lg p-3 mb-5 bg-white border rounded">
+                                <label for="description"><strong>Description</strong></label>
                                 <i class="fa fa-exclamation-circle trailing"></i>
-                               <input class="form-control border border-dark border rounded" 
-                               name="segment" id="segment" cols="30" rows="10" placeholder="segment" required>
-                            </div>
+                                <textarea type="text" class="form-control z-depth-1 border border-dark rounded text text-justify text-body" name="description" id="description" placeholder="description" maxlength="500"
+                                onkeydown="contaCaracteresUsuario(this)" onkeyup="contaCaracteresUsuario(this)" onclick="contaCaracteresUsuario(this)" required></textarea>
+                                <div>
+                                    <strong
+                                    ><p style="color: black;" id="divmag">
+                                        500 characters remaining
+                                    </p></strong
+                                    >
+                                </div>
+                                </div>
 
-                            <div class="col-6 shadow-lg p-3 mb-5 bg-white rounded">
-                               <label for="store_name">
-                                   <strong>Store name</strong>
-                                </label>
-                                <i class="fa fa-exclamation-circle trailing"></i>
-                               <input class="form-control border border-dark border rounded" 
-                               name="store_name" id="store_name" cols="30" rows="10" placeholder="store name" required>
-                            </div>
+                                <div class="col-12 col-lg-12 shadow-lg p-3 mb-5 bg-white border rounded">
+                                    <label for="date_product"><strong>Date product</strong></label>
+                                    <i class="fa fa-exclamation-circle trailing"></i>
+                                        <input type="date" data-max-date="today"  class="form-control date-mask to-date border border-dark rounded" name="date_product" required>
+                                </div>
 
-                            <div class="col-12 shadow-lg p-3 mb-5 bg-white border was-validated rounded">
-                                <label for="payment_method">
-                                    <strong>Payment method's</strong>
-                                </label>&nbsp;
-                                <a href="#" data-toggle="tooltip" title="Select the payment method you want or if the product will be exchanged">
-                                    <i class="fa fa-question-circle" aria-hidden="true"></i>
-                                </a>
-                                  <input class="form-control mb-3 is-valid border border-dark rounded" name="payment_method" id="payment_method" list="datalistOptions" id="exampleDataList" 
-                                  placeholder="Select the payment method or if you will exchange the product" required>
-                                    <datalist id="datalistOptions">
-                                    <option value="PIX">PIX</option>
-                                    <option value="Ticket">Ticket</option>
-                                    <option value="Credit card | debit">Credit card | debit</option>
-                                    <option value="Exchange involving product">Exchange involving product</option>
-                                    </datalist>
-                            </div>
+                                <div class="col-12 col-lg-6 shadow-lg p-3 mb-5 bg-white border rounded">
+                                    <label for="image_one"><strong>Image One</strong></label> 
+                                    <i class="fa fa-exclamation-circle trailing"></i>
+                                    <input type="file" class="form-control border border-dark rounded" name="image_one" id="image_one" required>
+                                </div>
 
-                            <div class="col-12 col-lg-12 shadow-lg p-3 mb-5 bg-white border rounded">
-                               <label for="description"><strong>Description</strong></label>
-                               <i class="fa fa-exclamation-circle trailing"></i>
-                               <textarea type="text" class="form-control z-depth-1 border border-dark rounded" name="description" id="description" placeholder="description" maxlength="500"
-                               onkeydown="contaCaracteresUsuario(this)" onkeyup="contaCaracteresUsuario(this)" onclick="contaCaracteresUsuario(this)" required></textarea>
-                               <div>
-                                <strong
-                                  ><p style="color: black;" id="divmag">
-                                    500 characters remaining
-                                  </p></strong
-                                >
-                              </div>
-                            </div>
+                                <div class="col-12 col-lg-3 shadow-lg p-3 mb-5 bg-white border rounded">
+                                    <label for="image_two"><strong>Image Two</strong></label> 
+                                    <i class="fa fa-exclamation-circle trailing"></i>
+                                    <input type="file" class="form-control border border-dark rounded" name="image_two" id="image_two" required>
+                                </div>
 
-                            <div class="col-12 col-lg-6 shadow-lg p-3 mb-5 bg-white border rounded">
-                                <label for="date_product"><strong>Date product</strong></label>
-                                <i class="fa fa-exclamation-circle trailing"></i>
-                                <input type="datetime-local" class="form-control border border-dark rounded" name="date_product" placeholder="2011-08-19T13:45:00" required>
-                            </div>
+                                <div class="col-12 col-lg-3 shadow-lg p-3 mb-5 bg-white border rounded">
+                                    <label for="image_three"><strong>Image Three</strong></label> 
+                                    <i class="fa fa-exclamation-circle trailing"></i>
+                                    <input type="file" class="form-control border border-dark rounded" name="image_three" id="image_three" required>
+                                </div>
 
-                            <div class="col-12 col-lg-6 shadow-lg p-3 mb-5 bg-white border rounded">
-                                <label for="image"><strong>Image</strong></label> 
-                                <i class="fa fa-exclamation-circle trailing"></i>
-                                <input type="file" class="form-control border border-dark rounded" name="image" id="image" required>
-                            </div>
+                                <div class="col-12 shadow-lg p-3 mb-5 bg-white border rounded">
+                                    <button type="submit" class="btn btn-outline-primary border border-transparent btn-block">
+                                        Create a product
+                                    </button>
 
-                            <div class="col-12 shadow-lg p-3 mb-5 bg-white border rounded">
-                                <button type="submit" class="btn btn-primary btn-block">
-                                    Create a product
-                                </button>
-                            </div>
+                                    <button type="submit" onclick="displayDashboar()" class="btn btn-outline-danger border border-transparent btn-block">
+                                        Come back
+                                    </button>
+                                </div>
 
-                       </div>
-                   </form>
-               </div>
-           </div>
-       </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
    </div>
 </div>
 <script>
@@ -126,5 +155,10 @@ function contaCaracteresUsuario(campo_passado) {
     var divmag = document.getElementById("divmag");
     divmag.innerHTML = conta + " characters remaining";
 }
+
+function displayDashboar() {
+    location.href = "{% url 'dashboard' %}"
+}
 </script>
+{% include 'partials/_footer.html' %}
 {% endblock %}

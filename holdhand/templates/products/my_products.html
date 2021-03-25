@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'partials/_menu.html' %}
+
+<div class="">
+  <div class="container">
+      <div class="row">
+          <div class="col-12">
+              <div class="section-heading">
+                <div class="col-12 shadow-lg p-3 mb-5 bg-white border rounded">
+                  <h3>Dear, {{ user.first_name }} {{ user.last_name }}</h3>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<section class="">
+    <div class="container">
+        <div class="row">
+          {% if products %}
+          {% for product in products %}
+          <div class="col-12 col-sm-12 col-lg-12">
+            <div class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border rounded">
+              <a href="#">
+                <ul class="list-unstyled">
+                  <li class="media">
+                    <img class="img-rounded img-thumbnail border border-white" src="{{ product.image_one.url }}" width="205"  alt="">&nbsp;
+                    <div class="media-body">
+                      <h5 class="mt-0 mb-1 text-center">Product name - "<strong>{{ product.product_name }}</strong>"</h5>
+                      <div class="card text text-body">
+                        <div class="card-body text text-body border border-white rounded">
+                          <small class="text text-justify text-body font-italic">
+                            DESCRIPTION -->> {{ product.description }}
+                          </small><br><br>
+                          <footer class="blockquote-footer text text-body text-uppercase">Created by <cite title="Título da fonte">{{ user.last_name }}, {{ user.first_name }}</cite></footer>
+                        </div>
+                      </div><br>
+                      <div class="col-12 col-sm-12 col-lg-12 d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a type="button" href="{% url 'product' product.id %}" class="btn btn-outline-secondary border border-transparent">
+                          View product <i class="fa fa-eye" aria-hidden="true"></i>
+                        </a>&nbsp;
+                        <a type="button" href="{% url 'edit_product' product.id %}" class="btn btn-outline-primary border border-transparent">
+                          Edit Product <i class="fa fa-edit" aria-hidden="true"></i>
+                        </a>&nbsp;
+                        <a type="button" href="{% url 'answer' product.id %}" class="btn btn-outline-success border border-transparent">
+                          View unanswered products <i class="fa fa-edit" aria-hidden="true"></i>
+                        </a>&nbsp;
+                        <a type="button" href="{% url 'delete_product' product.id %}" class="btn btn-outline-danger border border-transparent">
+                          Delete Product <i class="fa fa-trash fa-1x" aria-hidden="true"></i>
+                        </a>
+                      </div>
+                      
+                    </div>
+                  </li>
+                </ul>
+                <br>
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+          {% else %}
+          {% endif %}
+        </div>
+      </div>
+  </section>
+  
+<!-- ##### Pagination ##### -->
+<section class="top-catagory-area section-padding-20-0" style="color: black;">
+<div class="container">
+    {% if products.has_other_pages %}
+    <ul class="pagination justify-content-center" style="color: black;">
+    {% if products.has_previous %}
+    <li class="page-item" style="color: black;">
+        <a href="?page={{ products.previous_page_number }}" class="page-link"
+        >&laquo;</a
+        >
+    </li>
+    {% else %}
+    <li class="page-item disabled" style="color: black;">
+        <a class="page-link" style="color: black;">&laquo;</a>
+    </li>
+    {% endif %} {% for pagina in products.paginator.page_range %} 
+    {% if products.number == pagina %}
+    <li class="page-item active" style="color: black;">
+        <a class="page-link" style="color: black;">{{ pagina }}</a>
+    </li>
+    {% else %}
+    <li class="page-item" style="color: black;">
+        <a
+        href="?page={{ pagina }}"
+        class="page-link btn btn-outline-dark"
+        style="color: black;"
+        >{{ pagina }}</a
+        >
+    </li>
+    {% endif %} {% endfor %} {% if products.has_next %}
+    <li class="page-item" style="color: black;">
+        <a
+        href="?page={{ products.next_page_number }}"
+        style="color: black;"
+        class="page-link btn btn-outline-dark"
+        >&raquo;</a
+        >
+    </li>
+    {% else %}
+    <li class="page-item disabled" style="color: black;">
+        <a class="page-link" style="color: black;">&raquo;</a>
+    </li>
+    {% endif %}
+    </ul>
+    {% endif %}
+</div>
+</section>
+<!-- ##### Pagination End ##### -->
+<br>
+{% include 'partials/_footer.html' %}
+{% endblock %}

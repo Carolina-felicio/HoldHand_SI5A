@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'partials/_menu.html' %} 
+ 
+<!-- ##### Contact Form Area Start ##### -->
+<div class="">
+   <div class="container shadow-lg p-3 mb-5 bg-white">
+       <div class="row">
+           <div class="col-12 text-center">
+               <br>
+               <div class="jumbotron bg-primary text-white">
+                <h1 class="display-4 text-white">Editing a perosnal data into your account, {{ user.first_name }}.<br>
+                    Which you want to exchange or sell.</h1>
+                <p class="lead text-white text-center">Your digital and personalized HOLDHAND store.<br> 
+                    Here you will find several embroidery options. Feel free to contact us!.</p>
+            </div>
+        </div>
+        
+        <div class="">
+            <div class="contact-form-area">
+                <div class=" container">
+                    <form action="#" class="was-validated needs-validation" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                       <div class="row col-13">
+
+                            <div class="col-12 col-lg-12 shadow-lg p-3 mb-5 bg-white border rounded">                        
+                                <h4 class="text-center">PERSONAL DATA</h4>
+                            </div>
+
+                            <div class="col-6 col-lg-6 shadow-lg p-3 mb-5 bg-white border rounded">
+                               <label>
+                                   <strong>Name</strong>
+                                </label>
+                                {{ user_form.first_name }}
+                            </div>
+
+                            <div class="col-6 col-lg-6 shadow-lg p-3 mb-5 bg-white border rounded">
+                                <label>
+                                    <strong>Surname</strong>
+                                 </label>
+                                 {{ user_form.last_name }}
+                            </div>
+
+                            <div class="col-12 col-lg-12 shadow-lg p-3 mb-5 bg-white border rounded">
+                                <label>
+                                    <strong>E-mail</strong>
+                                 </label>
+                                 {{ user_form.email }}
+                            </div>
+                             
+                            <div class="col-12 col-lg-12 shadow-lg p-3 mb-5 bg-white border rounded">
+                                <h4 class="text-center">Phone and/or Cell Phone</h4>
+                            </div>
+
+                            <div class="col-6 col-lg-6 shadow-lg p-3 mb-5 bg-white border rounded">
+                                <label>
+                                    <strong>Phone</strong>
+                                 </label>
+                                 {{ profile_form.phone }}
+                            </div>
+
+                            <div class="col-6 col-lg-6 shadow-lg p-3 mb-5 bg-white border rounded">
+                                <label>
+                                    <strong>Cell Phone</strong>
+                                 </label>
+                                 {{ profile_form.cell_phone }}
+                            </div>
+
+                            <div class="col-12 shadow-lg p-3 mb-5 bg-white border rounded">
+                                <h4 class="text-center">Address</h4>
+                            </div>
+
+                            <div class="col-6 col-lg-6 shadow-lg p-3 mb-5 bg-white border rounded">
+                                <label>
+                                    <strong>Zip code</strong>
+                                 </label>
+                                 {{ profile_form.zip_code }}
+                            </div>
+
+                            <div class="col-3 col-lg-3 shadow-lg p-3 mb-5 bg-white border rounded">
+                                <label>
+                                    <strong>City</strong>
+                                 </label>
+                                 {{ profile_form.city }}
+                            </div>
+
+                            <div class="col-3 col-lg-3 shadow-lg p-3 mb-5 bg-white border rounded">
+                                <label>
+                                    <strong>Uf</strong>
+                                 </label>
+                                 {{ profile_form.uf }}
+                            </div>
+
+                            <div class="col-12 col-lg-12 shadow-lg p-3 mb-5 bg-white border rounded">
+                                <label>
+                                    <strong>Address</strong>
+                                 </label>
+                                 {{ profile_form.address }}
+                            </div>
+
+                            <div class="col-6 col-lg-6 shadow-lg p-3 mb-5 bg-white border rounded">
+                                <label>
+                                    <strong>District</strong>
+                                 </label>
+                                 {{ profile_form.district }}
+                            </div>
+
+                            <div class="col-3 col-lg-3 shadow-lg p-3 mb-5 bg-white border rounded">
+                                <label>
+                                    <strong>Number</strong>
+                                 </label>
+                                 {{ profile_form.number }}
+                            </div>
+
+                            <div class="col-3 col-lg-3 shadow-lg p-3 mb-5 bg-white border rounded">
+                                <label>
+                                    <strong>Number</strong>
+                                 </label>
+                                 {{ profile_form.complement }}
+                            </div>
+
+                            <div class="col-12 shadow-lg p-3 mb-5 bg-white border rounded">
+                                <button type="submit" class="btn btn-outline-primary border border-transparent btn-block">
+                                    edit personal data
+                                </button>
+                                <button
+                                    class="btn btn-outline-danger border border-transparent rounded btn-block"
+                                    type="button"
+                                    onclick="displayDashboar()">
+                                    Come back
+                                </button>
+                            </div>
+
+                       </div>
+                   </form>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+<script>
+    function displayDashboar() {
+        location.href = "{% url 'dashboard' %}"
+    }
+</script>
+{% include 'partials/_footer.html' %}
+{% endblock %}

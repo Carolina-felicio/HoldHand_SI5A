@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'partials/_menu.html' %}
+
+<div class="">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading">
+                  <div class="col-12 shadow-lg p-3 mb-5 bg-white border rounded">
+                    <h3>Dear, {{ user.first_name }} {{ user.last_name }}</h3>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+<br>
+<section class="section-content">
+    <div class="container shadow-lg p-3 mb-5 bg-white border rounded">
+        <h3 class="text-center shadow-lg p-3 mb-5 bg-white border rounded">Product Questions: {{ product.product_name }}</h3>        
+        <table class="table table_bordered shadow-lg p-1 mb-5 bg-white">
+            <tr>
+                <th>Questions &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th class="text-center">Action</th>
+            </tr>
+
+            {% for question in product.questions_no_answer %}
+                <tr>
+                    <td>Question - {{ question.question }}</td>
+                    <td class="text-center">
+                        <a href="{% url 'product_answer_question' product.id question.id %}" class="btn btn-outline-primary border border-transparent">Reply</a>
+                        <a href="{% url 'delete_question' question.id %}" class="btn btn-outline-danger border border-transparent">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <a href="{% url 'answer' product.id %}">
+            <button type="submit" class="btn btn-outline-danger border border-transparent btn-block">Come back</button>
+        </a>
+    </div>
+</section>
+<br><br><br>
+{% include 'partials/_footer.html' %}
+{% endblock %}

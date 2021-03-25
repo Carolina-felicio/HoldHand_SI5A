@@ -29,13 +29,10 @@
                                    <strong>Product name</strong>
                                 </label>
                                 <i class="fa fa-exclamation-circle trailing"></i>
-                               <input type="text" id="product_name" 
-                                class="form-control border border-dark rounded" 
-                                name="product_name" placeholder="products name" required
-                               >
+                                {{ form.product_name }}
                             </div>
 
-                            <div class="col-12 col-lg-12">
+                            <div class="col-6 col-lg-12">
                                 <input type="hidden" id="slug" 
                                  class="form-control border border-dark rounded" 
                                  name="slug" placeholder="products name" required
@@ -47,8 +44,7 @@
                                    <strong>Segment</strong>
                                 </label>
                                 <i class="fa fa-exclamation-circle trailing"></i>
-                               <input class="form-control border border-dark border rounded" 
-                               name="segment" id="segment" cols="30" rows="10" placeholder="segment" required>
+                                {{ form.segment }}
                             </div>
 
                             <div class="col-6 shadow-lg p-3 mb-5 bg-white rounded">
@@ -56,8 +52,7 @@
                                    <strong>Store name</strong>
                                 </label>
                                 <i class="fa fa-exclamation-circle trailing"></i>
-                               <input class="form-control border border-dark border rounded" 
-                               name="store_name" id="store_name" cols="30" rows="10" placeholder="store name" required>
+                                {{ form.store_name }}
                             </div>
 
                             <div class="col-12 shadow-lg p-3 mb-5 bg-white border was-validated rounded">
@@ -67,45 +62,36 @@
                                 <a href="#" data-toggle="tooltip" title="Select the payment method you want or if the product will be exchanged">
                                     <i class="fa fa-question-circle" aria-hidden="true"></i>
                                 </a>
-                                  <input class="form-control mb-3 is-valid border border-dark rounded" name="payment_method" id="payment_method" list="datalistOptions" id="exampleDataList" 
-                                  placeholder="Select the payment method or if you will exchange the product" required>
-                                    <datalist id="datalistOptions">
-                                    <option value="PIX">PIX</option>
-                                    <option value="Ticket">Ticket</option>
-                                    <option value="Credit card | debit">Credit card | debit</option>
-                                    <option value="Exchange involving product">Exchange involving product</option>
-                                    </datalist>
+                                {{ form.payment_method }}
                             </div>
 
                             <div class="col-12 col-lg-12 shadow-lg p-3 mb-5 bg-white border rounded">
                                <label for="description"><strong>Description</strong></label>
                                <i class="fa fa-exclamation-circle trailing"></i>
-                               <textarea type="text" class="form-control z-depth-1 border border-dark rounded" name="description" id="description" placeholder="description" maxlength="500"
-                               onkeydown="contaCaracteresUsuario(this)" onkeyup="contaCaracteresUsuario(this)" onclick="contaCaracteresUsuario(this)" required></textarea>
-                               <div>
-                                <strong
-                                  ><p style="color: black;" id="divmag">
-                                    500 characters remaining
-                                  </p></strong
-                                >
-                              </div>
+                               {{ form.description }}
                             </div>
 
                             <div class="col-12 col-lg-6 shadow-lg p-3 mb-5 bg-white border rounded">
-                                <label for="date_product"><strong>Date product</strong></label>
+                                <label for="image_one"><strong>Image One</strong></label> 
                                 <i class="fa fa-exclamation-circle trailing"></i>
-                                <input type="datetime-local" class="form-control border border-dark rounded" name="date_product" placeholder="2011-08-19T13:45:00" required>
+                                {{ form.image_one }}
                             </div>
 
-                            <div class="col-12 col-lg-6 shadow-lg p-3 mb-5 bg-white border rounded">
-                                <label for="image"><strong>Image</strong></label> 
+                            <div class="col-12 col-lg-3 shadow-lg p-3 mb-5 bg-white border rounded">
+                                <label for="image_two"><strong>Image Two</strong></label> 
                                 <i class="fa fa-exclamation-circle trailing"></i>
-                                <input type="file" class="form-control border border-dark rounded" name="image" id="image" required>
+                                {{ form.image_two }}
+                            </div>
+
+                            <div class="col-12 col-lg-3 shadow-lg p-3 mb-5 bg-white border rounded">
+                                <label for="image_three"><strong>Image Three</strong></label> 
+                                <i class="fa fa-exclamation-circle trailing"></i>
+                                {{ form.image_three }}
                             </div>
 
                             <div class="col-12 shadow-lg p-3 mb-5 bg-white border rounded">
                                 <button type="submit" class="btn btn-primary btn-block">
-                                    Create a product
+                                    edit a product
                                 </button>
                             </div>
 
@@ -116,16 +102,4 @@
        </div>
    </div>
 </div>
-<script>
-function contaCaracteresUsuario(campo_passado) {
-    var limite = 500;
-    var campo = campo_passado.value.length;
-    var maxlength = document
-    .getElementById("description")
-    .setAttribute("maxlength", limite);
-    var conta = limite - campo;
-    var divmag = document.getElementById("divmag");
-    divmag.innerHTML = conta + " characters remaining";
-}
-</script>
 {% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'partials/_menu.html' %}
+
+<div class="">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading">
+                  <div class="col-12 shadow-lg p-3 mb-5 bg-white border rounded">
+                    <h3>Dear, {{ user.first_name }} {{ user.last_name }}</h3>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="section-content">
+    <div class="container shadow-lg p-3 mb-5 bg-white border rounded">
+        <h3 class="text-center shadow-lg p-3 mb-5 bg-white border rounded">Answering product questions: {{ product.product_name }}</h3>
+        <div class="panel panel-default hadow-lg p-3 mb-5 bg-white border rounded">
+            <div class="panel-heading">Question asked in the product: {{ question.question }}</div>
+            <div class="panel-body">
+                <form class="questions-form" action="" method="post">
+                    {% csrf_token %}
+                    <h4>Answer</h4>
+                    {{ form.answer }}
+                    <br>
+                    <button type="submit" class="btn btn-outline-info border border-transparent btn-block">Reply</button>
+                    <br><br>
+                </form>
+                <a href="{% url 'product_question' product.id %}">
+                    <button type="submit" class="btn btn-outline-danger border border-transparent btn-block">Come back</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'partials/_footer.html' %}
+{% endblock %}
