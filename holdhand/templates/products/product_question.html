@@ -3,44 +3,29 @@
 {% block content %}
 {% include 'partials/_menu.html' %}
 
-<div class="">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="section-heading">
-                  <div class="col-12 shadow-lg p-3 mb-5 bg-white border rounded">
-                    <h3>Dear, {{ user.first_name }} {{ user.last_name }}</h3>
-                  </div>
-                </div>
+<main class="container">
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+    <h3 class="text-center shadow-lg p-3 mb-5 bg-white border rounded">
+        Dear, {{ user.first_name }} {{ user.last_name }}<br>
+        Product Questions: {{ product.product_name }}
+    </h3>
+      {% for question in product.questions_no_answer %}
+      <div class="d-flex text-muted pt-3 shadow-lg p-3 mb-5 bg-white border rounded">
+        <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+        <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+          <div class="d-flex justify-content-between">
+            <strong class="text-dark">Full Name - {{ question.user.first_name }} {{ question.user.first_name }}</strong>
+            <div class="d-flex justify-content-between">
+                <a href="{% url 'product_answer_question' product.id question.id %}" class="btn btn-outline-primary btn-sm">Reply</a>
+                <a href="{% url 'delete_question' question.id %}" class="btn btn-outline-danger btn-sm">Delete</a>    
             </div>
+          </div>
+          <span class="d-block">Question - {{ question.question }}</span>
         </div>
+      </div>
+      {% endfor %}
     </div>
-  </div>
-<br>
-<section class="section-content">
-    <div class="container shadow-lg p-3 mb-5 bg-white border rounded">
-        <h3 class="text-center shadow-lg p-3 mb-5 bg-white border rounded">Product Questions: {{ product.product_name }}</h3>        
-        <table class="table table_bordered shadow-lg p-1 mb-5 bg-white">
-            <tr>
-                <th>Questions &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                <th class="text-center">Action</th>
-            </tr>
-
-            {% for question in product.questions_no_answer %}
-                <tr>
-                    <td>Question - {{ question.question }}</td>
-                    <td class="text-center">
-                        <a href="{% url 'product_answer_question' product.id question.id %}" class="btn btn-outline-primary border border-transparent">Reply</a>
-                        <a href="{% url 'delete_question' question.id %}" class="btn btn-outline-danger border border-transparent">Delete</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </table>
-        <a href="{% url 'answer' product.id %}">
-            <button type="submit" class="btn btn-outline-danger border border-transparent btn-block">Come back</button>
-        </a>
-    </div>
-</section>
+  </main>
 <br><br><br>
 {% include 'partials/_footer.html' %}
 {% endblock %}

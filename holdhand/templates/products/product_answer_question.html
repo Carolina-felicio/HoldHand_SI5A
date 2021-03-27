@@ -21,19 +21,25 @@
     <div class="container shadow-lg p-3 mb-5 bg-white border rounded">
         <h3 class="text-center shadow-lg p-3 mb-5 bg-white border rounded">Answering product questions: {{ product.product_name }}</h3>
         <div class="panel panel-default hadow-lg p-3 mb-5 bg-white border rounded">
-            <div class="panel-heading">Question asked in the product: {{ question.question }}</div>
+            <div class="panel-heading text-dark shadow-lg p-3 mb-5 bg-white border rounded">
+                Client: <strong>{{ question.user.first_name }} {{ question.user.last_name }}</strong><br><br>
+                Question asked in the product: <strong>{{ question.question }}</strong>
+            </div>
             <div class="panel-body">
                 <form class="questions-form" action="" method="post">
                     {% csrf_token %}
-                    <h4>Answer</h4>
-                    {{ form.answer }}
-                    <br>
-                    <button type="submit" class="btn btn-outline-info border border-transparent btn-block">Reply</button>
-                    <br><br>
+                    <div class="panel-heading text-dark shadow-lg p-3 mb-5 bg-white border rounded">
+                        <h4>Answer</h4>
+                        {{ form.answer }}
+                        <br>
+                        <button type="submit" class="btn btn-outline-info border border-transparent btn-block">Reply</button>
+                </div>
                 </form>
-                <a href="{% url 'product_question' product.id %}">
-                    <button type="submit" class="btn btn-outline-danger border border-transparent btn-block">Come back</button>
-                </a>
+                <div class="panel-heading text-dark shadow-lg p-3 mb-5 bg-white border rounded">
+                    <a href="{% url 'product_question' product.id %}">
+                        <button type="submit" class="btn btn-outline-danger border border-transparent btn-block">Come back</button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

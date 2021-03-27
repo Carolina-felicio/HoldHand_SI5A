@@ -1,127 +1,45 @@
 {% load static %}
-<!-- ##### Header Area Start ##### -->
-<header class="header-area">
-  <!-- Top Header Area -->
-  <div class="top-header-area bg-dark text-white">
-    <div class="container h-100">
-      <div class="row h-100 align-items-center justify-content-between">
-        <!-- Breaking News -->
-        <div class="col-12 col-sm-6 text-left">
-          <div class="">
-            <div id="" class="">
-              <ul>
-                <li>
-                  <strong>Welcome to the HoldHand website</strong>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <!-- Top Social Info -->
-        <div class="col-13 col-sm-6">
-          <div class="top-social-info text-right">
-           
-            {% if user.is_authenticated %}
-            <strong
-              >Dear, {{ user.last_name }},{{ user.first_name }}, 
-              Welcome to the HoldHand website 
-              <i class='fa fa-id-badge' aria-hidden="true" style='font-size:18px'></i>
-            </strong>
-            {% elif user.is_superuser %}
-            <strong
-              >Dear, {{ user.last_name }},{{ user.first_name }},
-              Welcome to the HoldHand website 
-              <i class='fa fa-id-badge' aria-hidden="true" style='font-size:18px'></i>
-            </strong>
-            {% else %}
-            <strong
-              >Dear, Welcome to the HoldHand website
-            </strong>
-            {% endif %}
-          </div>
-        </div>
+<header class="p-3 bg-dark text-white">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+      </a>
+      {% if user.is_authenticated %}
+
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="{% url 'home' %}" class="nav-link px-2 text-white" onclick="exibirHome()">Home</a></li>
+        <li><a href="{% url 'dashboard' %}" class="nav-link px-2 text-white" onclick="displayDashboard()">Dashboard</a></li>
+        <li><a href="{% url 'insert_product' %}" class="nav-link px-2 text-white" onclick="exibirInsertProduct()">Insert Products</a></li>
+        <li><a href="{% url 'my_data' %}" class="nav-link px-2 text-white" onclick="displayProducts()">My Personal Data</a></li>
+        <li><a href="{% url 'my_product' %}" class="nav-link px-2 text-white" onclick="displayProducts()">My Products</a></li>
+      </ul>
+
+      <form action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
+        <input type="search" name="search" class="form-control form-control-dark" placeholder="Search...">
+      </form>
+
+      <div class="text-end">
+        <a href="{% url 'logout' %}" type="button" class="btn btn-outline-transparent text-white text-capitalize">
+          Logout
+        </a>
       </div>
-    </div>
-  </div>
+      {% else %}
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="{% url 'home' %}" class="nav-link px-2 text-white" onclick="exibirHome()">Home</a></li>
+        <li><a href="{% url 'register' %}" class="nav-link px-2 text-white" onclick="exibirRegister()">Register</a></li>
+      </ul>
 
+      <form action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
+        <input type="search" name="search" class="form-control form-control-dark" placeholder="Search...">
+      </form>
 
-  <!-- Navbar Area -->
-  <div class="delicious-main-menu">
-    <div class="classy-nav-container breakpoint-off">
-      <div class="container">
-        <!-- Menu -->
-        <nav class="classy-navbar justify-content-between" id="deliciousNav">
-          <!-- Logo -->
-          <a class="nav-brand" href="#">
-            <h6>
-              <img src="{% static 'img/system/holdhandltda.jpeg' %}" alt="" width="220" height="150"/>
-            </h6>
-          </a>
-          <!-- Menu -->
-          <div class="classy-menu">
-            <div class="classynav col-13">
-              <nav class="navbar navbar-expand-lg navbar-light bg-light border border-transparent shadow-lg p-3 mb-5 bg-body rounded">
-                {% if user.is_authenticated %}
-                <button type="button" class="btn btn-outline-info btn-sm border border-transparent" onclick="exibirHome()">
-                  Home <i class="fa fa-home" aria-hidden="true"></i>
-                </button>&nbsp;
-                <button type="button" class="btn btn-outline-info btn-sm border border-transparent" onclick="displayDashboard()">
-                  Dashboard <i class="fa fa-dashboard" aria-hidden="true"></i>
-                </button>&nbsp;
-                <button type="button" class="btn btn-outline-info btn-sm border border-transparent" onclick="exibirInsertProduct()">
-                  Insert Products <i class="fa fa-list" aria-hidden="true"></i>
-                </button>&nbsp;
-                <button type="button" class="btn btn-outline-info btn-sm border border-transparent" onclick="exibirLogout()">
-                  Logout <i class="fa fa-sign-out" aria-hidden="true"></i>
-                </button>&nbsp;
-                {% else %}
-                <button type="button" class="btn btn-outline-info btn-sm border border-transparent" onclick="exibirHome()">
-                  Home <i class="fa fa-home" aria-hidden="true"></i>
-                </button>&nbsp;
-                  <button type="button" class="btn btn-outline-info btn-sm border border-transparent" onclick="exibirRegister()">
-                    Register
-                  </button>&nbsp;
-                  <button type="button" class="btn btn-outline-info btn-sm border border-transparent" onclick="exibirLogin()">
-                    Log in
-                  </button>&nbsp;
-                {% endif %}
-
-                <form action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
-                  <input class="form-control mr-sm-1 border border-info" type="search" name="search" placeholder="Search">
-                  <button class="btn btn-outline-light my-3 text-dark my-sm-0" type="submit">
-                    <i class="material-icons">search</i>
-                  </button>
-                </form>
-              </nav>
-            </div>
-          </div>
-        </nav>
+      <div class="text-end">
+        <a href="{% url 'login' %}" type="button" class="btn btn-outline-transparent me-2 text-white text-capitalize">Login</a>
       </div>
+      {% endif %}
     </div>
   </div>
 </header>
-<script>
-  function exibirLogout() {
-    location.href = "{% url 'logout' %}";
-  }
+<br><br>
 
-  function exibirRegister() {
-    location.href = "{% url 'register' %}";
-  }
-
-  function exibirLogin() {
-    location.href = "{% url 'login' %}";
-  }
-
-  function exibirInsertProduct() {
-    location.href = "{% url 'insert_product' %}";
-  }
-
-  function exibirHome() {
-    location.href = "{% url 'home' %}";
-  }
-
-  function displayDashboard() {
-    location.href = "{% url 'dashboard' %}";
-  }
-</script>

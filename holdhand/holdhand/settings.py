@@ -96,7 +96,7 @@ WSGI_APPLICATION = 'holdhand.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'database-holdhand',
+        'NAME': 'holdhand_db',
         'USER': 'vilela',
         'PASSWORD': '123456',
         'HOST': 'localhost',

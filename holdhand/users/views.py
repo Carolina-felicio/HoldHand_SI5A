@@ -146,6 +146,9 @@ def register(request):
             'user': user,
             'user_address': user_address
         }
+        messages.info(
+            request, 'usuário criado com sucesso'
+        )
         return render(request, 'users/login.html', datas)
     else:
         return render(request, 'users/register.html')

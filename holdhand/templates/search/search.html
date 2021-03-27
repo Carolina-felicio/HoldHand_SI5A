@@ -15,7 +15,7 @@
                 <a href="#">
                     <ul class="list-unstyled">
                     <li class="media">
-                        <img class="img-rounded img-thumbnail border border-white" src="{{ product.image.url }}" width="205"  alt="">&nbsp;
+                        <img class="img-rounded img-thumbnail border border-white" src="{{ product.image_one.url }}" width="205"  alt="">&nbsp;
                         <div class="media-body">
                         <h5 class="mt-0 mb-1 text-center">Product name - "<strong>{{ product.product_name }}</strong>"</h5>
                         <div class="card text text-body">
@@ -31,7 +31,7 @@
                             <small class="text-dark text-end text-uppercase fst-italic">
                                 Click the button to see more product information -> 
                             </small>
-                            <a type="button" href="{% url 'product' product.slug product.id %}" class="btn btn-outline-info border border-transparent">
+                            <a type="button" href="{% url 'product' product.id %}" class="btn btn-outline-info border border-transparent">
                                 {{ product.product_name }} 
                             </a>&nbsp;
                             </p>

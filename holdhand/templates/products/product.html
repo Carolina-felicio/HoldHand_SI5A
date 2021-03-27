@@ -3,8 +3,19 @@
 {% block content %}
 {% include 'partials/_menu.html' %}
 
-<h1 class="text-center">Product: {{product.product_name}}</h1>
-<br>
+<div class="">
+  <div class="container">
+      <div class="row">
+          <div class="col-12">
+              <div class="section-heading">
+                <div class="col-12 shadow-lg p-3 mb-5 bg-white border rounded">
+                  <h1 class="text-center">{{product.product_name}}</h1>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
 <!-- Receipe Slider -->
 <div class="">
   <div class="container">
@@ -132,13 +143,13 @@
                   <div class="single-best-receipe-area mb-30 col-13 shadow-lg p-3 mb-5 bg-white border rounded">
                     <article class="ml-questions-list-question">
                         <p><i class="fa fa-user" style="color: black;"> </i> <span class="text-dark">Client - </span> <strong class="text-body">{{ q.user.first_name }} {{ q.user.last_name }}</strong><br>
-                          <i class="fa fa-comment" style="color: black;"></i> <strong class="text-body">Question - </strong> <strong class="text-secondary">{{ q.question }}</strong></small>
+                          <i class="fa fa-comment" style="color: black;"></i> <strong class="text-body">Question - </strong> <strong class="text-muted text-center">{{ q.question }}</strong></small>
                         </p>
                     </article>
                     <article class="ml-questions-list-answer">
                       {% for a in q.get_answers %}
                           <p class="text-justify">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-user" style="color: Dodgerblue;"></i><span class="text-dark"> Seller - </span> <strong class="text-primary">{{ product.username.first_name }} {{ product.username.last_name }}</strong><br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-comment" style="color: Dodgerblue;"></i> <strong style="color: Dodgerblue;"> Answer - </strong> <strong class="text-secondary text-center ">{{ a.answer }}</strong>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-comment" style="color: Dodgerblue;"></i> <strong style="color: Dodgerblue;"> Answer - </strong> <strong class="text-muted text-center ">{{ a.answer }}</strong>
                           </p>
                       {% endfor %}
                     </article>

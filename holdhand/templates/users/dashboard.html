@@ -16,7 +16,7 @@
             <button type="button" onclick="displayMyData()" class="btn btn-outline-success btn-block border border-transparent">
               View your personal data <i class="fa fa-address-book"></i>
             </button><br>
-            <button type="button" onclick="displayDashboard()" class="btn btn-outline-primary btn-block border border-transparent">
+            <button type="button" onclick="displayProducts()" class="btn btn-outline-primary btn-block border border-transparent">
               View my products <i class="fa fa-edit" aria-hidden="true"></i>
             </button><br>
             <button type="button" onclick="displayPasswordChange()" class="btn btn-outline-danger btn-block border border-transparent">
@@ -30,14 +30,14 @@
 </section>
 <br><br>
 <script>
-  function displayDashboard() {
-    location.href = "{% url 'my_product' %}";
-  }
   function displayMyData() {
     location.href = "{% url 'my_data' %}";
   }
   function displayPasswordChange() {
     location.href = "{% url 'password_change' %}";
+  }
+  function displayProducts() {
+    location.href = "{% url 'my_product' %}";
   }
 </script>
 {% include 'partials/_footer.html' %}
