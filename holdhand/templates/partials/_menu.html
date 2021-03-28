@@ -10,9 +10,9 @@
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li><a href="{% url 'home' %}" class="nav-link px-2 text-white" onclick="exibirHome()">Home</a></li>
         <li><a href="{% url 'dashboard' %}" class="nav-link px-2 text-white" onclick="displayDashboard()">Dashboard</a></li>
-        <li><a href="{% url 'insert_product' %}" class="nav-link px-2 text-white" onclick="exibirInsertProduct()">Insert Products</a></li>
-        <li><a href="{% url 'my_data' %}" class="nav-link px-2 text-white" onclick="displayProducts()">My Personal Data</a></li>
+        <li><a href="{% url 'my_data' %}" class="nav-link px-2 text-white" onclick="displayProducts()">My Data</a></li>
         <li><a href="{% url 'my_product' %}" class="nav-link px-2 text-white" onclick="displayProducts()">My Products</a></li>
+        <li><a href="{% url 'insert_product' %}" class="nav-link px-2 text-white" onclick="exibirInsertProduct()">Insert Products</a></li>
       </ul>
 
       <form action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
@@ -41,5 +41,6 @@
     </div>
   </div>
 </header>
+<div class="b-example-divider"></div>
 <br><br>
 

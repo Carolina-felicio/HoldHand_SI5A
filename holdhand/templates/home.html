@@ -6,13 +6,12 @@
 <!-- ##### Best Receipe Area Start ##### -->
 <section class="best-receipe-area">
   <div class="container">
-    <div class="row">
-      <h2 class="text-center">Available products</h2>
-      
-      {% if products %}
-      {% for product in products %}
-      <br><br>
+    <div class="row"> 
       <div class="col-12 col-sm-12 col-lg-12">
+        <h2 class="text-center shadow-lg p-3 mb-5 bg-white border rounded">Available products</h2>
+        {% if products %}
+        {% for product in products %}
+        <br><br>
         <div class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border rounded">
           <a href="#">
             <ul class="list-unstyled">
@@ -44,8 +43,7 @@
             <br>
           </a>
         </div>
-      </div>
-      {% endfor %}
+        {% endfor %}
       {% else %}
       <div class="row">
         <div class="col-13">
@@ -58,6 +56,7 @@
         </div>
       </div>
       {% endif %}
+      </div>
     </div>
   </div>
 </section>

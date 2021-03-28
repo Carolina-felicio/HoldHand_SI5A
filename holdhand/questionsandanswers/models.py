@@ -10,10 +10,10 @@ class ProductQuestion(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(ProductProfile, on_delete=models.CASCADE)
     question = models.TextField()
-    
+
     class Meta:
         verbose_name_plural = "Product Questions"
-        
+
     @property
     def get_answers(self):
         return self.productanswer_set.filter()

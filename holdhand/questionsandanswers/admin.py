@@ -6,7 +6,7 @@ from .models import ProductAnswer, ProductQuestion
 class ProductAnswerInline(admin.StackedInline):
     model = ProductAnswer
     can_delete = False
-    
+
 
 class ProductQuestionAdmin(admin.ModelAdmin):
     list_display = ('id', 'product', 'question', 'user')

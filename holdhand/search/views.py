@@ -15,7 +15,7 @@ def search(request):
     paginator = Paginator(product_list, 4)
     page = request.GET.get('page')
     product_per_page = paginator.get_page(page)
-    
+
     datas = {
         'products': product_per_page
     }

@@ -60,14 +60,27 @@
 <div class="">
   <div class="container">
     <div class="col-12 col-sm-12 col-lg-12">
-      <div class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border rounded">
-        <div class="receipe-headline my-5">
-          <strong>{{ product.date_product }}</strong>
-          <h1>Title product: {{product.product_name}}</h1>
-          <div class="receipe-duration">
-              <h6>Segment: {{product.segment}}</h6>
-              <h6>Store name: {{product.store_name}}</h6>
-              <h6>Payment method: {{ product.payment_method }}</h6>
+      <div class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-transparent">
+        <div class="card text-center">
+          <div class="card-header text-white bg-info bg-gradient">
+            Product - <strong>"{{product.product_name}}"</strong>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Segment product {{product.segment}} | Store name {{product.store_name}}</h5>
+            <p class="card-text">Payment method at product {{product.payment_method}} | Price at product {{product.price}}.</p>
+            <p class="card-text">All information is for the product {{ product.product_name }}.
+              The description is just below, if you have any questions you could write a comment or chat by WhatsApp with the seller, is this good?.</p>
+            <a class="btn btn-outline-primary border border-transparent" href="#">Buy product</a>
+            <a type="button" href="https://api.whatsapp.com/send?1=pt_BR&phone=55{{product.profile.cell_phone}}&text=Hi, 
+                  {{ product.username.first_name }} {{ product.username.last_name }}, gostaria de ter mais detalhes em relação ao produto {{ product.product_name }}. 
+                  My name is {{ user.first_name }} {{ user.last_name }}"
+            target="_blank"
+            class="btn btn-outline-success border border-transparent">
+              WhatsApp Seller <i class="fa fa-eye" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="card-footer text-white bg-info bg-gradient">
+            Insert at {{product.date_product}}
           </div>
         </div>
       </div>
@@ -75,11 +88,10 @@
   </div>
 </div>
 
-
 <div class="">
   <div class="container">
     <div class="col-12 col-sm-12 col-lg-12">
-      <div class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border rounded">
+      <div class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border border-transparent rounded">
         <a href="#">
           <ul class="list-unstyled">
             <li class="media">
@@ -87,11 +99,16 @@
               <div class="media-body">
                 <h5 class="mt-0 mb-1 text-center">Product name - "<strong>{{ product.product_name }}</strong>"</h5>
                 <div class="card text text-body">
-                  <div class="card-body text text-body border border-dark rounded">
+                  <div class="card-body text text-body ">
                     <small class="text text-justify text-body font-italic">
                       DESCRIPTION -->> {{ product.description }}
                     </small><br><br>
-                    <footer class="blockquote-footer text text-body text-uppercase">Created by <cite title="Título da fonte">{{ user.last_name }}, {{ user.first_name }}</cite></footer>
+                    <footer class="blockquote-footer text text-body text-uppercase">
+                      Created by 
+                      <cite title="Título da fonte">
+                        {{ product.username.first_name }} {{ product.username.last_name }}
+                      </cite>
+                    </footer>
                   </div>
                 </div>
               </div>
@@ -106,15 +123,6 @@
 
 <section class="section-questions-market-place-content">
   <div class="container">
-      <header>
-        <div class="single-best-receipe-area mb-30 col-12">
-          <div>
-            <h2 class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border rounded">Questions to the seller
-            </h2>
-          </div>
-        </div>
-      </header>
-
       <section class="section-questions-market-place-content">
         <div class="">
           <div class="col-12 col-sm-12 col-lg-12">
@@ -123,16 +131,23 @@
             <form class="questions-form" action="{% url 'product_new_question' product.id %}" method="post">
                 {% csrf_token %}
                 <div>
-                  <h4 class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border rounded">Questions
+                  
+                </div>
+                <div class="col-12">
+                  <h4 class="col-12">
+                    Questions to the seller
                   </h4>
+                  <div class="col-12">
+                    {{ form.question }}
+                  </div>
+                  <br>
+                  <div class=" col-12">
+                    <button type="submit" class="btn btn-outline-info border border-transparent rounded btn-block">
+                      To ask
+                    </button>
                 </div>
-                <div class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border rounded">
-                  {{ form.question }}
                 </div>
-                <br>
-                <div class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border rounded">
-                  <button type="submit" class="btn btn-outline-info border border-transparent rounded btn-block">Perguntar</button>
-                </div>
+                
             </form>
         {% endif %}
         

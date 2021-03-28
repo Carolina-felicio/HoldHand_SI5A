@@ -2,10 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from .models import ProductProfile
-from users.models import UserProfile
 from .forms import ProductForm
-from questionsandanswers.models import ProductQuestion, ProductAnswer
+from questionsandanswers.models import ProductQuestion
 from questionsandanswers.forms import ProductQuestionForm
+from users.models import UserProfile
 
 
 # Create your views here.
@@ -13,9 +13,9 @@ from questionsandanswers.forms import ProductQuestionForm
 
 def product(request, product_id):
     product = get_object_or_404(ProductProfile, pk=product_id)
-    questions = ProductQuestion.objects.filter(product=product)
+    questions = ProductQuestion.objects.filter(product=product).order_by('user')
     form = ProductQuestionForm()
-    
+
     paginator = Paginator(questions, 4)
     page = request.GET.get('page')
     product_per_page = paginator.get_page(page)
@@ -67,12 +67,15 @@ def create_product(request):
         image_one = request.FILES['image_one']
         image_two = request.FILES['image_two']
         image_three = request.FILES['image_three']
+        price = request.POST['price']
         slug = request.POST['product_name']
         user = get_object_or_404(User, pk=request.user.id)
+        profile = get_object_or_404(UserProfile, pk=request.user.id)
         product = ProductProfile.objects.create(
             username=user, product_name=product_name, segment=segment, store_name=store_name,
-            payment_method=payment_method, description=description, date_product=date_product, 
-            slug=slug, image_one=image_one, image_two=image_two, image_three=image_three
+            payment_method=payment_method, description=description, date_product=date_product,
+            image_one=image_one, image_two=image_two, image_three=image_three, profile=profile,
+             slug=slug, price=price
         )
         product.save()
         return redirect('home')
@@ -102,9 +105,6 @@ def edit_product(request, product_id):
                 product.store_name = form.cleaned_data['store_name']
                 product.payment_method = form.cleaned_data['payment_method']
                 product.description = form.cleaned_data['description']
-                product.image_one = form.cleaned_data['image_one']
-                product.image_two = form.cleaned_data['image_two']
-                product.image_three = form.cleaned_data['image_three']
                 product.save()
                 return redirect('dashboard')
 
@@ -121,7 +121,7 @@ def edit_product(request, product_id):
 
 def answer(request, product_id):
     product = get_object_or_404(ProductProfile, pk=product_id)
-    
+
     data = {
         'product': product
     }

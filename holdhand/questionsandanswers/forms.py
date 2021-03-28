@@ -1,6 +1,5 @@
 from django import forms
-from django.contrib.auth.models import User
-from .models import ProductQuestion, ProductAnswer
+from .models import ProductAnswer
 
 
 class ProductQuestionForm(forms.Form):
@@ -15,11 +14,11 @@ class AnswerQuestionForm(forms.ModelForm):
     class Meta:
         model = ProductAnswer
         exclude = ('user', 'product_question',)
-        
+
         widgets = {
             'answer': forms.Textarea(attrs={'class': 'form-control', 'id': 'answer', 'placeholder': 'Answer here ...'}),
         }
-        
+
         labels = {
             'answer': 'Answers'
         }

@@ -5,6 +5,18 @@
 
 {% include 'partials/_alertas.html' %}
 
+<style>
+  input {
+    font-family: monospace;
+  }
+  label {
+    display: block;
+  }
+  div {
+    margin: 0 0 1rem 0;
+  }
+</style>
+
 <div class="container col-xl-12 col-xxl-12 px-1 py-1 ">
   <div class="row align-items-center g-5 py-5">
     <div class="col-10 mx-auto col-lg-10 shadow-lg p-3 mb-5 bg-white">
@@ -18,7 +30,7 @@
       <form class="p-5 border rounded-3 bg-light ls-form ls-form-horizontal was-validated" action="#" method="POST" method="POST" data-toggle="validator"role="form" aria-label="Form register">
         {% csrf_token %}
         <h3 class="text-center">Register</h3>
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
             <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Personal data</button>
           </li>
@@ -37,7 +49,10 @@
                   type="text" class="form-control border border-transparent rounded contador caracteres" name="username"
                   id="username" placeholder="username" maxlength="30" minlength="5" style="color: rgba(0, 0, 0, 0.849);" required
                 />
-              <label for="username">username</label>
+              <label for="username">
+                username
+                <small>(Username must be a minimum of 5 characters and a maximum of 30. Example 'first_name.last_name'.)</small>
+              </label>
             </div>
             <div class="form-floating mb-3">
               <input
@@ -61,7 +76,6 @@
                   id="email"
                   maxlength="80"
                   placeholder="e-mail"
-                  title="Your email must contain a name before the '@', and after the '@' it must contain a domain."
                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                   required
                 />
@@ -75,7 +89,6 @@
                   id="email2"
                   maxlength="80"
                   placeholder="e-mail confirmation"
-                  title="Your confirmation email must contain a name before the '@', and after the '@' it must contain a domain.."
                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                   required
                 />
@@ -93,7 +106,10 @@
                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!|@|#|$|%|^|&|*|(|)|-|_]).{8,}"
                   required
                 />
-              <label for="password">Password</label>
+              <label for="password">
+                Password
+                <small>(The password must contain between 8 and 30 characters. Among them, a capital letter, lower case numbers and special characters.)</small>
+              </label>
             </div>
             <div class="form-floating mb-3">
               <input
@@ -111,7 +127,10 @@
                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!|@|#|$|%|^|&|*|(|)|-|_]).{8,}"
                   required
                 />
-              <label for="password2">Password Confirmation</label>
+              <label for="password2">
+                Password Confirmation
+                <small>(must contain between 8 and 30 characters. Among them, a capital letter, lower case numbers and special characters.)</small>
+              </label>
             </div>
           </div>
           <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -119,13 +138,17 @@
             <div class="form-floating mb-3">
               <input type="text" class="form-control phone-ddd-mask border border-transparent rounded" 
                 name="phone" id="phone" cols="30" rows="10" placeholder="(00) 0000-0000" value="(00) 0000-0000">
-              <label for="phone">Phone</label>
-              <small>(optional)</small><br><br>
+              <label for="phone">
+                Phone
+                <small>(optional)</small>
+              </label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control cel-sp-mask border border-transparent rounded" 
-                name="cell_phone" id="cell_phone" cols="30" rows="10" placeholder="(00) 00000-0000" required>
-              <label for="cell_phone">Cell Phone</label>
+              <input type="text" class="form-control border-transparent rounded" data-mask="(99)99999-9999"
+                name="cell_phone" id="cell_phone" cols="30" rows="10" placeholder="(00)00000-0000" required>
+              <label for="cell_phone">Cell Phone 
+                <samll>(00)00000-0000</samll>
+              </label>
             </div>
           </div>
           <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -171,7 +194,7 @@
           Create your account
         </button>
         <br><br>
-        <button class="w-100 btn btn-lg btn-outline-danger border border-transparent btn-block" onclick="exibirLogin()" type="submit" onclick="exibirRegister()">
+        <button class="w-100 btn btn-lg btn-outline-danger border border-transparent btn-block" onclick="exibirLogin()" type="submit">
           Already have an account? Click here
         </button>
         <hr class="my-4">
@@ -180,7 +203,14 @@
     </div>
   </div>
 </div>
+
+<!-- Input Mask -->
+<script src="js/plugins/jasny/jasny-bootstrap.min.js"></script>
+<script src="phone-mask.min.js"></script>
 <script>
+
+  $(":input").inputmask();
+  $("#cell_phone").inputmask({"mask": "(99)99999-9999"});
 
   function exibirLogin() {
     location.href = "{% url 'login' %}";

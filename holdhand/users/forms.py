@@ -10,9 +10,9 @@ class UserForm(forms.ModelForm):
         fields = ('first_name', 'last_name', 'email')
 
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control border border-dark rounded text-dark required'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control border border-dark rounded text-dark'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control border border-dark rounded text-dark'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control border border-dark rounded text-dark', 'required': True}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control border border-dark rounded text-dark', 'required': True}),
+            'email': forms.EmailInput(attrs={'class': 'form-control border border-dark rounded text-dark', 'required': True}),
         }
 
         labels = {
