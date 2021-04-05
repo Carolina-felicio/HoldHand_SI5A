@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django.contrib.auth.models import User
 from users.models import UserProfile
@@ -9,6 +10,7 @@ from decimal import Decimal
 
 # Create your models here.
 class ProductProfile(models.Model):
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     username = models.ForeignKey(User, on_delete=models.CASCADE)
     profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=100)

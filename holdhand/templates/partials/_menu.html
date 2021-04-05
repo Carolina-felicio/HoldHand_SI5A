@@ -8,11 +8,13 @@
       {% if user.is_authenticated %}
 
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="{% url 'home' %}" class="nav-link px-2 text-white" onclick="exibirHome()">Home</a></li>
-        <li><a href="{% url 'dashboard' %}" class="nav-link px-2 text-white" onclick="displayDashboard()">Dashboard</a></li>
-        <li><a href="{% url 'my_data' %}" class="nav-link px-2 text-white" onclick="displayProducts()">My Data</a></li>
-        <li><a href="{% url 'my_product' %}" class="nav-link px-2 text-white" onclick="displayProducts()">My Products</a></li>
-        <li><a href="{% url 'insert_product' %}" class="nav-link px-2 text-white" onclick="exibirInsertProduct()">Insert Products</a></li>
+        <li><a href="{% url 'home' %}" class="nav-link px-2 text-white">Home</a></li>
+        <li><a href="{% url 'dashboard' %}" class="nav-link px-2 text-white">Dashboard</a></li>
+        <li><a href="{% url 'shopping_cart' %}" class="nav-link px-2 text-white">My Cart</a></li>
+        <li><a href="{% url 'my_data' %}" class="nav-link px-2 text-white">My Data</a></li>
+        <li><a href="{% url 'my_product' %}" class="nav-link px-2 text-white">My Products</a></li>
+        <li><a href="{% url 'insert_product' %}" class="nav-link px-2 text-white">Insert Products</a></li>
+        
       </ul>
 
       <form action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
@@ -26,8 +28,8 @@
       </div>
       {% else %}
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="{% url 'home' %}" class="nav-link px-2 text-white" onclick="exibirHome()">Home</a></li>
-        <li><a href="{% url 'register' %}" class="nav-link px-2 text-white" onclick="exibirRegister()">Register</a></li>
+        <li><a href="{% url 'home' %}" class="nav-link px-2 text-white">Home</a></li>
+        <li><a href="{% url 'register' %}" class="nav-link px-2 text-white">Register</a></li>
       </ul>
 
       <form action="{% url 'search' %}" class="form-inline my-2 my-lg-0">

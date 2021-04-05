@@ -3,9 +3,9 @@
 {% block content %}
 {% include 'partials/_menu.html' %}
 
-<div class="">
+<div class="row">
   <div class="container">
-      <div class="row">
+      <div class="">
           <div class="col-12">
               <div class="section-heading">
                 <div class="col-12 shadow-lg p-3 mb-5 bg-white border rounded">
@@ -17,20 +17,20 @@
   </div>
 </div>
 
-<section class="">
-<div class="container">
-    <div class="row shadow-lg p-1 mb-5 bg-white">
+<section class="row">
+<div class="container ">
+    <div class=" col-12">
         {% if product %}
-        <div class="col-12 col-sm-12 col-lg-12">
-            <div class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border rounded">
+        <div class="shadow-lg p-3 mb-5 bg-white border border-white rounded">
+            <div class="single-best-receipe-area mb-30">
               <a href="#">
                 <ul class="list-unstyled">
                   <li class="media">
                     <img class="img-rounded img-thumbnail border border-white" src="{{ product.image_one.url }}" width="205"  alt="">&nbsp;
                     <div class="media-body">
-                      <h5 class="mt-0 mb-1 text-center">Product name - "<strong>{{ product.product_name }}</strong>"</h5>
+                      <h5 class="mt-0 mb-1 text-center"><strong>{{ product.product_name }}</strong></h5>
                       <div class="card text text-body">
-                        <div class="card-body text text-body border border-white rounded">
+                        <div class="card-body text text-body">
                           <small class="text text-justify text-body font-italic">
                             DESCRIPTION -->> {{ product.description }}
                           </small><br><br>

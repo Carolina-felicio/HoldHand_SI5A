@@ -3,25 +3,11 @@
 {% block content %}
 {% include 'partials/_menu.html' %} 
 
-{% include 'partials/_alertas.html' %}
-
-<style>
-  input {
-    font-family: monospace;
-  }
-  label {
-    display: block;
-  }
-  div {
-    margin: 0 0 1rem 0;
-  }
-</style>
-
-<div class="container col-xl-12 col-xxl-12 px-1 py-1 ">
+<div class="container col-xl-10 col-xxl-12 px-1 py-1 bg-light bg-gradient border border-transparent rounded">
   <div class="row align-items-center g-5 py-5">
-    <div class="col-10 mx-auto col-lg-10 shadow-lg p-3 mb-5 bg-white">
+    <div class="col-10 mx-auto col-lg-10 bg-light ">
       <!--alert-->
-      <div class="alert alert-white text-center border border-transparent text-uppercase" role="alert">
+      <div class="alert alert-white text-center text-centertext-uppercase" role="alert">
         <h4 class="alert-heading">
           Create your account on the HoldHand website
           <i class="fa fa-registered" aria-hidden="true"></i>
@@ -41,6 +27,7 @@
             <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Address</button>
           </li>
         </ul>
+        {% include 'partials/_alertas.html' %}
         <div class="tab-content" id="myTabContent">
           <br>
           <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -50,8 +37,8 @@
                   id="username" placeholder="username" maxlength="30" minlength="5" style="color: rgba(0, 0, 0, 0.849);" required
                 />
               <label for="username">
-                username
-                <small>(Username must be a minimum of 5 characters and a maximum of 30. Example 'first_name.last_name'.)</small>
+                Username
+                <small>(Username must be a minimum of 5 characters and a maximum of 30. Example "first_name.last_name").</small>
               </label>
             </div>
             <div class="form-floating mb-3">
@@ -108,7 +95,7 @@
                 />
               <label for="password">
                 Password
-                <small>(The password must contain between 8 and 30 characters. Among them, a capital letter, lower case numbers and special characters.)</small>
+                <small>(It must contain an uppercase letter, lowercase numbers and special characters. Minumum 8)</small>
               </label>
             </div>
             <div class="form-floating mb-3">
@@ -129,7 +116,7 @@
                 />
               <label for="password2">
                 Password Confirmation
-                <small>(must contain between 8 and 30 characters. Among them, a capital letter, lower case numbers and special characters.)</small>
+                <small class="text-end">(It must contain an uppercase letter, lowercase numbers and special characters. Minimum 8)</small>
               </label>
             </div>
           </div>
@@ -137,17 +124,17 @@
             <br>
             <div class="form-floating mb-3">
               <input type="text" class="form-control phone-ddd-mask border border-transparent rounded" 
-                name="phone" id="phone" cols="30" rows="10" placeholder="(00) 0000-0000" value="(00) 0000-0000">
-              <label for="phone">
+                name="phone" id="phone" cols="30" rows="10" placeholder="(00)0000-0000" value="(00)0000-0000" required>
+              <label for="phone" >
                 Phone
                 <small>(optional)</small>
               </label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control border-transparent rounded" data-mask="(99)99999-9999"
-                name="cell_phone" id="cell_phone" cols="30" rows="10" placeholder="(00)00000-0000" required>
+              <input type="text" class="form-control border border-transparent rounded" data-mask="(99)99999-9999"
+                name="cell_phone" id="cell_phone" placeholder="(00)00000-0000" required>
               <label for="cell_phone">Cell Phone 
-                <samll>(00)00000-0000</samll>
+                <small>(00)00000-0000</small>
               </label>
             </div>
           </div>
@@ -191,7 +178,7 @@
           </div>
         </div>
         <button class="w-100 btn btn-lg btn-outline-primary border border-transparent btn-block" type="submit">
-          Create your account
+          Sign up
         </button>
         <br><br>
         <button class="w-100 btn btn-lg btn-outline-danger border border-transparent btn-block" onclick="exibirLogin()" type="submit">
@@ -204,9 +191,6 @@
   </div>
 </div>
 
-<!-- Input Mask -->
-<script src="js/plugins/jasny/jasny-bootstrap.min.js"></script>
-<script src="phone-mask.min.js"></script>
 <script>
 
   $(":input").inputmask();

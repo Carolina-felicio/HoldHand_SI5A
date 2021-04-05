@@ -32,7 +32,7 @@ def product(request, product_id):
 def my_product(request):
     if request.user.is_authenticated:
         identification = request.user.id
-        products = ProductProfile.objects.order_by('product_name').filter(username=identification)
+        products = ProductProfile.objects.order_by('-date_product').filter(username=identification)
 
         paginator = Paginator(products, 4)
         page = request.GET.get('page')
@@ -57,30 +57,32 @@ def insert_product(request):
 
 
 def create_product(request):
-    if request.method == 'POST':
-        product_name = request.POST['product_name']
-        segment = request.POST['segment']
-        store_name = request.POST['store_name']
-        payment_method = request.POST['payment_method']
-        description = request.POST['description']
-        date_product = request.POST['date_product']
-        image_one = request.FILES['image_one']
-        image_two = request.FILES['image_two']
-        image_three = request.FILES['image_three']
-        price = request.POST['price']
-        slug = request.POST['product_name']
-        user = get_object_or_404(User, pk=request.user.id)
-        profile = get_object_or_404(UserProfile, pk=request.user.id)
-        product = ProductProfile.objects.create(
-            username=user, product_name=product_name, segment=segment, store_name=store_name,
-            payment_method=payment_method, description=description, date_product=date_product,
-            image_one=image_one, image_two=image_two, image_three=image_three, profile=profile,
-             slug=slug, price=price
-        )
-        product.save()
-        return redirect('home')
-    else:
-        return render(request, 'products/insert_product.html')
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            product_name = request.POST['product_name']
+            segment = request.POST['segment']
+            store_name = request.POST['store_name']
+            payment_method = request.POST['payment_method']
+            description = request.POST['description']
+            date_product = request.POST['date_product']
+            image_one = request.FILES['image_one']
+            image_two = request.FILES['image_two']
+            image_three = request.FILES['image_three']
+            price = request.POST['price']
+            slug = request.POST['product_name']
+            user = get_object_or_404(User, pk=request.user.id)
+            profile = get_object_or_404(UserProfile, pk=request.user.id)
+            product = ProductProfile.objects.create(
+                username=user, product_name=product_name, segment=segment, store_name=store_name,
+                payment_method=payment_method, description=description, date_product=date_product,
+                image_one=image_one, image_two=image_two, image_three=image_three, profile=profile,
+                slug=slug, price=price
+            )
+            product.save()
+            return redirect('home')
+        else:
+            return render(request, 'products/insert_product.html')
+    return redirect('login')
 
 
 def delete_product(request, product_id):

@@ -3,6 +3,7 @@ from django.contrib import auth, messages
 from django.contrib.auth.models import User
 from .models import UserProfile
 from .forms import UserForm, UserProfileForm
+from checkout.models import Cart
 
 
 # Create your views here.
@@ -140,11 +141,15 @@ def register(request):
             city=city, uf=uf, complement=complement, zip_code=zip_code,
             cell_phone=cell_phone, phone=phone
         )
+        cart = Cart.objects.create(user=user, status="Carrinho")
+        
         user.save()
         user_address.save()
+        cart.save()
         datas = {
             'user': user,
-            'user_address': user_address
+            'user_address': user_address,
+            'cart': cart
         }
         messages.info(
             request, 'usuário criado com sucesso'
@@ -170,6 +175,12 @@ def login(request):
         if (campo_vazio(email) or campo_vazio(senha)):
             messages.error(
                 request, 'WARNING!!! E-mail and / or password fields cannot be empty'
+            )
+            return redirect('login')
+        
+        if (campo_vazio(email) and campo_vazio(senha)):
+            messages.error(
+                request, 'WARNING!!! E-mail and password fields cannot be empty'
             )
             return redirect('login')
 
@@ -244,7 +255,9 @@ def my_data(request):
 
 
 def dashboard(request):
-    return render(request, 'users/dashboard.html')
+    if request.user.is_authenticated:
+        return render(request, 'users/dashboard.html')
+    return redirect('login')
 
 
 def logout(request):
@@ -262,11 +275,11 @@ def campo_vazio(campo):
     return not campo.strip()
 
 
-def senhas_nao_sao_iguais(senha, senha2):
+def senhas_nao_sao_iguais(password, password2):
     """
     Função que verifica se as senha são diferentes para realizar o cadastro
     """
-    return senha != senha2
+    return password != password2
 
 
 def email_nao_sao_iguais(email, email2):

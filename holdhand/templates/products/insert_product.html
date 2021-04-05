@@ -13,6 +13,10 @@
             <i class="fa fa-registered" aria-hidden="true"></i>
           </h4>
         </div>
+        <button type="submit" onclick="displayDashboar()" class="btn btn-outline-danger border border-transparent btn-block">
+          Come back
+        </button>
+        <br><br>
         <form action="{% url 'create_product' %}" class="p-5 border rounded-3 bg-light ls-form ls-form-horizontal was-validated row" method="POST" enctype="multipart/form-data" data-toggle="validator" role="form" aria-label="Form product">
           {% csrf_token %}
           <h3 class="text-center">Product</h3>
@@ -131,10 +135,6 @@
           <div class="form-floatingmb-3">
             <button type="submit" class="btn btn-outline-primary border border-transparent btn-block">
               Create a product
-              </button>
-
-              <button type="submit" onclick="displayDashboar()" class="btn btn-outline-danger border border-transparent btn-block">
-                  Come back
               </button>
             </div>
           <hr class="my-4">

@@ -25,13 +25,15 @@ def product_new_question(request, product_id):
 
 
 def product_question(request, product_id):
-    product = get_object_or_404(ProductProfile, pk=product_id)
+    if request.user.is_authenticated:
+        product = get_object_or_404(ProductProfile, pk=product_id)
 
-    data = {
-        'product': product
-    }
+        data = {
+            'product': product
+        }
 
-    return render(request, 'products/product_question.html', data)
+        return render(request, 'products/product_question.html', data)
+    return redirect('login')
 
 
 def product_answer_question(request, product_id, question_id):
@@ -63,13 +65,15 @@ def product_answer_question(request, product_id, question_id):
 
 
 def delete_question(request, question_id):
-    question = get_object_or_404(ProductQuestion, pk=question_id)
-    question.delete()
+    if request.user.is_authenticated:
+        question = get_object_or_404(ProductQuestion, pk=question_id)
+        question.delete()
 
-    question_to_delete = {
-        'delete': question
-    }
-    return render(request, 'products/my_products.html', question_to_delete)
+        question_to_delete = {
+            'delete': question
+        }
+        return render(request, 'products/my_products.html', question_to_delete)
+    return redirect('login')
 
 
 def product_resposta_usuario(request, product_id, question_id):

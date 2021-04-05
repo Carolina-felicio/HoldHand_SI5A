@@ -15,6 +15,7 @@ from pathlib import Path
 
 # python
 import os
+from django.contrib import messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,8 +32,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*', '127.0.0.1']
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -47,6 +46,7 @@ INSTALLED_APPS = [
     'search',
     'home',
     'questionsandanswers',
+    'checkout',
 ]
 
 MIDDLEWARE = [
@@ -82,6 +82,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'holdhand.wsgi.application'
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_COOKIE_NAME = 'holdhandSessionId'
+SESSION_COOKIE_AGE = 1800
+LOGIN_URL = '/users/login/'
+
+
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -96,7 +103,7 @@ WSGI_APPLICATION = 'holdhand.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'holdhand_db',
+        'NAME': 'database_test_holdhand',
         'USER': 'vilela',
         'PASSWORD': '123456',
         'HOST': 'localhost',
@@ -159,4 +166,9 @@ MESSAGE_TAGS = {
     messages.SUCCESS: 'success',
     messages.INFO: 'info',
     messages.WARNING: 'warning',
+}
+
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
 }

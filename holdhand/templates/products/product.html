@@ -3,9 +3,9 @@
 {% block content %}
 {% include 'partials/_menu.html' %}
 
-<div class="">
+<div class="row">
   <div class="container">
-      <div class="row">
+      <div class="">
           <div class="col-12">
               <div class="section-heading">
                 <div class="col-12 shadow-lg p-3 mb-5 bg-white border rounded">
@@ -57,10 +57,10 @@
 </div>
 <br>
 <!-- Receipe Content Area -->
-<div class="">
+<div class="row ">
   <div class="container">
-    <div class="col-12 col-sm-12 col-lg-12">
-      <div class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-transparent">
+    <div class="col-12">
+      <div class="single-best-receipe-area mb-30">
         <div class="card text-center">
           <div class="card-header text-white bg-info bg-gradient">
             Product - <strong>"{{product.product_name}}"</strong>
@@ -70,7 +70,6 @@
             <p class="card-text">Payment method at product {{product.payment_method}} | Price at product {{product.price}}.</p>
             <p class="card-text">All information is for the product {{ product.product_name }}.
               The description is just below, if you have any questions you could write a comment or chat by WhatsApp with the seller, is this good?.</p>
-            <a class="btn btn-outline-primary border border-transparent" href="#">Buy product</a>
             <a type="button" href="https://api.whatsapp.com/send?1=pt_BR&phone=55{{product.profile.cell_phone}}&text=Hi, 
                   {{ product.username.first_name }} {{ product.username.last_name }}, gostaria de ter mais detalhes em relação ao produto {{ product.product_name }}. 
                   My name is {{ user.first_name }} {{ user.last_name }}"
@@ -91,13 +90,37 @@
 <div class="">
   <div class="container">
     <div class="col-12 col-sm-12 col-lg-12">
+        <form action="{% url 'shopping_cart' %}" method="POST">
+          {% csrf_token %}
+          <div class="text-center">
+          <input
+                class="form-control form-control-sm border border-dark"
+                name="quantity"
+                id="quantity"
+                type="number"
+                placeholder="Select the desired quantity"
+              />
+              <br>
+          <button class="btn btn-outline-primary border border-transparent btn-block" type="submit">
+            <input type="hidden" id="product" name="product" value="{{ product.id }}"/>
+            Buy product
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>
+
+<div class="">
+  <div class="container">
+    <div class="col-12 col-sm-12 col-lg-12">
       <div class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border border-transparent rounded">
         <a href="#">
           <ul class="list-unstyled">
             <li class="media">
               <img class="img-rounded img-thumbnail border border-white" src="{{ product.image_one.url }}" width="205"  alt="">&nbsp;
               <div class="media-body">
-                <h5 class="mt-0 mb-1 text-center">Product name - "<strong>{{ product.product_name }}</strong>"</h5>
                 <div class="card text text-body">
                   <div class="card-body text text-body ">
                     <small class="text text-justify text-body font-italic">
@@ -128,7 +151,7 @@
           <div class="col-12 col-sm-12 col-lg-12">
             <div class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border rounded">
         {% if request.user.is_authenticated%}
-            <form class="questions-form" action="{% url 'product_new_question' product.id %}" method="post">
+            <form class="questions-form " action="{% url 'product_new_question' product.id %}" method="post">
                 {% csrf_token %}
                 <div>
                   
@@ -150,12 +173,12 @@
                 
             </form>
         {% endif %}
-        
+        <br>
         <section class="section-questions-market-place-content">
-          <ul class="ml-questions-list single-best-receipe-area mb-30 col-12">
+          <ul class="ml-questions-list single-best-receipe-area mb-20">
               {% for q in questions %}
                 <li>
-                  <div class="single-best-receipe-area mb-30 col-13 shadow-lg p-3 mb-5 bg-white border rounded">
+                  <div class="row col-12">
                     <article class="ml-questions-list-question">
                         <p><i class="fa fa-user" style="color: black;"> </i> <span class="text-dark">Client - </span> <strong class="text-body">{{ q.user.first_name }} {{ q.user.last_name }}</strong><br>
                           <i class="fa fa-comment" style="color: black;"></i> <strong class="text-body">Question - </strong> <strong class="text-muted text-center">{{ q.question }}</strong></small>
@@ -166,6 +189,7 @@
                           <p class="text-justify">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-user" style="color: Dodgerblue;"></i><span class="text-dark"> Seller - </span> <strong class="text-primary">{{ product.username.first_name }} {{ product.username.last_name }}</strong><br>
                             &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-comment" style="color: Dodgerblue;"></i> <strong style="color: Dodgerblue;"> Answer - </strong> <strong class="text-muted text-center ">{{ a.answer }}</strong>
                           </p>
+                          <hr>
                       {% endfor %}
                     </article>
                 </div>

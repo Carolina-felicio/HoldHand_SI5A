@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 
 
 def home(request):
-    products = ProductProfile.objects.order_by('product_name')
+    products = ProductProfile.objects.order_by('-date_product')
 
     paginator = Paginator(products, 4)
     page = request.GET.get('page')

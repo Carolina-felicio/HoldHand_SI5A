@@ -1,3 +1,4 @@
+import uuid
 from django.contrib.auth.models import User
 from django.db import models
 from products.models import ProductProfile
@@ -7,6 +8,7 @@ from products.models import ProductProfile
 
 
 class ProductQuestion(models.Model):
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(ProductProfile, on_delete=models.CASCADE)
     question = models.TextField()
@@ -23,6 +25,7 @@ class ProductQuestion(models.Model):
 
 
 class ProductAnswer(models.Model):
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product_question = models.ForeignKey(ProductQuestion, on_delete=models.CASCADE)
     answer = models.TextField()
