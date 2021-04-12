@@ -1,48 +1,45 @@
 {% load static %}
 <header class="p-3 bg-dark text-white">
-  <div class="container">
-    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-      <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-      </a>
-      {% if user.is_authenticated %}
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-end">
+            {% if user.is_authenticated %}
 
-      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="{% url 'home' %}" class="nav-link px-2 text-white">Home</a></li>
-        <li><a href="{% url 'dashboard' %}" class="nav-link px-2 text-white">Dashboard</a></li>
-        <li><a href="{% url 'shopping_cart' %}" class="nav-link px-2 text-white">My Cart</a></li>
-        <li><a href="{% url 'my_data' %}" class="nav-link px-2 text-white">My Data</a></li>
-        <li><a href="{% url 'my_product' %}" class="nav-link px-2 text-white">My Products</a></li>
-        <li><a href="{% url 'insert_product' %}" class="nav-link px-2 text-white">Insert Products</a></li>
-        
-      </ul>
+            <h6 class="px-2 text-white">Olá, {{ user.first_name }} <i class="fa fa-check"></i> | </h6>
 
-      <form action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
-        <input type="search" name="search" class="form-control form-control-dark" placeholder="Search...">
-      </form>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-start mb-md-0">
+                <li><a href="{% url 'home' %}" class="nav-link px-2 text-white">Home <i class="fa fa-home" ></i></a></li>
+                <li><a href="{% url 'dashboard' %}" class="nav-link px-2 text-white">Panel <i class="fa fa-tachometer"></i> | Profile <i class="fa fa-user"></i></a></li>
+                <li><a href="{% url 'shopping_cart' %}" class="nav-link px-2 text-white">Cart <i class="fa fa-cart-arrow-down"></i></a></li>
+                <li><a href="{% url 'two_factor:profile' %}" class="nav-link px-2 text-white">Enable | Disabled 2FA <i class="fa fa-shield"></i></a></li>
+                <li><a href="{% url 'insert_product' %}" class="nav-link px-2 text-white">Add Products <i class="fa fa-plus-square"></i></a></li>
+            </ul>
 
-      <div class="text-end">
-        <a href="{% url 'logout' %}" type="button" class="btn btn-outline-transparent text-white text-capitalize">
-          Logout
+            <form action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
+                <input type="search" name="search" class="form-control form-control-dark" placeholder="Search...">
+            </form>
+
+            <div class="text-end">
+                <a href="{% url 'logout' %}" type="button" class="btn btn-outline-transparent text-white text-capitalize">
+          Logout <i class="fa fa-sign-out"></i>
         </a>
-      </div>
-      {% else %}
-      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="{% url 'home' %}" class="nav-link px-2 text-white">Home</a></li>
-        <li><a href="{% url 'register' %}" class="nav-link px-2 text-white">Register</a></li>
-      </ul>
+            </div>
 
-      <form action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
-        <input type="search" name="search" class="form-control form-control-dark" placeholder="Search...">
-      </form>
+            {% else %}
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="{% url 'home' %}" class="nav-link px-2 text-white">Home</a></li>
+                <li><a href="{% url 'register' %}" class="nav-link px-2 text-white">Register</a></li>
+            </ul>
 
-      <div class="text-end">
-        <a href="{% url 'login' %}" type="button" class="btn btn-outline-transparent me-2 text-white text-capitalize">Login</a>
-      </div>
-      {% endif %}
+            <form action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
+                <input type="search" name="search" class="form-control form-control-dark" placeholder="Search...">
+            </form>
+
+            <div class="text-end">
+                <a href="{% url 'two_factor:login' %}" type="button" class="btn btn-outline-transparent me-2 text-white text-capitalize">Login</a>
+            </div>
+            {% endif %}
+        </div>
     </div>
-  </div>
 </header>
 <div class="b-example-divider"></div>
 <br><br>
-

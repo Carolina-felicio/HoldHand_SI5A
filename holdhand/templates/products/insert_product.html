@@ -1,162 +1,149 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
-{% include 'partials/_menu.html' %} 
+{% extends 'base.html' %} {% load static %} {% block content %} {% include 'partials/_menu.html' %}
 
 <div class="container col-xl-12 col-xxl-12 px-1 py-1 ">
     <div class="row align-items-center g-5 py-5">
-      <div class="col-10 mx-auto col-lg-10 shadow-lg p-3 mb-5 bg-white">
-        <!--alert-->
-        <div class="alert alert-white text-center border border-transparent text-uppercase" role="alert">
-          <h4 class="alert-heading">
-            Insert Product at HoldHand website
-            <i class="fa fa-registered" aria-hidden="true"></i>
-          </h4>
-        </div>
-        <button type="submit" onclick="displayDashboar()" class="btn btn-outline-danger border border-transparent btn-block">
+        <div class="col-10 mx-auto col-lg-10 shadow-lg p-3 mb-5 bg-white">
+            <!--alert-->
+            <div class="alert alert-white text-center border border-transparent text-uppercase" role="alert">
+                <h4 class="alert-heading">
+                    Insert Product at HoldHand website
+                    <i class="fa fa-registered" aria-hidden="true"></i>
+                </h4>
+            </div>
+            <button type="submit" onclick="displayDashboar()" class="btn btn-outline-danger border border-transparent btn-block">
           Come back
         </button>
-        <br><br>
-        <form action="{% url 'create_product' %}" class="p-5 border rounded-3 bg-light ls-form ls-form-horizontal was-validated row" method="POST" enctype="multipart/form-data" data-toggle="validator" role="form" aria-label="Form product">
-          {% csrf_token %}
-          <h3 class="text-center">Product</h3>
-          <div class="form-floating mb-1">
-            <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
-              <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Information Product</button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Payment and Description</button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Date and Images</button>
-              </li>
-            </ul>
-          </div>
-          <div class="tab-content" id="myTabContent">
-            <br>
+            <br><br>
+            <form action="{% url 'create_product' %}" class="p-5 border rounded-3 bg-light ls-form ls-form-horizontal was-validated row" method="POST" enctype="multipart/form-data" data-toggle="validator" role="form" aria-label="Form product">
+                {% csrf_token %}
+                <h3 class="text-center">Product</h3>
+                <div class="form-floating mb-1">
+                    <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Information Product</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Payment and Description</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Date and Images</button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content" id="myTabContent">
+                    <br>
 
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-              <div class="form-floating mb-3">
-                <input type="text" id="product_name" 
-                    class="form-control row-5 border border-transparent rounded" 
-                    name="product_name" placeholder="products name" required
-                >
-                <label for="product_name">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="form-floating mb-3">
+                            <input type="text" id="product_name" class="form-control row-5 border border-transparent rounded" name="product_name" placeholder="products name" required>
+                            <label for="product_name">
                   Product Name
-                </label> 
-              </div>
+                </label>
+                        </div>
 
-              <div class="form-floating mb-3">
-                <input type="hidden" id="slug" 
-                class="form-control border border-transparent rounded" 
-                name="slug" placeholder="slug" required>
-              </div>
+                        <div class="form-floating mb-3">
+                            <input type="hidden" id="slug" class="form-control border border-transparent rounded" name="slug" placeholder="slug" required>
+                        </div>
 
-              <div class="form-floating mb-3">
-                <input class="form-control border border-transparent border rounded" 
-                name="segment" id="segment" cols="30" rows="10" placeholder="segment" required>
-                <label for="segment">Segment</label>
-              </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control border border-transparent border rounded" name="segment" id="segment" cols="30" rows="10" placeholder="segment" required>
+                            <label for="segment">Segment</label>
+                        </div>
 
-              <div class="form-floating mb-3">
-                <input class="form-control border border-transparent rounded" 
-                name="store_name" id="store_name" cols="30" rows="10" placeholder="store name" required>
-                <label for="store_name">Store name</label>
-              </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control border border-transparent rounded" name="store_name" id="store_name" cols="30" rows="10" placeholder="store name" required>
+                            <label for="store_name">Store name</label>
+                        </div>
 
-            </div>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
-              <div class="form-floating mb-3">
-                <input class="form-control mb-3 is-valid border border-transparent rounded" name="payment_method" id="payment_method" list="datalistOptions" id="exampleDataList" 
-                placeholder="Select the payment method or if you will exchange the product" required>
-                    <datalist id="datalistOptions">
+                        <div class="form-floating mb-3">
+                            <input class="form-control mb-3 is-valid border border-transparent rounded" name="payment_method" id="payment_method" list="datalistOptions" id="exampleDataList" placeholder="Select the payment method or if you will exchange the product" required>
+                            <datalist id="datalistOptions">
                     <option value="PIX">PIX</option>
                     <option value="Ticket">Ticket</option>
                     <option value="Credit card | debit">Credit card | debit</option>
                     <option value="Exchange involving product">Exchange involving product</option>
                     </datalist>
-                <label for="payment_method">
+                            <label for="payment_method">
                   Payment method
                 </label>
-              </div>
+                        </div>
 
-              <div class="form-floating mb-3">
-                <input text="number" class="form-control border border-transparent border rounded" 
-                name="price" id="price" cols="30" rows="10" placeholder="price" required>
-                <label for="price">
+                        <div class="form-floating mb-3">
+                            <input text="number" class="form-control border border-transparent border rounded" name="price" id="price" cols="30" rows="10" placeholder="price" required>
+                            <label for="price">
                   Price Product <small>(Enter the value in the format "00.00" and not "00,00")</small>
                 </label>
-                
-              </div>
 
-              <div class="form-floating mb-6">
-                <textarea type="text" class="form-control z-depth-3 border border-transparent rounded text text-justify text-body" name="description" id="description" placeholder="description" maxlength="500"
-                onkeydown="contaCaracteresUsuario(this)" onkeyup="contaCaracteresUsuario(this)" onclick="contaCaracteresUsuario(this)" style="height: 150px" required></textarea>
-                <div>
-                    <strong>
+                        </div>
+
+                        <div class="form-floating mb-6">
+                            <textarea type="text" class="form-control z-depth-3 border border-transparent rounded text text-justify text-body" name="description" id="description" placeholder="description" maxlength="500" onkeydown="contaCaracteresUsuario(this)" onkeyup="contaCaracteresUsuario(this)"
+                                onclick="contaCaracteresUsuario(this)" style="height: 150px" required></textarea>
+                            <div>
+                                <strong>
                         <p style="color: black;" id="divmag">
                             500 characters remaining
                         </p>
                     </strong>
-                </div>
-                <label for="description">
+                            </div>
+                            <label for="description">
                     Description
                     <small>(The description must have a maximum of 500 characters)</small>
                 </label>
-              </div>
+                        </div>
 
-            </div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    </div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 
-              <div class="form-floating mb-3">
-                  <input type="date" data-max-date="today" class="form-control date-mask to-date border border-transparent rounded" 
-                  name="date_product" id="date_product" required>
-                  <label for="date_product">Date Product</label>
-              </div>
+                        <div class="form-floating mb-3">
+                            <input type="date" data-max-date="today" class="form-control date-mask to-date border border-transparent rounded" name="date_product" id="date_product" required>
+                            <label for="date_product">Date Product</label>
+                        </div>
 
-              <div class="form-floating input-group mb-3">
-                <div class="input-group-text" style="font-size: 15px"><i class="fa fa-image"><br>Image One</i></div>&nbsp; 
-                <input type="file" class="form-control border border-transparent rounded" name="image_one" id="image_one" required>
-              </div>
+                        <div class="form-floating input-group mb-3">
+                            <div class="input-group-text" style="font-size: 15px"><i class="fa fa-image"><br>Image One</i></div>&nbsp;
+                            <input type="file" class="form-control border border-transparent rounded" name="image_one" id="image_one" required>
+                        </div>
 
-              <div class="form-floating input-group mb-3">
-                <div class="input-group-text" style="font-size: 15px"><i class="fa fa-image"><br>Image Two</i></div>&nbsp;
-                <input type="file" class="form-control inputfile border border-transparent rounded" name="image_two" id="image_two" required>
-              </div>
+                        <div class="form-floating input-group mb-3">
+                            <div class="input-group-text" style="font-size: 15px"><i class="fa fa-image"><br>Image Two</i></div>&nbsp;
+                            <input type="file" class="form-control inputfile border border-transparent rounded" name="image_two" id="image_two" required>
+                        </div>
 
-              <div class="form-floating input-group mb-3">
-                <div class="input-group-text border border-transparent rounded" style="font-size: 14px"><i class="fa fa-image"><br>Image Three</i></div>&nbsp;
-                <input type="file" class="form-control border border-transparent rounded " name="image_three" id="image_three" required>
-              </div>
-            </div>
-          </div>
-          <div class="form-floatingmb-3">
-            <button type="submit" class="btn btn-outline-primary border border-transparent btn-block">
+                        <div class="form-floating input-group mb-3">
+                            <div class="input-group-text border border-transparent rounded" style="font-size: 14px"><i class="fa fa-image"><br>Image Three</i></div>&nbsp;
+                            <input type="file" class="form-control border border-transparent rounded " name="image_three" id="image_three" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floatingmb-3">
+                    <button type="submit" class="btn btn-outline-primary border border-transparent btn-block">
               Create a product
               </button>
-            </div>
-          <hr class="my-4">
-          <p class="text-muted text-center">By clicking Sign up, you agree to the terms of use.</p>
-        </form>
-      </div>
+                </div>
+                <hr class="my-4">
+                <p class="text-muted text-center">By clicking Sign up, you agree to the terms of use.</p>
+            </form>
+        </div>
     </div>
 </div>
 <script>
-  function contaCaracteresUsuario(campo_passado) {
-    var limite = 500;
-    var campo = campo_passado.value.length;
-    var maxlength = document
-    .getElementById("description")
-    .setAttribute("maxlength", limite);
-    var conta = limite - campo;
-    var divmag = document.getElementById("divmag");
-    divmag.innerHTML = conta + " characters remaining";
-  }
-  function displayDashboar() {
-    location.href = "{% url 'dashboard' %}"
-  }
+    function contaCaracteresUsuario(campo_passado) {
+        var limite = 500;
+        var campo = campo_passado.value.length;
+        var maxlength = document
+            .getElementById("description")
+            .setAttribute("maxlength", limite);
+        var conta = limite - campo;
+        var divmag = document.getElementById("divmag");
+        divmag.innerHTML = conta + " characters remaining";
+    }
+
+    function displayDashboar() {
+        location.href = "{% url 'dashboard' %}"
+    }
 </script>
-{% include 'partials/_footer.html' %}
-{% endblock %}
+{% include 'partials/_footer.html' %} {% endblock %}

@@ -15,7 +15,14 @@ from pathlib import Path
 
 # python
 import os
+import sys
 from django.contrib import messages
+from django.conf import global_settings
+from decouple import config
+from django.core.mail import send_mail
+
+
+sys.path.append(os.path.dirname(__file__))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,28 +32,61 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ej(^0a@%vgt7e2k4^$h%a)m+kt29u9aw3wf1$u8^gzl*(y05di'
+SECRET_KEY = config('SECRET_KEY', default='ej(^0a@%vgt7e2k4^$h%a)m+kt29u9aw3wf1$u8^gzl*(y05di')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ['*', '127.0.0.1']
+ALLOWED_HOSTS = ['*', '127.0.0.1', 'localhost']
+
+INTERNAL_IPS = ['127.0.0.1']
+
+# session user
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_COOKIE_NAME = 'holdhandSessionId'
+SESSION_COOKIE_AGE = 1800
+#LOGIN_URL = '/users/login/'
+
+LOGIN_URL = 'two_factor:login'
+# this one is optional
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = 'two_factor:login'
+
+# 2FA  configs
+TWO_FACTOR_PATCH_ADMIN= True
+TWO_FACTOR_LOGIN_TIMEOUT=600
+TWO_FACTOR_REMEMBER_COOKIE_AGE=True
+
+# recaptcha credentials Django 3.
+# Recaptch credentials
+GOOGLE_RECAPTCHA_SECRET_KEY = '6LfXAqYaAAAAAKowQod4p7UhPtJiCt7dHshDat1-'
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 
 # Application definition
 
 INSTALLED_APPS = [
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'captcha',
     'users',
     'products',
     'search',
     'home',
     'questionsandanswers',
     'checkout',
+    'django_otp',
+    'django_otp.plugins.otp_static',
+    'django_otp.plugins.otp_totp',
+    'otp_yubikey',
+    'two_factor',
+    'snowpenguin.django.recaptcha2',
+    #'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -55,9 +95,21 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django_otp.middleware.OTPMiddleware',
+    'two_factor.middleware.threadlocals.ThreadLocals',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+
+ignore_errors = [
+    'django.security.SuspiciousOperation',
+    'django.core.exceptions.SuspiciousOperation',
+    'rest_framework.exceptions.NotAuthenticated',
+]
+
+if DEBUG is False:
+    del MIDDLEWARE[0]
 
 ROOT_URLCONF = 'holdhand.urls'
 
@@ -80,30 +132,17 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'holdhand.wsgi.application'
-
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-SESSION_SAVE_EVERY_REQUEST = True
-SESSION_COOKIE_NAME = 'holdhandSessionId'
-SESSION_COOKIE_AGE = 1800
-LOGIN_URL = '/users/login/'
-
 
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR / 'db.sqlite3'),
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'database_test_holdhand',
+        'NAME': 'testes-db-hold-hand',
         'USER': 'vilela',
         'PASSWORD': '123456',
         'HOST': 'localhost',
@@ -142,7 +181,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -171,4 +210,26 @@ MESSAGE_TAGS = {
 GRAPH_MODELS = {
   'all_applications': True,
   'group_models': True,
+}
+
+PROJECT_ROOT = os.path.dirname(__file__)
+sys.path.insert(0, os.path.join(PROJECT_ROOT, '../apps'))
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'two_factor': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        }
+    }
 }

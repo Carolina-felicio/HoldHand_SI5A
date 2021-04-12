@@ -1,0 +1,13 @@
+{% extends "two_factor/_base_focus.html" %} {% load i18n %} {% block content %} {% include 'partials/_menu.html' %}
+<div class="container col-xl-10 col-xxl-8 px-4">
+    <div class="row align-items-center g-5 py-5">
+        <h1>{% block title %}{% trans "Disable Two-factor Authentication" %}{% endblock %}</h1>
+        <p>{% blocktrans trimmed %}You are about to disable two-factor authentication. This weakens your account security, are you sure?{% endblocktrans %}</p>
+        <form method="post">
+            {% csrf_token %}
+            <table>{{ form }}</table>
+            <button class="btn btn-danger" type="submit">{% trans "Disable" %}</button>
+        </form>
+    </div>
+</div>
+{% include 'partials/_footer.html' %} {% endblock %}
