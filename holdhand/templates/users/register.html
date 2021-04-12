@@ -1,270 +1,209 @@
-{% extends 'base.html' %} 
-{% load static %} 
-{% block content %}
-{% include 'partials/_menu.html' %} 
+{% extends 'base.html' %} {% load static %} {% block content %} {% include 'partials/_menu.html' %}
 
-<div class="container col-xl-10 col-xxl-12 px-1 py-1 bg-light bg-gradient border border-transparent rounded">
-  <div class="row align-items-center g-5 py-5">
-    <div class="col-10 mx-auto col-lg-10 bg-light ">
-      <!--alert-->
-      <div class="alert alert-white text-center text-centertext-uppercase" role="alert">
-        <h4 class="alert-heading">
-          Create your account on the HoldHand website
-          <i class="fa fa-registered" aria-hidden="true"></i>
-        </h4>
-      </div>
-      <form class="p-5 border rounded-3 bg-light ls-form ls-form-horizontal was-validated" action="#" method="POST" method="POST" data-toggle="validator"role="form" aria-label="Form register">
-        {% csrf_token %}
-        <h3 class="text-center">Register</h3>
-        <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Personal data</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Phone</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Address</button>
-          </li>
-        </ul>
-        {% include 'partials/_alertas.html' %}
-        <div class="tab-content" id="myTabContent">
-          <br>
-          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <div class="form-floating mb-3">
-              <input
-                  type="text" class="form-control border border-transparent rounded contador caracteres" name="username"
-                  id="username" placeholder="username" maxlength="30" minlength="5" style="color: rgba(0, 0, 0, 0.849);" required
-                />
-              <label for="username">
+<div class="container col-xl-10 col-xxl-12 px-1 py-1">
+    <div class="row align-items-center g-5 py-5">
+        <div class="col-10 mx-auto col-lg-10">
+            <!--alert-->
+            <div class="alert alert-white text-center text-centertext-uppercase" role="alert">
+                <h4 class="alert-heading">
+                    Create your account on the HoldHand website
+                    <i class="fa fa-registered" aria-hidden="true"></i>
+                </h4>
+            </div>
+            <form class="p-5 border rounded-3 bg-light ls-form ls-form-horizontal was-validated" action="#" method="POST" method="POST" data-toggle="validator" role="form" aria-label="Form register">
+                {% csrf_token %} {% include 'partials/_alertas.html' %}
+                <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Personal data</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Phone</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Address</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+                    <br>
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control border border-transparent rounded contador caracteres" name="username" id="username" placeholder="username" maxlength="30" minlength="5" style="color: rgba(0, 0, 0, 0.849);" required />
+                            <label for="username">
                 Username
                 <small>(Username must be a minimum of 5 characters and a maximum of 30. Example "first_name.last_name").</small>
               </label>
-            </div>
-            <div class="form-floating mb-3">
-              <input
-                  type="text" class="form-control border border-transparent rounded" name="name" id="name" data-ls-module="charCounter"
-                  maxlength="30" placeholder="name" required
-                />
-              <label for="name">Name</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input
-                  type="text" class="form-control border border-transparent rounded" name="surname" id="surname" placeholder="surname"
-                  title="Your last name is mandatory to fill out the form." required
-                />
-              <label for="surname">Surname</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input
-                  type="email"
-                  class="form-control border border-transparent rounded"
-                  name="email"
-                  id="email"
-                  maxlength="80"
-                  placeholder="e-mail"
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                  required
-                />
-              <label for="email">E-mail</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input
-                  type="email"
-                  class="form-control border border-transparent rounded"
-                  name="email2"
-                  id="email2"
-                  maxlength="80"
-                  placeholder="e-mail confirmation"
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                  required
-                />
-              <label for="email2">E-mail confirmation</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input
-                  type="password"
-                  class="form-control border border-transparent rounded"
-                  name="password"
-                  id="password"
-                  placeholder="password"
-                  data-minlength="8"
-                  maxlength="30"
-                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!|@|#|$|%|^|&|*|(|)|-|_]).{8,}"
-                  required
-                />
-              <label for="password">
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control border border-transparent rounded" name="name" id="name" data-ls-module="charCounter" maxlength="30" placeholder="name" required />
+                            <label for="name">Name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control border border-transparent rounded" name="surname" id="surname" placeholder="surname" title="Your last name is mandatory to fill out the form." required />
+                            <label for="surname">Surname</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control border border-transparent rounded" name="email" id="email" maxlength="80" placeholder="e-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required />
+                            <label for="email">E-mail</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control border border-transparent rounded" name="email2" id="email2" maxlength="80" placeholder="e-mail confirmation" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required />
+                            <label for="email2">E-mail confirmation</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control border border-transparent rounded" name="password" id="password" placeholder="password" data-minlength="8" maxlength="30" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!|@|#|$|%|^|&|*|(|)|-|_]).{8,}" required
+                            />
+                            <label for="password">
                 Password
                 <small>(It must contain an uppercase letter, lowercase numbers and special characters. Minumum 8)</small>
               </label>
-            </div>
-            <div class="form-floating mb-3">
-              <input
-                  type="password"
-                  class="form-control border border-transparent rounded"
-                  name="password2"
-                  id="password2"
-                  placeholder="password confirmation"
-                  data-component="password-strength"
-                  data-monitor-id="password-strength-monitor"
-                  data-minlength="8"
-                  maxlength="30"
-                  data-match="#password"
-                  data-match-error="Atenção! As senhas não estão iguais."
-                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!|@|#|$|%|^|&|*|(|)|-|_]).{8,}"
-                  required
-                />
-              <label for="password2">
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control border border-transparent rounded" name="password2" id="password2" placeholder="password confirmation" data-component="password-strength" data-monitor-id="password-strength-monitor" data-minlength="8" maxlength="30"
+                                data-match="#password" data-match-error="Atenção! As senhas não estão iguais." pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!|@|#|$|%|^|&|*|(|)|-|_]).{8,}" required />
+                            <label for="password2">
                 Password Confirmation
                 <small class="text-end">(It must contain an uppercase letter, lowercase numbers and special characters. Minimum 8)</small>
               </label>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <br>
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control phone-ddd-mask border border-transparent rounded" 
-                name="phone" id="phone" cols="30" rows="10" placeholder="(00)0000-0000" value="(00)0000-0000" required>
-              <label for="phone" >
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <br>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control phone-ddd-mask border border-transparent rounded" name="phone" id="phone" cols="30" rows="10" placeholder="(00)0000-0000" value="(00)0000-0000" required>
+                            <label for="phone">
                 Phone
                 <small>(optional)</small>
               </label>
-            </div>
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control border border-transparent rounded" data-mask="(99)99999-9999"
-                name="cell_phone" id="cell_phone" placeholder="(00)00000-0000" required>
-              <label for="cell_phone">Cell Phone 
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control border border-transparent rounded" data-mask="(99)99999-9999" name="cell_phone" id="cell_phone" placeholder="(00)00000-0000" required>
+                            <label for="cell_phone">Cell Phone 
                 <small>(00)00000-0000</small>
               </label>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-            <br>
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control border border-transparent rounded" 
-                name="zip_code" id="zip_code" cols="30" rows="10" placeholder="00000-000" required>
-              <label for="zip_code">Zip Code</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control border border-transparent rounded" 
-                name="city" id="city" cols="30" rows="10" placeholder="city" required>
-              <label for="city">City</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control border border-transparent rounded" 
-                name="uf" id="uf" cols="30" rows="10" placeholder="city" required>
-              <label for="uf">UF</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control border border-transparent rounded" 
-                name="address" id="address" cols="30" rows="10" placeholder="city" required>
-              <label for="address">Address</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control border border-transparent rounded" 
-                name="district" id="district" cols="30" rows="10" placeholder="city" required>
-              <label for="district">District</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control border border-transparent rounded" 
-                name="number" id="number" cols="30" rows="10" placeholder="city" required>
-              <label for="number">Number</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control border border-transparent rounded" 
-                  name="complement" id="complement" cols="30" rows="10" placeholder="complement" value="not complement">
-              <label for="complement">Complement</label>
-            </div>
-          </div>
-        </div>
-        <button class="w-100 btn btn-lg btn-outline-primary border border-transparent btn-block" type="submit">
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <br>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control border border-transparent rounded" name="zip_code" id="zip_code" cols="30" rows="10" placeholder="00000-000" required>
+                            <label for="zip_code">Zip Code</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control border border-transparent rounded" name="city" id="city" cols="30" rows="10" placeholder="city" required>
+                            <label for="city">City</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control border border-transparent rounded" name="uf" id="uf" cols="30" rows="10" placeholder="city" required>
+                            <label for="uf">UF</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control border border-transparent rounded" name="address" id="address" cols="30" rows="10" placeholder="city" required>
+                            <label for="address">Address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control border border-transparent rounded" name="district" id="district" cols="30" rows="10" placeholder="city" required>
+                            <label for="district">District</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control border border-transparent rounded" name="number" id="number" cols="30" rows="10" placeholder="city" required>
+                            <label for="number">Number</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control border border-transparent rounded" name="complement" id="complement" cols="30" rows="10" placeholder="complement" value="not complement">
+                            <label for="complement">Complement</label>
+                        </div>
+                    </div>
+                </div>
+                <button class="w-100 btn btn-lg btn-outline-primary border border-transparent btn-block" type="submit">
           Sign up
         </button>
-        <br><br>
-        <button class="w-100 btn btn-lg btn-outline-danger border border-transparent btn-block" onclick="exibirLogin()" type="submit">
-          Already have an account? Click here
-        </button>
-        <hr class="my-4">
-        <p class="text-muted text-center">By clicking Sign up, you agree to the terms of use.</p>
-      </form>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a class=" btn btn-link text-danger text-end" href="{% url 'two_factor:login' %}" type="submit">
+            Already have an account? Click here
+                    </a>
+                </div>
+                <hr class="my-4">
+                <p class="text-muted text-center">By clicking Sign up, you agree to the terms of use.</p>
+            </form>
+        </div>
     </div>
-  </div>
 </div>
 
 <script>
+    $(":input").inputmask();
+    $("#cell_phone").inputmask({
+        "mask": "(99)99999-9999"
+    });
 
-  $(":input").inputmask();
-  $("#cell_phone").inputmask({"mask": "(99)99999-9999"});
+    function exibirLogin() {
+        location.href = "{% url 'two_factor:login' %}";
+    }
 
-  function exibirLogin() {
-    location.href = "{% url 'login' %}";
-  }
+    function exibirRegister() {
+        location.href = "{% url 'home' %}";
+    }
 
-  function exibirRegister() {
-    location.href = "{% url 'home' %}";
-  }
+    function contaCaracteresUsuario(campo_passado) {
+        var limite = 30;
+        var campo = campo_passado.value.length;
+        var maxlength = document
+            .getElementById("username")
+            .setAttribute("maxlength", limite);
+        var conta = limite - campo;
+        var divmag = document.getElementById("divmag");
+        divmag.innerHTML = conta + " characters remaining";
+    }
 
-  function contaCaracteresUsuario(campo_passado) {
-    var limite = 30;
-    var campo = campo_passado.value.length;
-    var maxlength = document
-      .getElementById("username")
-      .setAttribute("maxlength", limite);
-    var conta = limite - campo;
-    var divmag = document.getElementById("divmag");
-    divmag.innerHTML = conta + " characters remaining";
-  }
+    function contaCaracteresSenha(campo_passado) {
+        var limite = 30;
+        var campo = campo_passado.value.length;
+        var maxlength = document
+            .getElementById("password")
+            .setAttribute("maxlength", limite);
+        var conta = limite - campo;
+        var divmagsenha = document.getElementById("divmagsenha");
+        divmagsenha.innerHTML = conta + " characters remaining";
+    }
 
-  function contaCaracteresSenha(campo_passado) {
-    var limite = 30;
-    var campo = campo_passado.value.length;
-    var maxlength = document
-      .getElementById("password")
-      .setAttribute("maxlength", limite);
-    var conta = limite - campo;
-    var divmagsenha = document.getElementById("divmagsenha");
-    divmagsenha.innerHTML = conta + " characters remaining";
-  }
-
-  function contaCaracteresConfSenha(campo_passado) {
-    var limite = 30;
-    var campo = campo_passado.value.length;
-    var maxlength = document
-      .getElementById("password2")
-      .setAttribute("maxlength", limite);
-    var conta = limite - campo;
-    var divmagconfsenha = document.getElementById("divmagconfsenha");
-    divmagconfsenha.innerHTML = conta + " characters remaining";
-  }
+    function contaCaracteresConfSenha(campo_passado) {
+        var limite = 30;
+        var campo = campo_passado.value.length;
+        var maxlength = document
+            .getElementById("password2")
+            .setAttribute("maxlength", limite);
+        var conta = limite - campo;
+        var divmagconfsenha = document.getElementById("divmagconfsenha");
+        divmagconfsenha.innerHTML = conta + " characters remaining";
+    }
 </script>
 
 <script type="text/javascript">
-	$("#zip_code").focusout(function(){
-		//Início do Comando AJAX
-		$.ajax({
-			//O campo URL diz o caminho de onde virá os dados
-			//É importante concatenar o valor digitado no CEP
-			url: 'https://viacep.com.br/ws/'+$(this).val()+'/json/unicode/',
-			//Aqui você deve preencher o tipo de dados que será lido,
-			//no caso, estamos lendo JSON.
-			dataType: 'json',
-			//SUCESS é referente a função que será executada caso
-			//ele consiga ler a fonte de dados com sucesso.
-			//O parâmetro dentro da função se refere ao nome da variável
-			//que você vai dar para ler esse objeto.
-			success: function(resposta){
-				//Agora basta definir os valores que você deseja preencher
-				//automaticamente nos campos acima.
-				$("#address").val(resposta.logradouro);
-				$("#district").val(resposta.bairro);
-				$("#city").val(resposta.localidade);
-				$("#uf").val(resposta.uf);
-				//Vamos incluir para que o Número seja focado automaticamente
-				//melhorando a experiência do usuário
-				$("#number").focus();
-			}
-		});
-	});
+    $("#zip_code").focusout(function() {
+        //Início do Comando AJAX
+        $.ajax({
+            //O campo URL diz o caminho de onde virá os dados
+            //É importante concatenar o valor digitado no CEP
+            url: 'https://viacep.com.br/ws/' + $(this).val() + '/json/unicode/',
+            //Aqui você deve preencher o tipo de dados que será lido,
+            //no caso, estamos lendo JSON.
+            dataType: 'json',
+            //SUCESS é referente a função que será executada caso
+            //ele consiga ler a fonte de dados com sucesso.
+            //O parâmetro dentro da função se refere ao nome da variável
+            //que você vai dar para ler esse objeto.
+            success: function(resposta) {
+                //Agora basta definir os valores que você deseja preencher
+                //automaticamente nos campos acima.
+                $("#address").val(resposta.logradouro);
+                $("#district").val(resposta.bairro);
+                $("#city").val(resposta.localidade);
+                $("#uf").val(resposta.uf);
+                //Vamos incluir para que o Número seja focado automaticamente
+                //melhorando a experiência do usuário
+                $("#number").focus();
+            }
+        });
+    });
 </script>
-{% include 'partials/_footer.html' %}
-{% endblock %}
+{% include 'partials/_footer.html' %} {% endblock %}

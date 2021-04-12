@@ -1,0 +1,50 @@
+{% extends 'base.html' %} {% load static %} {% block content %} {% include 'partials/_menu.html' %}
+
+
+<div class="container col-xl-12 col-xxl-12 px-1 py-1 ">
+    <div class="row align-items-center g-5 py-5">
+        <div class="col-10 mx-auto col-lg-10 shadow-lg p-3 mb-5 bg-white">
+            <!--alert-->
+            <div class="alert alert-white text-center text-uppercase" role="alert">
+                <h4 class="alert-heading">
+                    Personal data your account on the HoldHand website
+                    <i class="fa fa-registered" aria-hidden="true"></i>
+                </h4>
+            </div>
+            <button class="w-100 btn btn-sm btn-outline-dark border border-transparent" onclick="displayMyProducts()">
+                My products
+            </button>
+            <br><br>
+            <button class="w-100 btn btn-sm btn-outline-dark border border-transparent" onclick="displayPasswordChange()">
+                Change password
+            </button>
+            <br><br>
+            <button class="w-100 btn btn-sm btn-outline-dark border border-transparent" onclick="displayDeleteAccount()">
+                Delete my account
+            </button>
+            <br><br>
+            <button class="w-100 btn btn-sm btn-outline-dark border border-transparent" onclick="myData()">
+                My personal data
+            </button>
+            <br><br>
+        </div>
+    </div>
+</div>
+<script>
+    function displayMyProducts() {
+        location.href = "{% url 'my_product' %}"
+    }
+
+    function displayDeleteAccount() {
+        location.href = "{% url 'delete_user' %}"
+    }
+
+    function displayPasswordChange() {
+        location.href = "{% url 'password_change' %}";
+    }
+
+    function myData() {
+        location.href = "{% url 'my_data' %}";
+    }
+</script>
+{% include 'partials/_footer.html' %} {% endblock %}

@@ -144,6 +144,9 @@
   </div>
 </div>
 
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+
 <section class="section-questions-market-place-content">
   <div class="container">
       <section class="section-questions-market-place-content">
@@ -179,15 +182,15 @@
               {% for q in questions %}
                 <li>
                   <div class="row col-12">
-                    <article class="ml-questions-list-question">
-                        <p><i class="fa fa-user" style="color: black;"> </i> <span class="text-dark">Client - </span> <strong class="text-body">{{ q.user.first_name }} {{ q.user.last_name }}</strong><br>
-                          <i class="fa fa-comment" style="color: black;"></i> <strong class="text-body">Question - </strong> <strong class="text-muted text-center">{{ q.question }}</strong></small>
+                    <article class="ml-questions-list-question text-break">
+                        <p><i class="fas fa-user-edit" style="color: black;"> </i> <span class="text-dark">Client - </span> <strong class="text-body">{{ q.user.first_name }} {{ q.user.last_name }}</strong><br>
+                          <i class="far fa-comment-dots" style="color: black;"></i> <strong class="text-body text-break">Question - </strong> <strong class="text-muted text-center">{{ q.question }}</strong></small>
                         </p>
                     </article>
-                    <article class="ml-questions-list-answer">
+                    <article class="ml-questions-list-answer text-break">
                       {% for a in q.get_answers %}
-                          <p class="text-justify">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-user" style="color: Dodgerblue;"></i><span class="text-dark"> Seller - </span> <strong class="text-primary">{{ product.username.first_name }} {{ product.username.last_name }}</strong><br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-comment" style="color: Dodgerblue;"></i> <strong style="color: Dodgerblue;"> Answer - </strong> <strong class="text-muted text-center ">{{ a.answer }}</strong>
+                          <p class="text-sm-start"><i class="fa fa-user" style="color: Dodgerblue;"></i><span class="text-dark"> Seller - </span> <strong class="text-primary">{{ product.username.first_name }} {{ product.username.last_name }}</strong><br>
+                            <i class="fas fa-quote-right" style="color: Dodgerblue;"></i> <strong style="color: Dodgerblue;"> Answer - </strong> <strong class="text-muted text-break lh-base">{{ a.answer }}</strong>
                           </p>
                           <hr>
                       {% endfor %}

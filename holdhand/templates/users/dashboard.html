@@ -1,44 +1,49 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
-{% include 'partials/_menu.html' %}
+{% extends 'base.html' %} {% load static %} {% block content %} {% include 'partials/_menu.html' %}
 <br><br>
 <section class="">
-  <div class="container">
-    <div class="row">
-      <div class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border border-transparent rounded">
-        <div class="col-12 shadow-lg p-1 mb-5 bg-white border rounded">
-          <h3 class="text-center">Dear, {{ user.first_name }}</h3><br>
-          <h5 class="text-center">Below you can go to the personal data page or the page with your products</h5>
-        </div>
-        <div class="media-body">
-          <div class="col-12 col-sm-12 col-lg-12 d-grid gap-2 d-md-flex justify-content-md-end shadow-lg p-1 mb-5 bg-white">
-            <button type="button" onclick="displayMyData()" class="btn btn-outline-success btn-block border border-transparent">
+    <div class="container">
+        <div class="row">
+            <div class="single-best-receipe-area mb-30 col-12 shadow-lg p-3 mb-5 bg-white border border-transparent rounded">
+                <div class="col-12 shadow-lg p-1 mb-5 bg-white border rounded">
+                    <h3 class="text-center">Dear, {{ user.first_name }}</h3><br>
+                    <h5 class="text-center">Below you can go to the personal data page or the page with your products</h5>
+                </div>
+                <div class="media-body">
+                    <div class="col-12 col-sm-12 col-lg-12 d-grid gap-2 d-md-flex justify-content-md-end shadow-lg p-1 mb-5 bg-white">
+                        <button type="button" onclick="displayMyData()" class="btn btn-success btn-block border border-transparent">
               View your personal data <i class="fa fa-address-book"></i>
             </button><br>
-            <button type="button" onclick="displayProducts()" class="btn btn-outline-primary btn-block border border-transparent">
+                        <button type="button" onclick="displayProducts()" class="btn btn-primary btn-block border border-transparent">
               View my products <i class="fa fa-edit" aria-hidden="true"></i>
             </button><br>
-            <button type="button" onclick="displayPasswordChange()" class="btn btn-outline-danger btn-block border border-transparent">
+                        <button type="button" onclick="displayPasswordChange()" class="btn btn-warning btn-block border border-transparent text-white">
               Change Password <i class="fa fa-check" aria-hidden="true"></i>
-            </button>
-          </div>
+            </button><br>
+                        <button type="button" onclick="deleteAccount()" class="btn btn-danger btn-block border border-transparent">
+                Delete Account <i class="fa fa-check" aria-hidden="true"></i>
+              </button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
 <br><br>
 <script>
-  function displayMyData() {
-    location.href = "{% url 'my_data' %}";
-  }
-  function displayPasswordChange() {
-    location.href = "{% url 'password_change' %}";
-  }
-  function displayProducts() {
-    location.href = "{% url 'my_product' %}";
-  }
+    function displayMyData() {
+        location.href = "{% url 'my_data' %}";
+    }
+
+    function displayPasswordChange() {
+        location.href = "{% url 'password_change' %}";
+    }
+
+    function displayProducts() {
+        location.href = "{% url 'my_product' %}";
+    }
+
+    function deleteAccount() {
+        location.href = "{% url 'delete_user' %}";
+    }
 </script>
-{% include 'partials/_footer.html' %}
-{% endblock %}
+{% include 'partials/_footer.html' %} {% endblock %}
