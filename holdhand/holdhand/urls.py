@@ -21,6 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from two_factor.urls import urlpatterns as tf_urls
 from two_factor.gateways.twilio.urls import urlpatterns as tf_twilio_urls
+from rest_framework_jwt.views import obtain_jwt_token
 
 
 urlpatterns = [
@@ -35,6 +36,7 @@ urlpatterns = [
     path('', include('checkout.urls')),
     path('', include(tf_urls)),
     path('', include(tf_twilio_urls)),
+    path('', obtain_jwt_token),
 
     # Password reset links (ref: https://github.com/django/django/blob/master/django/contrib/auth/views.py)
     path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(template_name='registration/password_change_done.html'), name='password_change_done'),

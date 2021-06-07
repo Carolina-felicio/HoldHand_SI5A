@@ -2,6 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from django.http import Http404, HttpResponseNotFound, Http404
 from django.core.paginator import Paginator
+import json
+import urllib
+from django.contrib import auth, messages
+from django.conf import settings
 
 # project
 from .models import ProductProfile
@@ -58,18 +62,11 @@ def insert_product(request):
     """
     if request.user.is_authenticated:
         return render(request, 'products/insert_product.html')
-    else:
-        return redirect('login')
+    return redirect('two_factor:login')
 
 
 def create_product(request):
     if request.user.is_authenticated:
-
-        try:
-            cart = Cart.objects.get(user=request.user, status="Carrinho")
-        except Cart.DoesNotExist:
-            cart = Cart(user=request.user, status="Carrinho")
-
         if request.method == 'POST':
             product_name = request.POST['product_name']
             segment = request.POST['segment']
@@ -91,11 +88,10 @@ def create_product(request):
                 slug=slug, price=price
             )
             product.save()
-            cart.save()
             return redirect('home')
         else:
             return render(request, 'products/insert_product.html')
-    return redirect('login')
+    return redirect('two_factor:login')
 
 
 def delete_product(request, product_id):
@@ -110,31 +106,44 @@ def delete_product(request, product_id):
 
 def edit_product(request, product_id):
     if request.user.is_authenticated:
-
-        try:
-            product = ProductProfile.objects.get(pk=product_id)
-            if request.method == 'POST':
-                form = ProductForm(request.POST)
-                if form.is_valid():
-                    product.product_name = form.cleaned_data['product_name']
-                    product.segment = form.cleaned_data['segment']
-                    product.store_name = form.cleaned_data['store_name']
-                    product.payment_method = form.cleaned_data['payment_method']
-                    product.description = form.cleaned_data['description']
+        product = get_object_or_404(ProductProfile, pk=product_id)
+        form = ProductForm(instance=product)
+        if request.method == 'POST':
+            form = ProductForm(request.POST)
+            if form.is_valid():
+                product.product_name = form.cleaned_data['product_name']
+                product.segment = form.cleaned_data['segment']
+                product.store_name = form.cleaned_data['store_name']
+                product.payment_method = form.cleaned_data['payment_method']
+                product.description = form.cleaned_data['description']
+                
+                recaptcha_response = request.POST.get('g-recaptcha-response')
+                url = 'https://www.google.com/recaptcha/api/siteverify'
+                values = {
+                    'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+                    'response': recaptcha_response
+                }
+                
+                data = urllib.parse.urlencode(values).encode()
+                req =  urllib.request.Request(url, data=data)
+                response = urllib.request.urlopen(req)
+                result = json.loads(response.read().decode())
+                
+                if result['success']:
                     product.save()
-                    return redirect('dashboard')
-
-            form = ProductForm(instance=product)
-
-            product_to_display = {
-                'product': product,
-                'form': form
-            }
-            return render(request, 'products/edit_product.html', product_to_display)
-        except ProductProfile.DoesNotExist:
-            response = render_to_response('errors/error_404.html')
-            return HttpResponseNotFound(response.content)
-    return redirect('login')
+                    messages.success(request, 'Data has been successfully changed!')
+                else:
+                    messages.error(request, 'Invalid recaptcha and/or recaptcha not selected. Please try again.')
+                
+                return redirect('profile')
+            
+        
+        product_to_display = {
+            'product': product,
+            'form': form
+        }
+        return render(request, 'products/edit_product.html', product_to_display)
+    return redirect('two_factor:login')
 
 
 def answer(request, product_id):

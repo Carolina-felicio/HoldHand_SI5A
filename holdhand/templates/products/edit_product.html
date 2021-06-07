@@ -1,77 +1,76 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
-{% include 'partials/_menu.html' %} 
-
+{% extends 'base.html' %} {% load static %} {% block content %} {% include 'partials/_menu.html' %}
+<script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit' async defer></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <div class="container col-xl-12 col-xxl-12 px-1 py-1 ">
     <div class="row align-items-center g-5 py-5">
-      <div class="col-10 mx-auto col-lg-10 shadow-lg p-3 mb-5 bg-white">
-        <!--alert-->
-        <div class="alert alert-white text-center border border-transparent text-uppercase" role="alert">
-          <h4 class="alert-heading">
-            Edit Product ant HoldHand website
-            <i class="fa fa-registered" aria-hidden="true"></i>
-          </h4>
-        </div>
-        <form action="#" class="p-5 border rounded-3 bg-light ls-form ls-form-horizontal was-validated" method="POST" enctype="multipart/form-data" data-toggle="validator" role="form" aria-label="Form product">
-          {% csrf_token %}
-          <h3 class="text-center">Product</h3>
-          <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-              <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Information Product</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Payment and Description</button>
-            </li>
-          </ul>
-          <div class="tab-content" id="myTabContent">
-            <br>
+        <div class="col-10 mx-auto col-lg-10 shadow-lg p-3 mb-5 bg-white">
+            <!--alert-->
+            <div class="alert alert-white text-center border border-transparent text-uppercase" role="alert">
+                <h4 class="alert-heading">
+                    Edit Product ant HoldHand website
+                    <i class="fa fa-registered" aria-hidden="true"></i>
+                </h4>
+            </div>
+            {% include 'partials/_alertas.html' %}
+            <form action="#" class="p-5 border rounded-3 bg-light ls-form ls-form-horizontal was-validated" method="POST" data-toggle="validator" role="form" aria-label="Form product">
+                {% csrf_token %}
+                <h3 class="text-center">Product</h3>
+                <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Information Product</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Payment and Description</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <br>
 
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-              <div class="form-floating mb-3">
-                {{ form.product_name }}
-                <label for="product_name">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="form-floating mb-3">
+                            {{ form.product_name }}
+                            <label for="product_name">
                   Product Name
                 </label>
-              </div>
+                        </div>
 
-              <div class="form-floating mb-3">
-                {{ form.segment }}
-                <label for="segment">Segment</label>
-              </div>
+                        <div class="form-floating mb-3">
+                            {{ form.segment }}
+                            <label for="segment">Segment</label>
+                        </div>
 
-              <div class="form-floating mb-3">
-                {{ form.store_name }}
-                <label for="store_name">Store name</label>
-              </div>
+                        <div class="form-floating mb-3">
+                            {{ form.store_name }}
+                            <label for="store_name">Store name</label>
+                        </div>
 
-            </div>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-              <br>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <br>
 
-              <div class="form-floating mb-6">
-                {{ form.description }}
-                <label for="description">
+                        <div class="form-floating mb-6">
+                            {{ form.description }}
+                            <label for="description">
                     Description
                 </label>
-              </div>
-              <br>
+                        </div>
+                        <br> {{ form.payment_method }}
+                        <br><br> <br><br>
 
-            {{ form.payment_method }}
-            <br><br> <br><br>
+                    </div>
+                </div>
 
-            </div>
-          </div>
-          
-            <button type="submit" class="btn btn-outline-primary border border-transparent btn-block">
+                <div class="g-recaptcha" data-theme="light" data-callback="correctCaptcha" data-sitekey="6LfXAqYaAAAAAHmasv_X7Oi6TWlxvn6bw0X9wehx" required="true"></div>
+                <br>
+
+                <button type="submit" class="btn btn-outline-primary border border-transparent btn-block">
                 edit a product
             </button>
-          <hr class="my-4">
-          <p class="text-muted text-center">By clicking Sign up, you agree to the terms of use.</p>
-        </form>
-      </div>
+                <hr class="my-4">
+                <p class="text-muted text-center">By clicking Sign up, you agree to the terms of use.</p>
+            </form>
+        </div>
     </div>
 </div>
-{% include 'partials/_footer.html' %}
-{% endblock %}
+{% include 'partials/_footer.html' %} {% endblock %}

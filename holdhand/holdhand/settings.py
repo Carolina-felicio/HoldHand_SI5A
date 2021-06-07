@@ -56,7 +56,6 @@ LOGOUT_REDIRECT_URL = 'two_factor:login'
 # 2FA  configs
 TWO_FACTOR_PATCH_ADMIN= True
 TWO_FACTOR_LOGIN_TIMEOUT=600
-TWO_FACTOR_REMEMBER_COOKIE_AGE=True
 
 # recaptcha credentials Django 3.
 # Recaptch credentials
@@ -142,7 +141,7 @@ WSGI_APPLICATION = 'holdhand.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'testes-db-hold-hand',
+        'NAME': 'test-data-base-hold-hand',
         'USER': 'vilela',
         'PASSWORD': '123456',
         'HOST': 'localhost',
@@ -232,4 +231,15 @@ LOGGING = {
             'level': 'INFO',
         }
     }
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
 }
